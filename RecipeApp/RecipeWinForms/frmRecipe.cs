@@ -17,6 +17,7 @@ namespace RecipeWinForms
             DataTable dt = SQLutility.GetDataTable(sql);
             gRecipe.DataSource = dt;
             gRecipe.Columns["RecipeId"].Visible = false;
+            gRecipe.AllowUserToAddRows = false;
         }
 
         private void ShowDetailForm(int rowindex)

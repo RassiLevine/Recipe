@@ -30,11 +30,13 @@
         {
             tblMain = new TableLayoutPanel();
             lblName = new Label();
-            lblNumIngredients = new Label();
-            lblNumDirections = new Label();
+            lblCalories = new Label();
+            lblStatus = new Label();
             txtName = new TextBox();
-            txtIng = new TextBox();
-            txtDir = new TextBox();
+            txtCalories = new TextBox();
+            txtStatus = new TextBox();
+            lblDateDraft = new Label();
+            txtDateDraft = new TextBox();
             tblMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -44,16 +46,19 @@
             tblMain.ColumnStyles.Add(new ColumnStyle());
             tblMain.ColumnStyles.Add(new ColumnStyle());
             tblMain.Controls.Add(lblName, 0, 0);
-            tblMain.Controls.Add(lblNumIngredients, 0, 1);
-            tblMain.Controls.Add(lblNumDirections, 0, 2);
+            tblMain.Controls.Add(lblCalories, 0, 1);
+            tblMain.Controls.Add(lblStatus, 0, 2);
             tblMain.Controls.Add(txtName, 1, 0);
-            tblMain.Controls.Add(txtIng, 1, 1);
-            tblMain.Controls.Add(txtDir, 1, 2);
+            tblMain.Controls.Add(txtCalories, 1, 1);
+            tblMain.Controls.Add(txtStatus, 1, 2);
+            tblMain.Controls.Add(lblDateDraft, 0, 3);
+            tblMain.Controls.Add(txtDateDraft, 1, 3);
             tblMain.Dock = DockStyle.Fill;
             tblMain.Location = new Point(0, 0);
             tblMain.Margin = new Padding(4);
             tblMain.Name = "tblMain";
-            tblMain.RowCount = 3;
+            tblMain.RowCount = 4;
+            tblMain.RowStyles.Add(new RowStyle());
             tblMain.RowStyles.Add(new RowStyle());
             tblMain.RowStyles.Add(new RowStyle());
             tblMain.RowStyles.Add(new RowStyle());
@@ -67,54 +72,72 @@
             lblName.Location = new Point(4, 0);
             lblName.Margin = new Padding(4, 0, 4, 0);
             lblName.Name = "lblName";
-            lblName.Size = new Size(171, 35);
+            lblName.Size = new Size(102, 35);
             lblName.TabIndex = 0;
             lblName.Text = "Recipe Name";
             // 
-            // lblNumIngredients
+            // lblCalories
             // 
-            lblNumIngredients.AutoSize = true;
-            lblNumIngredients.Dock = DockStyle.Fill;
-            lblNumIngredients.Location = new Point(4, 35);
-            lblNumIngredients.Margin = new Padding(4, 0, 4, 0);
-            lblNumIngredients.Name = "lblNumIngredients";
-            lblNumIngredients.Size = new Size(171, 35);
-            lblNumIngredients.TabIndex = 1;
-            lblNumIngredients.Text = "Number Of Ingredients";
+            lblCalories.AutoSize = true;
+            lblCalories.Dock = DockStyle.Fill;
+            lblCalories.Location = new Point(4, 35);
+            lblCalories.Margin = new Padding(4, 0, 4, 0);
+            lblCalories.Name = "lblCalories";
+            lblCalories.Size = new Size(102, 35);
+            lblCalories.TabIndex = 1;
+            lblCalories.Text = "Calories";
             // 
-            // lblNumDirections
+            // lblStatus
             // 
-            lblNumDirections.AutoSize = true;
-            lblNumDirections.Location = new Point(4, 70);
-            lblNumDirections.Margin = new Padding(4, 0, 4, 0);
-            lblNumDirections.Name = "lblNumDirections";
-            lblNumDirections.Size = new Size(160, 21);
-            lblNumDirections.TabIndex = 2;
-            lblNumDirections.Text = "Number of Directions";
+            lblStatus.AutoSize = true;
+            lblStatus.Dock = DockStyle.Fill;
+            lblStatus.Location = new Point(4, 70);
+            lblStatus.Margin = new Padding(4, 0, 4, 0);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(102, 35);
+            lblStatus.TabIndex = 2;
+            lblStatus.Text = "Status";
             // 
             // txtName
             // 
             txtName.Dock = DockStyle.Fill;
-            txtName.Location = new Point(182, 3);
+            txtName.Location = new Point(113, 3);
             txtName.Name = "txtName";
-            txtName.Size = new Size(844, 29);
+            txtName.Size = new Size(913, 29);
             txtName.TabIndex = 3;
             // 
-            // txtIng
+            // txtCalories
             // 
-            txtIng.Dock = DockStyle.Fill;
-            txtIng.Location = new Point(182, 38);
-            txtIng.Name = "txtIng";
-            txtIng.Size = new Size(844, 29);
-            txtIng.TabIndex = 4;
+            txtCalories.Dock = DockStyle.Fill;
+            txtCalories.Location = new Point(113, 38);
+            txtCalories.Name = "txtCalories";
+            txtCalories.Size = new Size(913, 29);
+            txtCalories.TabIndex = 4;
             // 
-            // txtDir
+            // txtStatus
             // 
-            txtDir.Dock = DockStyle.Fill;
-            txtDir.Location = new Point(182, 73);
-            txtDir.Name = "txtDir";
-            txtDir.Size = new Size(844, 29);
-            txtDir.TabIndex = 5;
+            txtStatus.Dock = DockStyle.Fill;
+            txtStatus.Location = new Point(113, 73);
+            txtStatus.Name = "txtStatus";
+            txtStatus.Size = new Size(913, 29);
+            txtStatus.TabIndex = 5;
+            // 
+            // lblDateDraft
+            // 
+            lblDateDraft.AutoSize = true;
+            lblDateDraft.Location = new Point(3, 105);
+            lblDateDraft.Name = "lblDateDraft";
+            lblDateDraft.Size = new Size(77, 21);
+            lblDateDraft.TabIndex = 6;
+            lblDateDraft.Text = "DateDraft";
+            // 
+            // txtDateDraft
+            // 
+            txtDateDraft.Dock = DockStyle.Fill;
+            txtDateDraft.Location = new Point(113, 108);
+            txtDateDraft.Name = "txtDateDraft";
+            txtDateDraft.Size = new Size(913, 29);
+            txtDateDraft.TabIndex = 7;
             // 
             // frmPopup
             // 
@@ -135,10 +158,12 @@
 
         private TableLayoutPanel tblMain;
         private Label lblName;
-        private Label lblNumIngredients;
-        private Label lblNumDirections;
+        private Label lblCalories;
+        private Label lblStatus;
         private TextBox txtName;
-        private TextBox txtIng;
-        private TextBox txtDir;
+        private TextBox txtCalories;
+        private TextBox txtStatus;
+        private Label lblDateDraft;
+        private TextBox txtDateDraft;
     }
 }

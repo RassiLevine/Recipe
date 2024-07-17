@@ -19,12 +19,12 @@ namespace RecipeWinForms
         }
         public void ShowForm(int recipeid)
         {
-            string sql = "select r.RecipeName, NumIngredients = count(distinct ri.ingredientId), NumDirections = count(distinct d.Direction)\r\nfrom recipe r\r\njoin Directions d\r\non r.RecipeId = d.RecipeId\r\njoin RecipeIngredient ri\r\non ri.RecipeId = r.RecipeId\r\nwhere r.RecipeId =" + recipeid.ToString() + "\r\ngroup by r.RecipeName";
+            string sql = "select r.RecipeName, r.Calories, r.RecipeStatus, r.DateDraft, r.DatePublished\r\nfrom recipe r\r\njoin Directions d\r\non r.RecipeId = d.RecipeId\r\njoin RecipeIngredient ri\r\non ri.RecipeId = r.RecipeId\r\nwhere r.RecipeId =" + recipeid.ToString() + "\r\ngroup by r.RecipeName,r.Calories, r.RecipeStatus, r.DateDraft, r.DatePublished";
             DataTable dt = SQLutility.GetDataTable(sql);
             txtName.DataBindings.Add("Text", dt, "RecipeName");
-            txtIng.DataBindings.Add("Text", dt, "NumIngredients");
-            txtDir.DataBindings.Add("Text", dt, "NumDirections");
-
+            txtCalories.DataBindings.Add("Text", dt, "Calories");
+            txtStatus.DataBindings.Add("Text", dt, "RecipeStatus");
+            txtDateDraft.DataBindings.Add("Text", dt, "DateDraft");
             this.Show();
         }
     }

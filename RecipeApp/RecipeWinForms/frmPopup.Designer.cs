@@ -287,6 +287,7 @@
             txtRecipePic.Dock = DockStyle.Fill;
             txtRecipePic.Location = new Point(123, 283);
             txtRecipePic.Name = "txtRecipePic";
+            txtRecipePic.ReadOnly = true;
             txtRecipePic.Size = new Size(916, 29);
             txtRecipePic.TabIndex = 18;
             // 

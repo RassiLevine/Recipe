@@ -21,16 +21,16 @@ select 'Jacklyn', 'Bee', 'JB1223'
 union select 'John', 'Smith', 'JS2345'
 union select 'Mike', 'Band', 'MB1122'
 
-insert Cuisine(CuisineType)
+insert Cuisine(Cuisine)
 select 'American'
 union select 'French'
 union select 'English'
 
 insert Recipe(RecipeName, calories, cuisineId, staffid, datedraft, datepublished, datearchived)
-select 'Chocolate Chip Cookies', 150, c.cuisineId, (select s.staffid from staff s where s.StaffFirstName = 'Jacklyn' and s.StaffLastName = 'Bee' ), '2024/01/01', null, null from cuisine c where c.cuisinetype = 'American'
-union select 'Apple Yogurt Smoothie', 200,c.cuisineId, (select s.staffid from staff s where s.StaffFirstName = 'Jacklyn' and s.StaffLastName = 'Bee' ),'2024/01/01', '2024/02/05','2024/02/09' from cuisine c where c.cuisinetype = 'French'
-union select 'cheese Bread', 250, c.cuisineId,(select s.staffid from staff s where s.StaffFirstName = 'John' and s.StaffLastName = 'Smith' ), '2024/01/02', '2024/02/05', null from cuisine c where c.cuisinetype = 'English'
-union select 'Butter Muffins', 300, c.cuisineId,(select s.staffid from staff s where s.StaffFirstName = 'John' and s.StaffLastName = 'Smith' ), '2024/02/02', null, '2024/02/05' from cuisine c where c.cuisinetype = 'English'
+select 'Chocolate Chip Cookies', 150, c.cuisineId, (select s.staffid from staff s where s.StaffFirstName = 'Jacklyn' and s.StaffLastName = 'Bee' ), '2024/01/01', null, null from cuisine c where c.Cuisine = 'American'
+union select 'Apple Yogurt Smoothie', 200,c.cuisineId, (select s.staffid from staff s where s.StaffFirstName = 'Jacklyn' and s.StaffLastName = 'Bee' ),'2024/01/01', '2024/02/05','2024/02/09' from cuisine c where c.Cuisine = 'French'
+union select 'cheese Bread', 250, c.cuisineId,(select s.staffid from staff s where s.StaffFirstName = 'John' and s.StaffLastName = 'Smith' ), '2024/01/02', '2024/02/05', null from cuisine c where c.Cuisine = 'English'
+union select 'Butter Muffins', 300, c.cuisineId,(select s.staffid from staff s where s.StaffFirstName = 'John' and s.StaffLastName = 'Smith' ), '2024/02/02', null, '2024/02/05' from cuisine c where c.Cuisine = 'English'
 
 insert measurementType(measurementType)
 select 'cup'

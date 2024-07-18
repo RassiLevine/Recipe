@@ -31,9 +31,9 @@ create table dbo.Staff(
 
 create table dbo.Cuisine(
     CuisineId int not null identity primary key,
-    CuisineType varchar(30) not null
+    Cuisine varchar(30) not null
         constraint u_cuisine_type unique
-        constraint ck_CuisineType_cant_be_unique check(CuisineType <> '') 
+        constraint ck_CuisineType_cant_be_unique check(Cuisine <> '') 
 )
 
 create table dbo.Recipe(

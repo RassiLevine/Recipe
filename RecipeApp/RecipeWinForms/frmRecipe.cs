@@ -15,7 +15,7 @@ namespace RecipeWinForms
 
         private void SearchForRecipe(string recipename)
         {
-            string sql = "select * from recipe r where r.recipename like '%" + recipename + "%'";
+            string sql = "select r.RecipeId, r.RecipeName, r.Calories, r.RecipeStatus, r.DateDraft, r.CuisineId from recipe r where r.recipename like '%" + recipename + "%'";
             DataTable dt = SQLutility.GetDataTable(sql);
             gRecipe.DataSource = dt;
             gRecipe.Columns["RecipeId"].Visible = false;

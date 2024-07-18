@@ -3,6 +3,7 @@ using System.Data;
 using CPUWindowsFormFramework;
 using System.Diagnostics;
 using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
 
 namespace RecipeWinForms
 {
@@ -24,7 +25,8 @@ namespace RecipeWinForms
                 dtrecipe.Rows.Add();
             }
             DataTable dtcuisine = SQLutility.GetDataTable("select c.CuisineId, c.CuisineType from Cuisine c"); //cuisinetype needs to be changed to cusine
-            WindowsFormsUtility.SetListBinding(drpdwnCuisine,dtcuisine, dtrecipe, "Cuisine");
+            WindowsFormsUtility.SetListBinding(drpdwnCuisine, dtcuisine, dtrecipe, "Cuisine");
+            drpdwnCuisine.DisplayMember = "CuisineType";
             WindowsFormsUtility.SetControlBinding(txtRecipeName, dtrecipe);
             WindowsFormsUtility.SetControlBinding(txtCalories, dtrecipe);
             WindowsFormsUtility.SetControlBinding(txtRecipeStatus, dtrecipe);

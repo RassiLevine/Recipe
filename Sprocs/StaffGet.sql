@@ -20,3 +20,4 @@ declare @staffId int
 select top 1 @staffId = s.staffid from staff s
 exec StaffGet @StaffId = @staffId
 */
+

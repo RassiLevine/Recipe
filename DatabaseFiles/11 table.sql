@@ -31,9 +31,9 @@ create table dbo.Staff(
 
 create table dbo.Cuisine(
     CuisineId int not null identity primary key,
-    Cuisine varchar(30) not null
+    CuisineType varchar(30) not null
         constraint u_cuisine_type unique
-        constraint ck_CuisineType_cant_be_unique check(Cuisine <> '') 
+        constraint ck_CuisineType_cant_be_unique check(CuisineType <> '') 
 )
 
 create table dbo.Recipe(
@@ -43,7 +43,7 @@ create table dbo.Recipe(
     RecipeName varchar(30) not null 
         constraint ck_recipe_name_cant_be_blank check(RecipeName <> '')
         constraint u_recipe_recipeName unique,
-        Calories int not null 
+    Calories int not null 
             constraint ck_must_be_greater_than_zero check(calories > 0),
     DateDraft datetime not null default getdate()
         constraint ck_datedraft_cannot_be_future_date check(datedraft <= getdate()),

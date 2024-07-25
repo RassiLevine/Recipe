@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using CPUFramework;
 namespace RecipeSystem
 {
@@ -9,25 +10,36 @@ namespace RecipeSystem
         {
             DataTable dt = new();
             SqlCommand cmd = SQLutility.GetSqlCommand("RecipeGet");
-            cmd.Parameters["RecipeName"].Value = recipename;
+            cmd.Parameters["@RecipeName"].Value = recipename;
             dt = SQLutility.GetDataTable(cmd);
             return dt;
         }
 
         public static DataTable GetCuisineList()
         {
-            return SQLutility.GetDataTable("select cuisineid, cuisinetype from cuisine");
+            DataTable dt = new();
+            SqlCommand cmd = SQLutility.GetSqlCommand("CuisineGet");
+            cmd.Parameters["@All"].Value = 1;
+            dt = SQLutility.GetDataTable(cmd);
+            return dt;
         }
 
         public static DataTable GetStaffList()
         {
-            return SQLutility.GetDataTable("select * from staff");
+            DataTable dt = new();
+            SqlCommand cmd = SQLutility.GetSqlCommand("StaffGet");
+            cmd.Parameters["@All"].Value = 1;
+            dt = SQLutility.GetDataTable(cmd);
+            return dt;
         }
 
         public static DataTable LoadRecipe(int recipeid)
         {
-            string sql = "select r.*, c.cuisineid, s.staffid from recipe r join cuisine c on r.cuisineid = c.cuisineid join staff s on r.staffid = s.staffid where r.RecipeId =" + recipeid.ToString();
-            return SQLutility.GetDataTable(sql);
+            DataTable dt = new();
+            SqlCommand cmd = SQLutility.GetSqlCommand("RecipeGet");
+            cmd.Parameters["@RecipeId"].Value = recipeid;
+            dt = SQLutility.GetDataTable(cmd);
+            return dt;
         }
 
         public static void Save(DataTable dtrecipe)

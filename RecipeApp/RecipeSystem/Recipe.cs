@@ -9,7 +9,7 @@ namespace RecipeSystem
         {
             DataTable dt = new();
             SqlCommand cmd = SQLutility.GetSqlCommand("RecipeGet");
-            cmd.Parameters["RecipeName"].Value = recipename;
+            cmd.Parameters["@RecipeName"].Value = recipename;
             dt = SQLutility.GetDataTable(cmd);
             return dt;
         }

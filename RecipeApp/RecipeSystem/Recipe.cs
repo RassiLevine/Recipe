@@ -61,8 +61,9 @@ namespace RecipeSystem
         public static void Delete(DataTable dtrecipe)
         {
             int id = (int)dtrecipe.Rows[0]["RecipeId"];
-            string sql = "delete recipe where RecipeId = " + id;
-            SQLutility.ExecuteSQL(sql);
+            SqlCommand cmd = SQLutility.GetSqlCommand("RecipeDelete");
+            SQLutility.SetParamValue(cmd, "@Recipeid", id);
+            SQLutility.ExecuteSQL(cmd);
         }
     }
 }

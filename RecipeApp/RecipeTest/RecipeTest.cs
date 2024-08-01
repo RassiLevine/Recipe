@@ -138,6 +138,26 @@ and cm.CourseRecipeId is null");
             TestContext.WriteLine(ex.Message);
         }
 
+        [Test]
+        public void DeletePublishedRecipe()
+        {
+            string sql = @"
+select top 1 recipeid 
+from recipe 
+where RecipeStatus = 'published'
+";
+            DataTable dt = SQLutility.GetDataTable(sql);
+            int recipeid = 0;
+            if(dt.Rows.Count > 0)
+            {
+                recipeid = (int)dt.Rows[0]["recipeid"];
+            }
+            Assume.That(recipeid > 0, "no recipes with status of 'published'");
+            TestContext.WriteLine("existing recipe wth status of published with recipeid of " + recipeid);
+            TestContext.WriteLine("ensure app cannot delete recipe " + recipeid);
+            Exception ex = Assert.Throws<Exception>(() => Recipe.Delete(dt));
+            TestContext.WriteLine(ex.Message);
+        }
 
         [Test]
         public void LoadRecipe()

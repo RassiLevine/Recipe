@@ -38,9 +38,9 @@ create table dbo.Cuisine(
 
 create table dbo.Recipe(
     RecipeId int not null identity primary key, 
-        CuisineId int not null constraint f_cusine_recipe foreign key references cuisine(cuisineId),
+    CuisineId int not null constraint f_cusine_recipe foreign key references cuisine(cuisineId),
     StaffId int not null constraint f_Staff_recipe foreign key references staff(staffId),
-    RecipeName varchar(30) not null 
+    RecipeName varchar(50) not null 
         constraint ck_recipe_name_cant_be_blank check(RecipeName <> '')
         constraint u_recipe_recipeName unique,
     Calories int not null 

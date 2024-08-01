@@ -98,23 +98,32 @@ namespace RecipeTest
     [Test]
         public void DeleteRecipe()
         {
-            DataTable dt = SQLutility.GetDataTable("select top 1 recipeid from recipe r left join cuisine c on c.cuisineid = r.cuisineid where c.cuisineid is null");
+            DataTable dt = SQLutility.GetDataTable(@"select top 1 r.recipeid
+from recipe r
+left
+join recipeingredient ri
+on ri.recipeid = r.recipeid
+left
+join CourseRecipeCourseMeal cm
+on cm.recipeid = r.recipeid
+where ri.ingredientid is null
+and cm.CourseRecipeId is null");
             int recipeid = 0;
             if (dt.Rows.Count > 0)
             {
                 recipeid = (int)dt.Rows[0]["recipeid"];
             }
-            Assume.That(recipeid > 0, "no recipes without cuisine in db, cant run");
-            TestContext.WriteLine("existing recipe without cuisine id with recipeid of = " + recipeid);
+            Assume.That(recipeid > 0, "no recipes without ingredients in db, cant run");
+            TestContext.WriteLine("existing recipe without ingredients' id with recipeid of = " + recipeid);
             TestContext.WriteLine("ensure that app can delete " + recipeid);
             Recipe.Delete(dt);
-            DataTable dtafterdelete = SQLutility.GetDataTable("select * from recipe where recipe id = " + recipeid);
+            DataTable dtafterdelete = SQLutility.GetDataTable("select top 1 recipeid from recipe where recipeid =" + recipeid);
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "record with recipeid " + recipeid + " exists in db");
-            TestContext.WriteLine("record with recipeid" + recipeid + "does not exist in db");
+            TestContext.WriteLine("record with recipeid " + recipeid + "does not exist in db");
         }
 
         [Test]
-        public void DeleteRecipeWithCuisine()
+        public void DeleteRecipeWithDirections()
         {
             DataTable dt = SQLutility.GetDataTable("select top 1 r.recipeid from recipe r join directions d on r.recipeid = d.recipeid");
             int recipeid = 0;

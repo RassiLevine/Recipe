@@ -95,7 +95,7 @@ namespace RecipeTest
             TestContext.WriteLine("recipename for reicpe with id " + recipeid + " is " + dt.Rows[0]["recipename"].ToString() + "(" + recipename + ")");
         }
 
-    [Test]
+    [Test]  
         public void DeleteRecipe()
         {
             DataTable dt = SQLutility.GetDataTable(@"select top 1 r.recipeid

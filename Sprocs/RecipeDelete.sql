@@ -1,21 +1,41 @@
 create or alter procedure dbo.RecipeDelete (
-    @Recipeid int
+    @Recipeid int,
+    @Message varchar(500) = '' output
     )
 as
 begin
+    declare @return int = 0
+    
+    if exists(select * from recipe r
+              left join cookbookrecipe cr
+              on r.recipeid = cr.recipeid
+              left join CourseRecipeCourseMeal crm
+              on r.recipeid = crm.recipeid
+              where cr.cookbookid is null
+              and crm.coursemealid is null
+              and  RecipeStatus = 'published' or (RecipeStatus = 'archived' and DATEDIFF(day, GETDATE(), DateArchived) < 30))
+
+    begin
+    select @return = 1, @message = 'Cannot delete recipe becasue it is either: published; archived for less than 30 days; part of a meal or cookbook'
+    goto finished
+    end 
+
     begin try
-        begin tran
+    begin tran
 delete RecipeIngredient where recipeid = @recipeid
 delete Directions where recipeid = @Recipeid
-delete courserecipecoursemeal where recipeid = @recipeid
-delete cookbookrecipe where recipeid = @recipeid
+--delete courserecipecoursemeal where recipeid = @recipeid
+--delete cookbookrecipe where recipeid = @recipeid
 delete recipe where recipeid = @recipeid
         commit
     end try
-begin catch
-    rollback;
-    throw
-end catch
+    begin catch
+rollback;
+throw
+    end catch
+
+    finished:
+    return @return
 end
 go
 

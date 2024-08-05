@@ -76,8 +76,9 @@ namespace RecipeTest
             staffid = 2;
             string recipename = dt.Rows[0]["recipename"].ToString();
             TestContext.WriteLine("recipename for recipe with id " + recipeid + " is " + recipename);
-            DateTime now = new();
-            recipename = "tea" + now.ToString();
+            DateTime now = DateTime.Now;
+            string name = "tea" + now.ToString();
+            recipename = name;
             TestContext.WriteLine("insert recipe name for recipe with id " + recipeid + " to" + recipename);
             int calories = SQLutility.GetFirstRowFirstColumn("select calories from recipe where recipeid = " + recipeid);
             calories = 2;
@@ -98,7 +99,7 @@ namespace RecipeTest
     [Test]
         public void DeleteRecipe()
         {
-            DataTable dt = SQLutility.GetDataTable(@"select top 1 r.recipeid
+            DataTable dt = SQLutility.GetDataTable(@"select top 1 *
 from recipe r
 left
 join recipeingredient ri

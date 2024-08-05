@@ -5,7 +5,7 @@ from recipe r
 left join cookbookrecipe cbr
 on cbr.recipeid = r.recipeid
 left join courserecipecoursemeal cm 
-on cm.RecipeId = r.RecipeId  
+on cm.RecipeId = r.RecipeId    
 where  RecipeStatus = 'draft'
 and cbr.CookbookId is NULL
 and cm.courseMealId is null 

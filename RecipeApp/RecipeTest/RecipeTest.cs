@@ -82,7 +82,7 @@ namespace RecipeTest
             int calories = SQLutility.GetFirstRowFirstColumn("select calories from recipe where recipeid = " + recipeid);
             calories = 2;
             dt.Rows[0]["cuisineid"] = cuisineid;
-            dt.Rows[0]["staffid"] = staffid;
+            dt.Rows[0]["staffid"] = staffid;  
             dt.Rows[0]["recipename"] = recipename;
             dt.Rows[0]["calories"] = calories;
             Recipe.Save(dt);

@@ -1,20 +1,20 @@
-create or alter procedure dbo.StaffGet(@StaffId int = 0, @all bit = 0, @StaffLastName varchar(20) = '')
+create or alter procedure dbo.StaffGet(@StaffId int = 0, @All bit = 0, @StaffUserName varchar(20) = '')
 as
 begin
-select s.StaffId, s.StaffFirstName, s.StaffLastName
+select s.StaffId, s.UserName
 from staff s
 where s.StaffId = @StaffId
 or @all = 1
-or (@StaffLastName <> '' and s.StaffLastName like '%' + @StaffLastName + '%')
+or (@StaffUserName <> '' and s.UserName like '%' + @StaffUserName + '%')
 end
 go
 
 /*
 exec StaffGet
 
-exec StaffGet @all = 1
+exec StaffGet @All = 1
 
-exec StaffGet @StaffLastName = 's'
+exec StaffGet @StaffUserName = 's'
 
 declare @staffId int
 select top 1 @staffId = s.staffid from staff s

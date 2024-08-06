@@ -44,7 +44,7 @@ namespace RecipeSystem
         {
             int id = (int)dtrecipe.Rows[0]["RecipeId"];
             SqlCommand cmd = SQLutility.GetSqlCommand("RecipeDelete");
-            SQLutility.SetParamValue(cmd, "@Recipeid", id);
+            SQLutility.SetParamValue(cmd, "@RecipeId", id);
             SQLutility.ExecuteSQL(cmd);
         }
     }

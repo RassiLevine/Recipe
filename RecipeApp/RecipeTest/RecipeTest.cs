@@ -94,8 +94,34 @@ namespace RecipeTest
             Assert.IsTrue(dt.Rows[0]["recipename"].ToString() == recipename, "recipename for recipe with id " + recipeid + " is " + recipename + "(" + dt.Rows[0]["recipename"].ToString() + ")");
             TestContext.WriteLine("recipename for reicpe with id " + recipeid + " is " + dt.Rows[0]["recipename"].ToString() + "(" + recipename + ")");
         }
+
+        [Test]
+        [TestCase("tea", 2 )]
+        [TestCase("iced coffee", 60)]
+        public void InsertRecipeNew(string recipename, int calories)
+        {
+            DataTable dt = SQLutility.GetDataTable("select * from recipe where recipeid = 0");
+            DataRow r = dt.Rows.Add();
+            Assume.That(dt.Rows.Count == 1);
+            int cuisineid = SQLutility.GetFirstRowFirstColumn("select top 1 cuisineid from cuisine");
+            int staffid = SQLutility.GetFirstRowFirstColumn("select top 1 staffid from staff");
+            Assume.That(cuisineid > 0, "cant run test, no parties in db");
+
+            r["cuisineid"] = cuisineid;
+            r["staffid"] = staffid;
+            r["recipename"] = recipename;
+            r["calories"] = calories;
             
-    [Test]  
+            Recipe.Save(dt);
+            int pkid = 0;
+            if (r["recipeid"] != DBNull.Value)
+            {
+                pkid = (int)r["recipeid"];
+            }
+            Assert.IsTrue(pkid > 0, "pk not updated in datatable");
+            TestContext.WriteLine("new primary key is " + pkid);
+        }
+        [Test]  
         public void DeleteRecipe()
         {
             DataTable dt = SQLutility.GetDataTable(@"select top 1 r.recipeid

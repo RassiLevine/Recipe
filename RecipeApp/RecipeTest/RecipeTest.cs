@@ -71,9 +71,7 @@ namespace RecipeTest
 
             int recipeid = SQLutility.GetFirstRowFirstColumn("select top 1 recipeid from recipe");
             int cuisineid = SQLutility.GetFirstRowFirstColumn("select cuisineid from recipe r where r.recipeid = " + recipeid);
-            cuisineid = 1;
             int staffid = SQLutility.GetFirstRowFirstColumn("select staffid from recipe r where r.recipeid = " + recipeid);
-            staffid = 2;
             string recipename = dt.Rows[0]["recipename"].ToString();
             TestContext.WriteLine("recipename for recipe with id " + recipeid + " is " + recipename);
             DateTime now = DateTime.Now;

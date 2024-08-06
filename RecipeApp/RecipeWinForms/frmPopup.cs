@@ -11,7 +11,8 @@ namespace RecipeWinForms
 {
     public partial class frmPopup : Form
     {
-        DataTable dtrecipe;
+        DataTable dtrecipe = new DataTable();
+        BindingSource bindsource = new BindingSource();
         public frmPopup()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace RecipeWinForms
         {
 
             dtrecipe = Recipe.LoadRecipe(recipeid);
+            bindsource.DataSource = dtrecipe;
             if (recipeid == 0)
             {
                 dtrecipe.Rows.Add();
@@ -32,13 +34,13 @@ namespace RecipeWinForms
             DataTable dtstaff = Recipe.GetStaffList();
             WindowsFormsUtility.SetListBinding(drpdwnStaff, dtstaff, dtrecipe, "Staff");
             drpdwnStaff.DisplayMember = "StaffLastName";
-            WindowsFormsUtility.SetControlBinding(txtRecipeName, dtrecipe);
-            WindowsFormsUtility.SetControlBinding(txtCalories, dtrecipe);
-            WindowsFormsUtility.SetControlBinding(txtRecipeStatus, dtrecipe);
-            WindowsFormsUtility.SetControlBinding(txtDateDraft, dtrecipe);
-            WindowsFormsUtility.SetControlBinding(txtRecipePic, dtrecipe);
-            WindowsFormsUtility.SetControlBinding(txtDatePublished, dtrecipe);
-            WindowsFormsUtility.SetControlBinding(txtDateArchived, dtrecipe);
+            WindowsFormsUtility.SetControlBinding(txtRecipeName, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtCalories, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtRecipeStatus, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtDateDraft, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtRecipePic, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtDatePublished, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtDateArchived, bindsource);
             this.Show();
         }
 

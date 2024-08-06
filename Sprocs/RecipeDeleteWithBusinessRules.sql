@@ -12,7 +12,7 @@ begin
 
 
     begin
-    select @return = 1, @message = 'Cannot delete recipe becasue it is either: published; archived for less than 30 days; part of a meal or cookbook'
+    select @return = 1, @message = 'Cannot delete recipe becasue it is either published or archived for less than 30 days'
     goto finished
     end 
 

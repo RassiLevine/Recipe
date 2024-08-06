@@ -2,7 +2,7 @@
 create or alter procedure dbo.RecipeDelete (
     @Recipeid int,
     @Message varchar(500) = '' output
-    )
+    )  
 as    
 begin
     declare @return int = 0

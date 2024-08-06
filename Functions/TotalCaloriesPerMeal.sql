@@ -19,7 +19,7 @@ begin
 end
 go
 
-/*
+/*  
 TEST
 select m.mealname, TotalCalories = dbo.TotalCaloriesPerMeal(m.mealsid)
 from meals m

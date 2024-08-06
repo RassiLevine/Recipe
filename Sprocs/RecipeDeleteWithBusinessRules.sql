@@ -16,7 +16,7 @@ begin
     goto finished
     end 
 
-    begin try
+    begin try  
     begin tran
 delete RecipeIngredient where recipeid = @recipeid
 delete Directions where recipeid = @Recipeid

@@ -1,37 +1,38 @@
 create or alter procedure dbo.RecipeUpdate(
-    @recipeid int = 0 output,
-    @cuisineid int,
-    @staffid int,
-    @recipeName varchar (500),
-    @calories int, 
-    @datedraft date, 
-    @datepublished date, 
-    @datearchived date
+    @RecipeId int = 0 output,
+    @CuisineId int,
+    @StaffId int,
+    @RecipeName varchar (500),
+    @Calories int, 
+    @DateDraft date, 
+    @DatePublished date, 
+    @DateArchived date
 )
 
 as 
     begin 
 
-        select @recipeid = isnull(@recipeid, 0), @cuisineid = isnull(@cuisineid, 0), @calories = isnull(@calories, 0)
+        select @RecipeId = isnull(@recipeid, 0), @CuisineId = isnull(@cuisineid, 0), @Calories = isnull(@calories, 0)
 
         if @recipeid = 0
             begin
-                insert recipe(cuisineid, staffid, recipename, calories )--, datedraft, datepublished, datearchived)
-                values(@cuisineid, @staffid, @recipename, @calories) --, @datedraft, @datepublished, @datearchived)  
+                insert recipe(cuisineid, staffid, recipename, calories )
+                values(@CuisineId, @StaffId, @RecipeName, @Calories) 
 
-                select @recipeid = SCOPE_IDENTITY()
+                select @RecipeId = SCOPE_IDENTITY()
             end
         else 
             begin
                 update recipe
                 set 
-                cuisineid = @cuisineid,
-                recipename = @recipeName,
-                calories = @calories,
-                datedraft = @datedraft,
-                datepublished = @datepublished,
-                datearchived = @datearchived
-                where recipeid = @recipeid
+                cuisineid = @CuisineId,
+                staffid = @StaffId,
+                recipename = @RecipeName,
+                calories = @Calories,
+                datedraft = @DateDraft,
+                datepublished = @DatePublished,
+                datearchived = @DateArchived
+                where recipeid = @RecipeId
             end
     end
     go

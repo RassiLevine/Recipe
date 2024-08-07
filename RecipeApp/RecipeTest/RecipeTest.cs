@@ -185,6 +185,27 @@ where RecipeStatus = 'published'
         }
 
         [Test]
+        public void DeleteRecipeArchivedLessThanThirtyDays()
+        {
+            string sql = @"
+select top 1 recipeid 
+from recipe 
+where Datediff(day, getdate(), datearchived) <30
+";
+            DataTable dt = SQLutility.GetDataTable(sql);
+            int recipeid = 0;
+            if (dt.Rows.Count > 0)
+            {
+                recipeid = (int)dt.Rows[0]["recipeid"];
+            }
+            Assume.That(recipeid > 0, "no recipes that are archived for less than 30 days");
+            TestContext.WriteLine("existing recipe that is archived for less thatn 30 days " + recipeid);
+            TestContext.WriteLine("ensure app cannot delete recipe " + recipeid);
+            Exception ex = Assert.Throws<Exception>(() => Recipe.Delete(dt));
+            TestContext.WriteLine(ex.Message);
+
+        }
+        [Test]
         public void LoadRecipe()
         {
             int recipeid = GetRecipeId();

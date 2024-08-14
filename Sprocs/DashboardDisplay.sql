@@ -1,0 +1,39 @@
+create or alter proc dbo.DashboardDisplay(
+    @Message varchar(1000) = ' '
+)
+as
+begin
+
+    declare @return int = 0
+
+select Recipes =  'Recipes', NumRecipes = count(distinct r.RecipeId)
+from staff s
+join recipe r
+on s.Staffid = r.StaffId 
+join meals m
+on m.StaffId = r.StaffId
+join Cookbook c
+on c.StaffId = s.StaffId
+union select Meals  =  'Meals', NumRecipes = count(distinct m.MealsId)
+from staff s
+join recipe r
+on s.Staffid = r.StaffId 
+join meals m
+on m.StaffId = r.StaffId
+join Cookbook c
+on c.StaffId = s.StaffId
+union select Cookbooks =  'cookbooks', NumRecipes = count(distinct c.CookbookId)
+from staff s
+join recipe r
+on s.Staffid = r.StaffId 
+join meals m
+on m.StaffId = r.StaffId
+join Cookbook c
+on c.StaffId = s.StaffId
+
+
+    return @return
+end
+go
+
+--exec DashboardDisplay

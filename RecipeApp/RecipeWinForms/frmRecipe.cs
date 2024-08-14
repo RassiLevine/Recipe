@@ -31,8 +31,13 @@ namespace RecipeWinForms
             }
             frmPopup frm = new();
             frm.ShowForm(id);
+            if (this.MdiParent != null && this.MdiParent is frmMain)
+            {
+                ((frmMain)this.MdiParent).OpenForm(typeof(frmPopup), id);
+            }
+
         }
-    
+
         private void BtnSearch_Click(object? sender, EventArgs e)
         {
             SearchForRecipe(txtName.Text);

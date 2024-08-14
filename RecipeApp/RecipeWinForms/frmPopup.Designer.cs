@@ -303,7 +303,7 @@
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "frmPopup";
-            Text = "frmPopup";
+            Text = "New Recipe";
             tblMain.ResumeLayout(false);
             tblMain.PerformLayout();
             tblButton.ResumeLayout(false);

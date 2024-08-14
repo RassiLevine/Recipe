@@ -14,7 +14,7 @@ namespace RecipeWinForms
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             DBmanager.SetConnectionString("Server=tcp:dev-rlevine.database.windows.net,1433;Initial Catalog=RecipeWebsiteDB;Persist Security Info=False;User ID=cpuadminRL;Password=Rassi0605!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
-            Application.Run(new frmRecipe());
+            Application.Run(new frmMain());
         }
     }
 }

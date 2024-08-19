@@ -71,7 +71,7 @@ create table dbo.MeasurementType(
         constraint u_measurementType_must_be_unique unique(measurementType)
 )
 create table dbo.Ingredients(
-    IngredientId int not null identity primary key,
+    IngredientsId int not null identity primary key,
     IngredientName varchar(30) not null 
         constraint ck_ingredientName_cant_be_blank check(IngredientName <> '')
         constraint u_ingredientName unique,
@@ -82,7 +82,7 @@ go
 create table dbo.RecipeIngredient(
     RecipeIngredientId int not null identity primary key,
     RecipeId int not null constraint f_recipe_recipeIngredient foreign key references recipe(recipeId),
-    ingredientId int not null constraint f_ingredient_recipeIngredient foreign key references ingredients(ingredientId),
+    ingredientId int not null constraint f_ingredient_recipeIngredient foreign key references ingredients(ingredientsId),
     MeasurementTypeId int null constraint f_MeasurementType_MeasurementType foreign key references measurementType(MeasurementTypeId),
     IngredientAmt decimal(10,2) not null
         constraint ck_ingredientAmt_must_be_greater_than_zero check(ingredientamt > 0),

@@ -21,6 +21,7 @@ namespace RecipeWinForms
             InitializeComponent();
             BindData();
             btnNewRecipe.Click += BtnNewRecipe_Click;
+            gData.CellContentClick += GData_CellContentClick;
         }
 
         private void BindData()
@@ -35,10 +36,11 @@ namespace RecipeWinForms
             int id = 0;
             if (rowindex > -1)
             {
-                id = (int)gData.Rows[rowindex].Cells["RecipeId"].Value;
+                id = WindowsFormsUtility.GetIdFromGrid(gData, rowindex, "RecipeId");
+                    //(int)gData.Rows[rowindex].Cells["RecipeId"].Value;
             }
-            frmPopup frm = new();
-            frm.ShowForm(id);
+            //frmPopup frm = new();
+            //frm.ShowForm(id);
             if (this.MdiParent != null && this.MdiParent is frmMain)
             {
                 ((frmMain)this.MdiParent).OpenForm(typeof(frmPopup), id);
@@ -49,6 +51,11 @@ namespace RecipeWinForms
         private void BtnNewRecipe_Click(object? sender, EventArgs e)
         {
             ShowDetailForm(-1);  
+        }
+
+        private void GData_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            ShowDetailForm(e.RowIndex);
         }
 
 

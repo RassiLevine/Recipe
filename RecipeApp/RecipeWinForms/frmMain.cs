@@ -44,6 +44,7 @@ namespace RecipeWinForms
                 {
                     frmPopup f = new();
                     frm = f;
+                    f.ShowForm(pkvalue);
                 }
                 if (frm != null)
                 {
@@ -54,9 +55,9 @@ namespace RecipeWinForms
                     frm.Show();
                 }
                     WindowsFormsUtility.SetupNav(tsMain);
-                }
-           
+            }
         }
+
         private void Frm_TextChanged(object? sender, EventArgs e)
         {
             WindowsFormsUtility.SetupNav(tsMain);

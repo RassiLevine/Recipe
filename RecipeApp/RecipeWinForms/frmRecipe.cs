@@ -2,6 +2,7 @@ using CPUFramework;
 using System.Configuration;
 using System.Data;
 using RecipeSystem;
+using CPUWindowsFormFramework;
 namespace RecipeWinForms
 {
     public partial class frmRecipe : Form
@@ -27,10 +28,11 @@ namespace RecipeWinForms
             int id = 0;
             if(rowindex > -1)
             {
-                id = (int)gRecipe.Rows[rowindex].Cells["RecipeId"].Value;
+                id = WindowsFormsUtility.GetIdFromGrid(gRecipe, rowindex, "RecipeId");
+                    //(int)gRecipe.Rows[rowindex].Cells["RecipeId"].Value;
             }
-            frmPopup frm = new();
-            frm.ShowForm(id);
+            //frmPopup frm = new();
+            //frm.ShowForm(id);
             if (this.MdiParent != null && this.MdiParent is frmMain)
             {
                 ((frmMain)this.MdiParent).OpenForm(typeof(frmPopup), id);

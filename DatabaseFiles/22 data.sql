@@ -89,7 +89,7 @@ union select 'salt'
 )
 
 insert RecipeIngredient(RecipeId, ingredientid, IngredientAmt, MeasurementTypeId, ingredientsequence)
-select r.recipeid, i.IngredientId,x.amt, mt.measurementTypeId, x.ingSequence
+select r.recipeid, i.IngredientsId,x.amt, mt.measurementTypeId, x.ingSequence
 from  x
 join Ingredients i
 on x.Ingredient = i.IngredientName

@@ -129,7 +129,7 @@ on ri.recipeid = r.recipeid
 left
 join CourseRecipeCourseMeal cm
 on cm.recipeid = r.recipeid
-where ri.ingredientid is null
+where ri.ingredientsid is null
 and cm.CourseRecipeId is null");
             int recipeid = 0;
             if (dt.Rows.Count > 0)

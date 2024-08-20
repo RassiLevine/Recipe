@@ -1,12 +1,7 @@
 ﻿using CPUFramework;
 using System.Data;
 using CPUWindowsFormFramework;
-using System.Diagnostics;
-using System.Data.SqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
 using RecipeSystem;
-using System.Security.Cryptography;
-using System.Security.Principal;
 
 namespace RecipeWinForms
 {
@@ -14,8 +9,10 @@ namespace RecipeWinForms
     {
         DataTable dtrecipe = new DataTable();
         DataTable dtIngredients = new DataTable();
+        DataTable dtDirections = new DataTable();
         BindingSource bindsource = new BindingSource();
         int recipeid = 0;
+        string deletecolumn = "del col";
         public frmPopup()
         {
             InitializeComponent();
@@ -47,6 +44,9 @@ namespace RecipeWinForms
             WindowsFormsUtility.SetControlBinding(txtDateArchived, bindsource);
             this.Text = GetRecipeDesc();
             LoadIngredients();
+            LoadDirections();
+            SetButtonsEnabledBasedOnNewRecord();
+
         }
         private void LoadIngredients()
         {
@@ -55,8 +55,24 @@ namespace RecipeWinForms
             gIngredients.DataSource = dtIngredients;
             WindowsFormsUtility.AddComboBoxToGrid(gIngredients, DataMaintenance.GetDataList("Ingredients"), "Ingredients", "IngredientName");
             WindowsFormsUtility.AddComboBoxToGrid(gIngredients, DataMaintenance.GetDataList("MeasurementType"), "MeasurementType", "MeasurementType");
+            WindowsFormsUtility.AddDeleteButtonToGrid(gIngredients, deletecolumn);
             WindowsFormsUtility.FormatGridForEdit(gIngredients, "RecipeIngredients");
            
+        }
+
+        private void LoadDirections()
+        {
+            dtDirections = Directions.LoadByRecipeId(recipeid);
+            gDirections.Columns.Clear();
+            gDirections.DataSource = dtDirections;
+            WindowsFormsUtility.AddDeleteButtonToGrid(gDirections, deletecolumn);
+            WindowsFormsUtility.FormatGridForEdit(gDirections, "Directions");
+        }
+        private void SetButtonsEnabledBasedOnNewRecord()
+        {
+            bool b = recipeid == 0 ? false : true;
+            btnDelete.Enabled = b;
+            btnSaveChild.Enabled = b;
         }
         private void Save()
         {
@@ -110,7 +126,7 @@ namespace RecipeWinForms
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, Application.ProductName);
+                MessageBox.Show(ex.Message, "RecipeApp");
             }
             finally
             {

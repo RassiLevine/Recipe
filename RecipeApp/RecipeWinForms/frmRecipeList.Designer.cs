@@ -81,7 +81,7 @@
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "frmRecipeList";
-            Text = "Recipe List";
+            Text = "Recipes";
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gData).EndInit();
             ResumeLayout(false);

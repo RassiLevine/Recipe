@@ -15,6 +15,9 @@ namespace RecipeWinForms
             mnuDashboard.Click += MnuDashboard_Click;
             mnuRecipeList.Click += MnuList_Click;
             mnuNewRecipe.Click += MnuNewRecipe_Click;
+            mnuMealsList.Click += MnuMealsList_Click;
+            mnuCookbookList.Click += MnuCookbookList_Click;
+            mnuNewCookbook.Click += MnuNewCookbook_Click;
             mnuClone.Click += MnuClone_Click;
         }
 
@@ -39,6 +42,22 @@ namespace RecipeWinForms
                 {
                     frmRecipeList f = new();
                     frm = f;
+                }
+                else if(frmtype == typeof(frmCookbooksList))
+                {
+                    frmCookbooksList f = new();
+                    frm = f; 
+                }
+                else if (frmtype == typeof(frmMealsList))
+                {
+                    frmMealsList f = new();
+                    frm = f;
+                }
+                else if(frmtype == typeof(frmCookbookDetail))
+                {
+                    frmCookbookDetail f = new();
+                    frm = f;
+                    f.ShowCookbookDetailForm(pkvalue);
                 }
                 else if (frmtype == typeof(frmPopup))
                 {
@@ -82,6 +101,19 @@ namespace RecipeWinForms
         private void MnuClone_Click(object? sender, EventArgs e)
         {
             
+        }
+        private void MnuMealsList_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmMealsList));
+        }
+        private void MnuNewCookbook_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmCookbookDetail));
+        }
+
+        private void MnuCookbookList_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmCookbooksList));
         }
     }
 }

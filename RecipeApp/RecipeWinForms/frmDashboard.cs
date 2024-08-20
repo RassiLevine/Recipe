@@ -1,16 +1,5 @@
-﻿using CPUFramework;
-using CPUWindowsFormFramework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using RecipeSystem;
 using System.Data;
-using System.Data.SqlClient;
-using System.DirectoryServices.ActiveDirectory;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -20,31 +9,61 @@ namespace RecipeWinForms
         {
             InitializeComponent();
             this.Activated += FrmDashboard_Activated;
+            btnRecipeList.Click += BtnRecipeList_Click;
+            btnCookbookList.Click += BtnCookbookList_Click;
+            btnMealList.Click += BtnMealList_Click;
 
         }
 
-        //private void BindData()
-        //{
-        //    SqlCommand cmd = SQLutility.GetSqlCommand("GetDashboard");
-        //    DataTable dt = SQLutility.GetDataTable(cmd);
-        //    gData.DataSource = dt;
-        //}
+        private void SetDashboardLabels(string numtype, Label lbl)
+        {
+            DataTable dt = DataMaintenance.GetDashboard();
+            var rows = dt.Select($"Type = '{numtype}'");
+            if(rows.Length > 0)
+            {
+                lbl.Text = rows[0]["Number"].ToString();
+            }
+        }
 
-        private void ShowForm()
+        private void ShowRecipeForm()
         {
             if (this.MdiParent != null && this.MdiParent is frmMain)
             {
                 ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipeList));
             }
         }
-        private void GData_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
-        {
-            ShowForm();
-        }
 
+        private void ShowCookbookForm()
+        {
+            if (this.MdiParent != null && this.MdiParent is frmMain)
+            {
+                ((frmMain)this.MdiParent).OpenForm(typeof(frmCookbooksList));
+            }
+        }
+        private void ShowMealsForm()
+        {
+            if (this.MdiParent != null && this.MdiParent is frmMain)
+            {
+                ((frmMain)this.MdiParent).OpenForm(typeof(frmMealsList));
+            }
+        }
         private void FrmDashboard_Activated(object? sender, EventArgs e)
         {
-            //BindData();
+            SetDashboardLabels("Cookbooks", lblCookbooksNum);
+            SetDashboardLabels("Meals", lblMealsNum);
+            SetDashboardLabels("Recipes", lblRecipeNum);
+        }
+        private void BtnRecipeList_Click(object? sender, EventArgs e)
+        {
+            ShowRecipeForm();
+        }
+        private void BtnCookbookList_Click(object? sender, EventArgs e)
+        {
+            ShowCookbookForm();
+        }
+        private void BtnMealList_Click(object? sender, EventArgs e)
+        {
+            ShowMealsForm();
         }
     }
 }

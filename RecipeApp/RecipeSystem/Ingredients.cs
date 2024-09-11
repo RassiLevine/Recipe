@@ -22,7 +22,7 @@ namespace RecipeWinForms
             {
                 r["RecipeIngredientId"] = recipeingredientid;
             }
-            SQLutility.SaveDataTable(dt, "IngredientUpdate");
+            SQLutility.SaveDataTable(dt, "RecipeIngredientUpdate");
         }
         
 

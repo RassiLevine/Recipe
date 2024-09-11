@@ -6,20 +6,20 @@ begin
 
     declare @return int = 0
 
-select cb.CookbookName, author = concat(s.StaffFirstName, ' ',  s.StaffLastName), NumRecipes = count(r.RecipeId)
+select cb.CookbookId, cb.CookbookName, author = concat(s.StaffFirstName, ' ',  s.StaffLastName), NumRecipes = count(r.RecipeId)
 from Cookbook cb
 join staff s
 on cb.staffid = s.StaffId
-join CookbookRecipe cbr
+left join CookbookRecipe cbr
 on cbr.CookbookId = cb.CookbookId
-join recipe r
+left join recipe r
 on cbr.recipeId = r.RecipeId
-group by cb.CookbookName, cb.active, s.StaffFirstName, s.StaffLastName
-having cb.active = 1
+group by cb.CookbookId, cb.CookbookName, cb.active, s.StaffFirstName, s.StaffLastName
 order by cb.CookbookName
 
     return @return
 end
 go
 
-exec CookbookList
+--exec CookbookList
+

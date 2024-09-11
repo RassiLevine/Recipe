@@ -240,21 +240,21 @@ where Datediff(day, getdate(), datearchived) <30
             TestContext.WriteLine("number of staff members returned = " + dt.Rows.Count);
         }
 
-        [Test]
-        public void SearchRecipe()
-        {
-            string criteria = "a";
-            int num = SQLutility.GetFirstRowFirstColumn("select total = count(*) from recipe where recipename like '%" + criteria + "%'");
-            Assume.That(num > 0, "cant run - no match");
-            TestContext.WriteLine(num + " recipes that match " + criteria);
-            TestContext.WriteLine("ensure that recipe search returns " + num + " with criteria " + criteria);
-            DataTable dt = Recipe.Search(criteria);
-            int results = dt.Rows.Count;
+        //[Test]
+        //public void SearchRecipe()
+        //{
+        //    string criteria = "a";
+        //    int num = SQLutility.GetFirstRowFirstColumn("select total = count(*) from recipe where recipename like '%" + criteria + "%'");
+        //    Assume.That(num > 0, "cant run - no match");
+        //    TestContext.WriteLine(num + " recipes that match " + criteria);
+        //    TestContext.WriteLine("ensure that recipe search returns " + num + " with criteria " + criteria);
+        //    DataTable dt = Recipe.Search(criteria);
+        //    int results = dt.Rows.Count;
 
-            Assert.IsTrue(results == num, "results of recipe search does not match number of recipes " + results + "<>" + num);
-            TestContext.WriteLine("number of rows returned by search is " + results);
+        //    Assert.IsTrue(results == num, "results of recipe search does not match number of recipes " + results + "<>" + num);
+        //    TestContext.WriteLine("number of rows returned by search is " + results);
 
-        }
+        //}
 
         private int GetRecipeId()
         {

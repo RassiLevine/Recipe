@@ -1,8 +1,9 @@
-create or alter proc dbo.MeasurementGet(
+create or alter proc dbo.MeasurementTypeGet(
     @MeasurementId int = 0,
     @RecipeId int = 0,
     @IngredientId int = 0,
     @All int = 0,
+    @IncludeBlank int = 0,
     @Message varchar(500) = '' output
 )
 as
@@ -11,17 +12,14 @@ begin
 
     select @MeasurementId = isnull(@MeasurementId, 0), @RecipeId = isnull(@recipeid, 0), @ingredientid = isnull(@IngredientId, 0), @All = isnull(@all, 0)
 
-select mt.MeasurementTypeId, mt.MeasurementType
+select mt.MeasurementTypeId,  mt.MeasurementType
 from MeasurementType mt
-join RecipeIngredient ri
+/*join RecipeIngredient ri
 on mt.MeasurementTypeId = ri.MeasurementTypeId
-where ri.recipeid = @recipeid
-or mt.MeasurementTypeId = @MeasurementId
-or ri.ingredientid = @ingredientid
-or @All = 1
+where ri.recipeid = @recipeid*/
+where @All = 1
 
     return @return
 end
 go
 
-exec MeasurementGet @recipeid = 6

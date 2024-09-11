@@ -19,7 +19,9 @@ namespace RecipeWinForms
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
             btnSaveChild.Click += BtnSaveChild_Click;
+            btnChangeStatus.Click += BtnChangeStatus_Click;
         }
+
         public void ShowForm(int recipeidval)
         {
             recipeid = recipeidval;
@@ -80,6 +82,7 @@ namespace RecipeWinForms
             try
             {
                 Recipe.Save(dtrecipe);
+                Recipe.LoadRecipe(recipeid);
             }
             catch (Exception ex)
             {
@@ -143,6 +146,17 @@ namespace RecipeWinForms
             }
             return value;
         }
+
+        private void OpenStatusForm(int recipeid)
+        {
+            int id = 0;
+            this.Tag = recipeid;
+            id = recipeid;
+            if (this.MdiParent != null && this.MdiParent is frmMain)
+            {
+                ((frmMain)this.MdiParent).OpenForm(typeof(frmChangeRecipeStatus), id);
+            }
+        }
         private void BtnSave_Click(object? sender, EventArgs e)
         {
             Save();
@@ -155,6 +169,11 @@ namespace RecipeWinForms
         private void BtnSaveChild_Click(object? sender, EventArgs e)
         {
             SaveChild();
+        }
+
+        private void BtnChangeStatus_Click(object? sender, EventArgs e)
+        {
+            OpenStatusForm(recipeid);  
         }
 
     }

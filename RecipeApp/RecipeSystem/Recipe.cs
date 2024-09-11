@@ -1,19 +1,19 @@
-﻿using System.Data;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Data.SqlClient;
 using CPUFramework;
 namespace RecipeSystem
 {
     public class Recipe
     {
-        public static DataTable Search(string recipename)
-        {
-            DataTable dt = new();
-            SqlCommand cmd = SQLutility.GetSqlCommand("RecipeGet");
-            cmd.Parameters["@RecipeName"].Value = recipename;
-            dt = SQLutility.GetDataTable(cmd);
-            return dt;
-        }
-
+        //public static DataTable Search(string recipename)
+        //{
+        //    DataTable dt = new();
+        //    SqlCommand cmd = SQLutility.GetSqlCommand("RecipeGet");
+        //    cmd.Parameters["@RecipeName"].Value = recipename;
+        //    dt = SQLutility.GetDataTable(cmd);
+        //    return dt;
+        //}
         public static DataTable GetCuisineList()
         {
             return SQLutility.GetDataTable("select cuisineid, cuisinetype from cuisine");
@@ -24,12 +24,27 @@ namespace RecipeSystem
             return SQLutility.GetDataTable("select * from staff");
         }
 
+        //public static DataTable LoadRecipe(int recipeid)
+        //{
+        //    string sql = "select r.*, c.cuisineid, s.staffid from recipe r join cuisine c on r.cuisineid = c.cuisineid join staff s on r.staffid = s.staffid where r.RecipeId =" + recipeid.ToString();
+        //    return SQLutility.GetDataTable(sql);
+        //}
+
         public static DataTable LoadRecipe(int recipeid)
         {
-            string sql = "select r.*, c.cuisineid, s.staffid from recipe r join cuisine c on r.cuisineid = c.cuisineid join staff s on r.staffid = s.staffid where r.RecipeId =" + recipeid.ToString();
-            return SQLutility.GetDataTable(sql);
+            SqlCommand cmd = SQLutility.GetSqlCommand("RecipeGet");
+            SQLutility.SetParamValue(cmd, "@RecipeId", recipeid);
+            DataTable dt = SQLutility.GetDataTable(cmd);
+            return dt;
         }
-
+        public static DataTable LoadRecipeStatus(int recipeid)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = SQLutility.GetSqlCommand("StatusGet");
+            SQLutility.SetParamValue(cmd, "@RecipeId", recipeid);
+            dt = SQLutility.GetDataTable(cmd);
+            return dt;
+        }
         public static void Save(DataTable dtrecipe)
         {
             if (dtrecipe.Rows.Count == 0)
@@ -38,6 +53,7 @@ namespace RecipeSystem
             }
             DataRow r = dtrecipe.Rows[0];
             SQLutility.SaveDataRow(r, "RecipeUpdate");
+            
         }
 
         public static void Delete(DataTable dtrecipe)

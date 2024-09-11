@@ -51,6 +51,7 @@
             txtDateDraft = new TextBox();
             txtDatePublished = new TextBox();
             txtDateArchived = new TextBox();
+            btnChangeStatus = new Button();
             tblButtons = new TableLayoutPanel();
             btnSave = new Button();
             btnDelete = new Button();
@@ -265,16 +266,19 @@
             // 
             // tblStatus
             // 
-            tblStatus.ColumnCount = 3;
+            tblStatus.ColumnCount = 5;
             tblStatus.ColumnStyles.Add(new ColumnStyle());
             tblStatus.ColumnStyles.Add(new ColumnStyle());
             tblStatus.ColumnStyles.Add(new ColumnStyle());
+            tblStatus.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 190F));
+            tblStatus.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
             tblStatus.Controls.Add(lblDrafted, 0, 0);
             tblStatus.Controls.Add(lblPublished, 1, 0);
             tblStatus.Controls.Add(lblArchived, 2, 0);
             tblStatus.Controls.Add(txtDateDraft, 0, 1);
             tblStatus.Controls.Add(txtDatePublished, 1, 1);
             tblStatus.Controls.Add(txtDateArchived, 2, 1);
+            tblStatus.Controls.Add(btnChangeStatus, 3, 1);
             tblStatus.Dock = DockStyle.Fill;
             tblStatus.Location = new Point(118, 135);
             tblStatus.Name = "tblStatus";
@@ -345,6 +349,17 @@
             txtDateArchived.ReadOnly = true;
             txtDateArchived.Size = new Size(81, 29);
             txtDateArchived.TabIndex = 5;
+            // 
+            // btnChangeStatus
+            // 
+            btnChangeStatus.BackColor = Color.FromArgb(255, 255, 128);
+            btnChangeStatus.Dock = DockStyle.Fill;
+            btnChangeStatus.Location = new Point(285, 24);
+            btnChangeStatus.Name = "btnChangeStatus";
+            btnChangeStatus.Size = new Size(184, 34);
+            btnChangeStatus.TabIndex = 6;
+            btnChangeStatus.Text = "Change Recipe Status";
+            btnChangeStatus.UseVisualStyleBackColor = false;
             // 
             // tblButtons
             // 
@@ -463,5 +478,6 @@
         private DataGridView gDirections;
         private TableLayoutPanel tblButtons;
         private Button btnSaveChild;
+        private Button btnChangeStatus;
     }
 }

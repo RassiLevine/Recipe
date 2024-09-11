@@ -10,18 +10,18 @@ namespace RecipeWinForms
         public frmRecipe()
         {
             InitializeComponent();
-            btnSearch.Click += BtnSearch_Click;
+            //btnSearch.Click += BtnSearch_Click;
             btnNew.Click += BtnNew_Click;
             gRecipe.CellDoubleClick += GRecipe_DoubleClick;
         }
 
-        private void SearchForRecipe(string recipename)
-        {
-            DataTable dt = Recipe.Search(recipename);
-            gRecipe.DataSource = dt;
-            gRecipe.Columns["RecipeId"].Visible = false;
-            gRecipe.AllowUserToAddRows = false;
-        }
+        //private void SearchForRecipe(string recipename)
+        //{
+        //    DataTable dt = Recipe.Search(recipename);
+        //    gRecipe.DataSource = dt;
+        //    gRecipe.Columns["RecipeId"].Visible = false;
+        //    gRecipe.AllowUserToAddRows = false;
+        //}
 
         private void ShowDetailForm(int rowindex)
         {
@@ -40,10 +40,10 @@ namespace RecipeWinForms
 
         }
 
-        private void BtnSearch_Click(object? sender, EventArgs e)
-        {
-            SearchForRecipe(txtName.Text);
-        }
+        //private void BtnSearch_Click(object? sender, EventArgs e)
+        //{
+        //    SearchForRecipe(txtName.Text);
+        //}
 
 
         private void BtnNew_Click(object? sender, EventArgs e)

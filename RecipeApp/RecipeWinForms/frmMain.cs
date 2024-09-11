@@ -19,8 +19,9 @@ namespace RecipeWinForms
             mnuCookbookList.Click += MnuCookbookList_Click;
             mnuNewCookbook.Click += MnuNewCookbook_Click;
             mnuClone.Click += MnuClone_Click;
+            mnuEditData.Click += MnuEditData_Click;
+            mnuAutoCreate.Click += MnuAutoCreate_Click;
         }
-
         private void FrmMain_Shown(object? sender, EventArgs e)
         {
             OpenForm(typeof(frmDashboard));
@@ -52,6 +53,26 @@ namespace RecipeWinForms
                 {
                     frmMealsList f = new();
                     frm = f;
+                }
+                else if(frmtype == typeof(frmDataMaintenance))
+                {
+                    frmDataMaintenance f = new();
+                    frm = f;
+                }
+                else if(frmtype == typeof(frmCloneRecipe))
+                {
+                    frmCloneRecipe f = new();
+                    frm = f;
+                }
+                else if(frmtype == typeof(frmAutoCreateCookbook))
+                {
+                    frmAutoCreateCookbook f = new();
+                    frm = f;
+                }
+                else if(frmtype == typeof(frmChangeRecipeStatus)){
+                    frmChangeRecipeStatus f = new();
+                    frm = f;
+                    f.ShowStatusForm(pkvalue);
                 }
                 else if(frmtype == typeof(frmCookbookDetail))
                 {
@@ -100,7 +121,7 @@ namespace RecipeWinForms
         }
         private void MnuClone_Click(object? sender, EventArgs e)
         {
-            
+            OpenForm(typeof(frmCloneRecipe));   
         }
         private void MnuMealsList_Click(object? sender, EventArgs e)
         {
@@ -115,5 +136,15 @@ namespace RecipeWinForms
         {
             OpenForm(typeof(frmCookbooksList));
         }
+        private void MnuEditData_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmDataMaintenance));
+        }
+        private void MnuAutoCreate_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmAutoCreateCookbook));
+        }
+
+
     }
 }

@@ -1,16 +1,7 @@
 ﻿using CPUFramework;
 using CPUWindowsFormFramework;
-using RecipeSystem;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -37,10 +28,7 @@ namespace RecipeWinForms
             if (rowindex > -1)
             {
                 id = WindowsFormsUtility.GetIdFromGrid(gData, rowindex, "RecipeId");
-                    //(int)gData.Rows[rowindex].Cells["RecipeId"].Value;
             }
-            //frmPopup frm = new();
-            //frm.ShowForm(id);
             if (this.MdiParent != null && this.MdiParent is frmMain)
             {
                 ((frmMain)this.MdiParent).OpenForm(typeof(frmPopup), id);

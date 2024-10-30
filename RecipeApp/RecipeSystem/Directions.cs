@@ -19,5 +19,23 @@ namespace RecipeSystem
 
             return dt;
         }
+
+        public static void SaveTable(DataTable dt, int directionid, int recipeid)
+        {
+
+            foreach (DataRow r in dt.Select("", "", DataViewRowState.Added))
+            {int id = WindowsFormsUtility.GetIdFromGrid(gData, rowindex, currenttabletype.ToString() + "Id");
+                r["DirectionsId"] = directionid;
+                r["RecipeId"] = recipeid;
+            }
+            SQLutility.SaveDataTable(dt, "DirectionsUpdate");
+        }
+
+        public static void DeleteDirectionChild(int directionsid)
+        {
+            SqlCommand cmd = SQLutility.GetSqlCommand("DirectionsDelete");
+            cmd.Parameters["@DirectionsId"].Value = directionsid;
+            SQLutility.ExecuteSQL(cmd);
+        }
     }
 }

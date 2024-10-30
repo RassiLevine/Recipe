@@ -1,5 +1,4 @@
 create or alter proc CookbookRecipeGet(
-    @CookbookRecipeId int = 0,
     @CookbookId int = 0,
     @RecipeId int = 0,
     @All int = 0,
@@ -9,11 +8,12 @@ as
 begin
  declare @return int = 0
 
-select cbr.CookbookId, r.RecipeId, r.RecipeName, cbr.Seq
+select cbr.CookbookId, r.RecipeId, cbr.Seq
 from CookbookRecipe cbr
 join Recipe r
 on r.RecipeId = cbr.RecipeId
 where cbr.CookbookId = @CookbookId
+or @All = 1
 order by cbr.Seq
  return @return
 

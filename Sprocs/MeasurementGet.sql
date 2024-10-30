@@ -14,9 +14,6 @@ begin
 
 select mt.MeasurementTypeId,  mt.MeasurementType
 from MeasurementType mt
-/*join RecipeIngredient ri
-on mt.MeasurementTypeId = ri.MeasurementTypeId
-where ri.recipeid = @recipeid*/
 where @All = 1
 
     return @return

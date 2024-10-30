@@ -2,6 +2,7 @@
 using CPUWindowsFormFramework;
 using RecipeSystem;
 using System.Data;
+using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -129,8 +130,8 @@ namespace RecipeWinForms
 
         private void GData_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
-            string columnname = this.gData.Columns[e.RowIndex].Name;
-            if (columnname == "del col")
+            var cell = gData.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (cell is DataGridViewButtonCell)
             {
                 Delete(e.RowIndex);
             }

@@ -1,5 +1,5 @@
 create or alter proc dbo.RecipeGet(
-    @RecipeId int = 0,
+    @RecipeId int = 0 output,
     @All bit = 0,
     @Message varchar(5000) = '' output
 )
@@ -19,3 +19,4 @@ where r.RecipeId = @RecipeId
 
 return @return
 end
+

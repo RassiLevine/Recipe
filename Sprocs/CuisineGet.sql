@@ -1,4 +1,4 @@
-create or alter procedure dbo.CuisineGet(@CuisineId int = 0, @all bit = 0, @CuisineType varchar (30)= '' )
+create or alter procedure dbo.CuisineGet(@CuisineId int = 0, @All bit = 0, @CuisineType varchar (30)= '' )
 as
 begin 
 select c.CuisineId, c.CuisineType

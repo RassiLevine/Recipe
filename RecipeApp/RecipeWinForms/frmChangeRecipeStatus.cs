@@ -75,16 +75,18 @@ namespace RecipeWinForms
                     return;
                 }
             }
-            //DateTime.TryParse(txtDatePublished.Text, out var datepub);
-            //DateTime.TryParse(txtDateArchived.Text, out var datearc);
+            DateTime.TryParse(txtDatePublished.Text, out var datepub);
+            DateTime.TryParse(txtDateArchived.Text, out var datearc);
+            DateTime.TryParse(txtDateDraft.Text, out var datedraft);
             SQLutility.SetParamValue(cmd, "@RecipeId", recipeid);
             if(txtDateDraft.Text == "")
             {
                 SQLutility.SetParamValue(cmd, "@DateDraft", now);
             }
             string pub = txtDatePublished.Text;
-            SQLutility.SetParamValue(cmd, "@DatePublished", txtDatePublished.Text  == ""? "" : txtDatePublished.Text);
-            SQLutility.SetParamValue(cmd, "@DateArchived", txtDateArchived.Text == "" ? "" : txtDateArchived.Text);
+            SQLutility.SetParamValue(cmd, "@DateDraft", datedraft);
+            SQLutility.SetParamValue(cmd, "@DatePublished", txtDatePublished.Text  == ""? DBNull.Value : datepub);
+            SQLutility.SetParamValue(cmd, "@DateArchived", txtDateArchived.Text == "" ? DBNull.Value : datearc);
             dt = SQLutility.GetDataTable(cmd);
             dtRecipestatus = Recipe.LoadRecipeStatus(recipeid);
             bindsource.DataSource = dtRecipestatus;

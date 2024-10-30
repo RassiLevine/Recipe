@@ -1,8 +1,8 @@
 create or alter proc dbo.StatusUpdate(
     @RecipeId int = 0,
     @DateDraft date,
-    @DatePublished date,
-    @DateArchived date,
+    @DatePublished date null,
+    @DateArchived date null,
     @Message varchar(500) = '' output
 )
 as

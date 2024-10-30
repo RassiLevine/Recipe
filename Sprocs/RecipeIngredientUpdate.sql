@@ -1,36 +1,38 @@
-create or alter proc dbo.IngredientUpdate(
+create or alter proc dbo.RecipeIngredientUpdate(
     @RecipeIngredientId int = 0,
-    @IngredientId int = 0,
     @RecipeId int = 0,
+    @IngredientsId int = 0,
     @MeasurementTypeId int = 0,
-    @IngredientAmt decimal = 0,
-    @IngredientSequence int = 0,
+    @IngredientAmt decimal,
+    @IngredientSequence int,
     @Message varchar(500) = '' output
 )
 as
 begin
     declare @return int = 0
 
-select @RecipeIngredientId = isnull(@RecipeIngredientId, 0), @IngredientId = isnull(@IngredientId, 0), 
-       @RecipeId = isnull(@RecipeId, 0), @MeasurementTypeId = isnull(@MeasurementTypeId, 0), @IngredientAmt = isnull(@IngredientAmt, 0),
-       @IngredientSequence = isnull(@IngredientSequence, 0)
+select @RecipeIngredientId = isnull(@RecipeIngredientId, 0)
 
     if @RecipeIngredientId = 0
         begin
-            insert RecipeIngredient(RecipeId, ingredientId, MeasurementTypeId, IngredientAmt, IngredientSequence)
-            values (@RecipeId, @IngredientId, @MeasurementTypeId, @IngredientAmt, @IngredientSequence)
+            insert RecipeIngredient(RecipeId, IngredientId, MeasurementTypeId, IngredientAmt, IngredientSequence)
+            values ( @RecipeId, @IngredientsId, @MeasurementTypeId, @IngredientAmt, @IngredientSequence)
+
+            select @RecipeIngredientId = scope_identity()
         end
     else
         begin
             update RecipeIngredient
             set 
                 RecipeId = @RecipeId,
-                ingredientId = @IngredientId,
-                measurementTypeId = @MeasurementTypeId,
+                IngredientId = @IngredientsId,
+                MeasurementTypeId = @MeasurementTypeId,
                 IngredientAmt = @IngredientAmt,
                 Ingredientsequence = @IngredientSequence
+            where RecipeIngredientId = @RecipeIngredientId
         end 
 
     return @return
 end
 go
+

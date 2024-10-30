@@ -18,12 +18,6 @@ namespace RecipeSystem
 
         public static DataTable LoadCookbookRecipe(int cookbookid)
         {
-            //DataTable dt = new DataTable();
-            //SqlCommand cmd = SQLutility.GetSqlCommand("CookbookRecipeGet");
-            //SQLutility.SetParamValue(cmd, "@CookbookId", cookbookid);
-            //dt = SQLutility.GetDataTable(cmd);
-            //return dt;
-
             SqlCommand cmd = SQLutility.GetSqlCommand("CookbookRecipeGet");
             cmd.Parameters["@CookbookId"].Value = cookbookid;
             DataTable dt = SQLutility.GetDataTable(cmd);
@@ -31,16 +25,15 @@ namespace RecipeSystem
 
         }
     
-        public static void Save(DataTable dtcookbook)
+        public static void Save(DataTable dtcookbook, string tablename)
         {
             if (dtcookbook.Rows.Count == 0)
             {
                 throw new Exception("cannot save cookbook, there are no rows in datatable");
             }
             DataRow r = dtcookbook.Rows[0];
-            SQLutility.SaveDataRow(r, "CookbookUpdate");
+            SQLutility.SaveDataRow(r, tablename+"Update");
         }
-
         public static void Delete(DataTable dtcookbook)
         {
             int id = (int)dtcookbook.Rows[0]["CookbookId"];

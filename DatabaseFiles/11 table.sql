@@ -57,8 +57,8 @@ create table dbo.Recipe(
     when datearchived is null then 'Published'
     when datearchived is not null then 'Archived'
     end,
-        constraint ck_datepublished_must_be_greater_than_datedraft check(datepublished> DateDraft),
-        constraint ck_datearchived_must_be_greater_than_datedraft_and_datepublished check(datearchived >DateDraft and datearchived > datepublished),
+        constraint ck_datepublished_must_be_greater_than_or_equal_to_datedraft check(datepublished >= DateDraft),
+        constraint ck_datearchived_must_be_greater_than_or_equal_to_datedraft_and_datepublished check(datearchived >= DateDraft and datearchived >= datepublished),
     RecipePic as concat('recipe', '_', replace(recipename, ' ', '_'), '.jpeg'),      
 
 )
@@ -88,7 +88,7 @@ create table dbo.RecipeIngredient(
         constraint ck_ingredientAmt_must_be_greater_than_zero check(ingredientamt > 0),
 	IngredientSequence int not null 
         constraint ck_ingredientSequence_must_be_greater_than_zero check(IngredientSequence > 0)
-        constraint u_ingredientSequence_recipe unique(IngredientSequence, recipeid)
+       constraint u_ingredientSequence_recipe unique(IngredientSequence, recipeid)
 
 )
 

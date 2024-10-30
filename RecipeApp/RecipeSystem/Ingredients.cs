@@ -16,21 +16,22 @@ namespace RecipeWinForms
             return dt;
         }
 
-        public static void SaveTable(DataTable dt, int recipeingredientid)
+        public static void SaveTable(DataTable dt, int recipeid, int recipeingredientid)
         {
+            
             foreach (DataRow r in dt.Select("", "", DataViewRowState.Added))
             {
-                r["RecipeIngredientId"] = recipeingredientid;
+                r["RecipeId"] = recipeid;
+                r["RecipeIngredientId"] = recipeingredientid; 
             }
             SQLutility.SaveDataTable(dt, "RecipeIngredientUpdate");
         }
-        
 
-        //public static void Delete(int medalpresidentid)
-        //{
-        //    SqlCommand cmd = SQLutility.GetSqlCommand("PresidentMedalDelete");
-        //    cmd.Parameters["@MedalPresidentId"].Value = medalpresidentid;
-        //    SQLutility.ExecuteSQL(cmd);
-        //}
+        public static void DeleteIngredientChild(int recipeingredientid)
+        {
+            SqlCommand cmd = SQLutility.GetSqlCommand("RecipeIngredientDelete");
+            cmd.Parameters["@RecipeIngredientId"].Value = recipeingredientid;
+            SQLutility.ExecuteSQL(cmd);
+        }
     }
 }

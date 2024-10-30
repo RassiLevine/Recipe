@@ -15,3 +15,4 @@ end
 go
 
 
+select * from recipe

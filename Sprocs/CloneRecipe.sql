@@ -6,8 +6,8 @@ as
 begin
     declare @return int = 0
 
-insert recipe(RecipeName, Calories, CuisineId, StaffId, DatePublished, DateArchived)
-select concat(r.RecipeName, '-clone'), r.Calories, r.CuisineId, r.StaffId, r.DatePublished, r.DateArchived
+insert recipe(RecipeName, Calories, CuisineId, StaffId, r.DateDraft, DatePublished, DateArchived)
+select concat(r.RecipeName, '-clone'), r.Calories, r.CuisineId, r.StaffId, r.DateDraft, r.DatePublished, r.DateArchived
 from recipe r
 where r.RecipeId = @RecipeId
 
@@ -42,4 +42,3 @@ on r.recipename = x.recipename
     return @return
 end
 go
-

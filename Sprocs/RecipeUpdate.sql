@@ -4,35 +4,39 @@ create or alter procedure dbo.RecipeUpdate(
     @StaffId int,
     @RecipeName varchar (500),
     @Calories int, 
-    @DateDraft date, 
-    @DatePublished date, 
-    @DateArchived date
+    @DateDraft date null output,
+    @DatePublished date,
+    @DateArchived date,
+    @Mesage varchar(500) = '' output
 )
 
 as 
     begin 
-
-        select @RecipeId = isnull(@recipeid, 0), @CuisineId = isnull(@cuisineid, 0), @Calories = isnull(@calories, 0)
+        declare @return int = 0
+        select @RecipeId = isnull(@RecipeId, 0), @CuisineId = isnull(@CuisineId, 0), @Calories = isnull(@Calories, 0)
 
         if @recipeid = 0
-            begin
-                insert recipe(cuisineid, staffid, recipename, calories )
+        begin
+                insert recipe(CuisineId, StaffId, RecipeName, Calories )
                 values(@CuisineId, @StaffId, @RecipeName, @Calories) 
 
                 select @RecipeId = SCOPE_IDENTITY()
+                select @DateDraft = DATEFROMPARTS(year(GETDATE()), month(getdate()), day(getdate()))
+
             end
         else 
             begin
                 update recipe
                 set 
-                cuisineid = @CuisineId,
-                staffid = @StaffId,
-                recipename = @RecipeName,
-                calories = @Calories,
-                datedraft = @DateDraft,
-                datepublished = @DatePublished,
-                datearchived = @DateArchived
-                where recipeid = @RecipeId
+                CuisineId = @CuisineId,
+                StaffId = @StaffId,
+                RecipeName = @RecipeName,
+                Calories = @Calories,
+                DateDraft = @DateDraft,
+                DatePublished = @DatePublished,
+                DateArchived = @DateArchived
+                where RecipeId = @RecipeId
             end
+        return @return
     end
     go

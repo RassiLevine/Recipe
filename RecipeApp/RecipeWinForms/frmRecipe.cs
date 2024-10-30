@@ -1,7 +1,3 @@
-using CPUFramework;
-using System.Configuration;
-using System.Data;
-using RecipeSystem;
 using CPUWindowsFormFramework;
 namespace RecipeWinForms
 {
@@ -10,18 +6,9 @@ namespace RecipeWinForms
         public frmRecipe()
         {
             InitializeComponent();
-            //btnSearch.Click += BtnSearch_Click;
             btnNew.Click += BtnNew_Click;
             gRecipe.CellDoubleClick += GRecipe_DoubleClick;
         }
-
-        //private void SearchForRecipe(string recipename)
-        //{
-        //    DataTable dt = Recipe.Search(recipename);
-        //    gRecipe.DataSource = dt;
-        //    gRecipe.Columns["RecipeId"].Visible = false;
-        //    gRecipe.AllowUserToAddRows = false;
-        //}
 
         private void ShowDetailForm(int rowindex)
         {
@@ -29,22 +16,13 @@ namespace RecipeWinForms
             if(rowindex > -1)
             {
                 id = WindowsFormsUtility.GetIdFromGrid(gRecipe, rowindex, "RecipeId");
-                    //(int)gRecipe.Rows[rowindex].Cells["RecipeId"].Value;
             }
-            //frmPopup frm = new();
-            //frm.ShowForm(id);
             if (this.MdiParent != null && this.MdiParent is frmMain)
             {
                 ((frmMain)this.MdiParent).OpenForm(typeof(frmPopup), id);
             }
 
         }
-
-        //private void BtnSearch_Click(object? sender, EventArgs e)
-        //{
-        //    SearchForRecipe(txtName.Text);
-        //}
-
 
         private void BtnNew_Click(object? sender, EventArgs e)
         {

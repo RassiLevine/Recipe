@@ -1,4 +1,4 @@
-create or alter proc dbo.DashboardDisplay(
+create or alter proc dbo.DashboardGet(
     @Message varchar(1000) = ' '
 )
 as
@@ -6,7 +6,7 @@ begin
 
     declare @return int = 0
 
-select 'Type' =  'cookbooks', 'Number' = count(distinct c.CookbookId)
+select 'Type' =  'Cookbooks', 'Number' = count(distinct c.CookbookId)
 from staff s
 join recipe r
 on s.Staffid = r.StaffId 
@@ -37,4 +37,4 @@ order by 'Type' desc
 end
 go
 
-exec DashboardDisplay
+--exec GetDashboard

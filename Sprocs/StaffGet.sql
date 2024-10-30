@@ -9,5 +9,3 @@ or (@StaffUserName <> '' and s.UserName like '%' + @StaffUserName + '%')
 end
 go
 
-
-

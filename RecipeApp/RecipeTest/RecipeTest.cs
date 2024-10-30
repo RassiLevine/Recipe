@@ -223,7 +223,7 @@ where Datediff(day, getdate(), datearchived) <30
             Assume.That(cuisinecount > 0, "no cuisine in db, cant test");
             TestContext.WriteLine("num cuisine types in DB =" + cuisinecount);
             TestContext.WriteLine("ensure that number of rows returend by app matches" + cuisinecount);
-            DataTable dt = Recipe.GetCuisineList();
+            DataTable dt = DataMaintenance.GetDataList("Cuisine");
             Assert.IsTrue(dt.Rows.Count == cuisinecount, "num rows returned by app (" + dt.Rows.Count + ")<>" + cuisinecount);
             TestContext.WriteLine("number of cuisine types returned by app = " + dt.Rows.Count);
         }
@@ -235,7 +235,7 @@ where Datediff(day, getdate(), datearchived) <30
             Assume.That(staffcount > 0, "no staff in db, cant test");
             TestContext.Write("num of staff in db = " + staffcount);
             TestContext.Write("ensure number of rows returned matches " + staffcount);
-            DataTable dt = Recipe.GetStaffList();
+            DataTable dt = DataMaintenance.GetDataList("Staff");
             Assert.IsTrue(dt.Rows.Count == staffcount, "um rows returned (" + dt.Rows.Count + ")<>" + staffcount);
             TestContext.WriteLine("number of staff members returned = " + dt.Rows.Count);
         }

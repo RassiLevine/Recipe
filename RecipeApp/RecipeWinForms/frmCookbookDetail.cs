@@ -10,7 +10,6 @@ namespace RecipeWinForms
 
     public partial class frmCookbookDetail : Form
     {
-
         DataTable dtCookbook = new DataTable();
         DataTable dtCookbookrecipe = new DataTable();
         int cookbookid = 0;
@@ -24,11 +23,11 @@ namespace RecipeWinForms
             btnSaveRecipe.Click += BtnSaveRecipe_Click;
             gRecipes.CellContentClick += GRecipes_CellContentClick;
         }
-
+        
         public void ShowCookbookDetailForm(int cookbookidval)
         {
             cookbookid = cookbookidval;
-            dtCookbook = Cookbook.LoadCookbook(cookbookidval);
+            dtCookbook = RecipeSystem.Cookbook.LoadCookbook(cookbookidval);
             this.Tag = cookbookid;
             bindsource.DataSource = dtCookbook;
             if(cookbookid == 0)
@@ -49,12 +48,12 @@ namespace RecipeWinForms
 
             private void LoadRecipesForCookbook()
         {
-            dtCookbookrecipe = Cookbook.LoadCookbookRecipe(cookbookid);
+            dtCookbookrecipe = RecipeSystem.Cookbook.LoadCookbookRecipe(cookbookid);
            gRecipes.Columns.Clear();
             gRecipes.DataSource = dtCookbookrecipe;
             WindowsFormsUtility.AddComboBoxToGrid(gRecipes, DataMaintenance.GetDataList("Recipe"), "Recipe", "RecipeName");
             WindowsFormsUtility.AddDeleteButtonToGrid(gRecipes, deletecolumn);
-            //WindowsFormsUtility.FormatGridForSearchResults(gRecipes, "CookbookRecipe");
+            WindowsFormsUtility.FormatGridForEdit(gRecipes, "CookbookRecipe");
 
         }
         private void SetButtonsEnabledBasedOnNewRecord()
@@ -93,7 +92,7 @@ namespace RecipeWinForms
             Application.UseWaitCursor = true;
             try
             {
-                Cookbook.Save(dtCookbook, "Cookbook");
+                RecipeSystem.Cookbook.Save(dtCookbook, "Cookbook");
             }
             catch(Exception ex)
             {
@@ -115,7 +114,7 @@ namespace RecipeWinForms
             Application.UseWaitCursor = true;
             try
             {
-                Cookbook.Delete(dtCookbook);
+                RecipeSystem.Cookbook.Delete(dtCookbook);
                 this.Close();
             }
             catch(Exception ex)
@@ -134,7 +133,7 @@ namespace RecipeWinForms
             {
                 try
                 {
-                    Cookbook.DeleteChild(id);
+                    RecipeSystem.Cookbook.DeleteChild(id);
                     LoadRecipesForCookbook();
 
                 }
@@ -160,14 +159,26 @@ namespace RecipeWinForms
         }
         private void BtnSaveRecipe_Click(object? sender, EventArgs e)
         {
+            SaveRecipe();
+              
+        }
+        private void SaveRecipe()
+        {
+            try
+            {
                 if (IsAnyRowWithData() == true)
                 {
-                    Cookbook.SaveRecipe(dtCookbookrecipe, cookbookid);
+                    RecipeSystem.Cookbook.SaveRecipe(dtCookbookrecipe, cookbookid);
                 }
                 else
                 {
                     MessageBox.Show("Cannot save cookbook because there are no recipes.");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot save recipe.");
+            }
         }
         private bool IsAnyRowWithData()
         {

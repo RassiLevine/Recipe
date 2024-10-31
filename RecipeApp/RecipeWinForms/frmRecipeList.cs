@@ -22,6 +22,15 @@ namespace RecipeWinForms
             gData.DataSource = dt;
             WindowsFormsUtility.FormatGridForSearchResults(gData, "Recipe");
         }
+        private void RefreshData()
+        {
+            BindData();
+        }
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            RefreshData();
+        }
         private void ShowDetailForm(int rowindex)
         {
             int id = 0;

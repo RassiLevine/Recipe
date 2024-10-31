@@ -154,7 +154,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(tblMain);
             Name = "frmDataMaintenance";
-            Text = "frmDataMaintenance";
+            Text = "Data Maintenance";
             tblMain.ResumeLayout(false);
             tblMain.PerformLayout();
             pnlRadioButtons.ResumeLayout(false);

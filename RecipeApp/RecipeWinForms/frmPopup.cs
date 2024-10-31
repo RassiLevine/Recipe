@@ -49,7 +49,7 @@ namespace RecipeWinForms
             this.Text = GetRecipeDesc();
             LoadIngredients();
             LoadDirections();
-            SetButtonsEnabledBasedOnNewRecord();
+            //SetButtonsEnabledBasedOnNewRecord();
 
         }
         private void LoadIngredients()

@@ -277,7 +277,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(tblMain);
             Name = "frmChangeRecipeStatus";
-            Text = "frmChangeRecipeStatus";
+            Text = "Recipe Status";
             tblMain.ResumeLayout(false);
             tblMain.PerformLayout();
             tblDates.ResumeLayout(false);

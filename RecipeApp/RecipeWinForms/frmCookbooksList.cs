@@ -1,5 +1,6 @@
 ﻿using CPUFramework;
 using CPUWindowsFormFramework;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -21,6 +22,16 @@ namespace RecipeWinForms
             DataTable dt = SQLutility.GetDataTable(cmd);
             gCookbookList.DataSource = dt;
             WindowsFormsUtility.FormatGridForSearchResults(gCookbookList, "Cookbook");
+        }
+
+        private void RefreshData()
+        {
+            BindData();
+        }
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            RefreshData();
         }
         private void ShowDetailForm(int rowindex)
         {

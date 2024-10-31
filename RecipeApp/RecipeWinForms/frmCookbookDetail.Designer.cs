@@ -260,7 +260,7 @@
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "frmCookbookDetail";
-            Text = "frmCookbookDetail";
+            Text = "Cookbook";
             tblMain.ResumeLayout(false);
             tblMain.PerformLayout();
             tblPrice.ResumeLayout(false);

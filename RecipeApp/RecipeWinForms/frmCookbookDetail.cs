@@ -3,6 +3,7 @@ using CPUWindowsFormFramework;
 using RecipeSystem;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -21,7 +22,6 @@ namespace RecipeWinForms
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
             btnSaveRecipe.Click += BtnSaveRecipe_Click;
-           // chkActive.Click += ChkActive_Click;
             gRecipes.CellContentClick += GRecipes_CellContentClick;
         }
 
@@ -160,15 +160,50 @@ namespace RecipeWinForms
         }
         private void BtnSaveRecipe_Click(object? sender, EventArgs e)
         {
-            Cookbook.Save(dtCookbookrecipe, "CookbookRecipe");
+                if (IsAnyRowWithData() == true)
+                {
+                    Cookbook.SaveRecipe(dtCookbookrecipe, cookbookid);
+                }
+                else
+                {
+                    MessageBox.Show("Cannot save cookbook because there are no recipes.");
+                }
         }
-
+        private bool IsAnyRowWithData()
+        {
+            foreach(DataGridViewRow row in gRecipes.Rows)
+            {
+                bool IsRowEmpty = true;
+                foreach(DataGridViewCell cell in row.Cells)
+                {
+                    if (cell.Value != null && !string.IsNullOrWhiteSpace(cell.Value.ToString()))
+                    {
+                        IsRowEmpty = false;
+                        break;
+                    }
+                }
+                if(IsRowEmpty == false)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         private void GRecipes_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             var cell = gRecipes.Rows[e.RowIndex].Cells[e.ColumnIndex];
             if (cell is DataGridViewButtonCell)
             {
-                DeleteRecipeInCookbook(e.RowIndex);
+                if(IsAnyRowWithData() == true)
+                {
+                    DeleteRecipeInCookbook(e.RowIndex);
+                    gRecipes.DataSource = dtCookbookrecipe;
+                }
+                else
+                {
+                    MessageBox.Show("Cannot delete recipe.");
+                }
+
             }
         }
     }

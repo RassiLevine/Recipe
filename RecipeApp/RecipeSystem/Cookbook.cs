@@ -34,6 +34,15 @@ namespace RecipeSystem
             DataRow r = dtcookbook.Rows[0];
             SQLutility.SaveDataRow(r, tablename+"Update");
         }
+        public static void SaveRecipe(DataTable dt, int cookbookid)
+        {
+            foreach (DataRow r in dt.Select("", "", DataViewRowState.Added))
+            {
+                r["CookbookId"] = cookbookid;
+            }
+            SQLutility.SaveDataTable(dt, "CookbookRecipeUpdate");
+    }
+
         public static void Delete(DataTable dtcookbook)
         {
             int id = (int)dtcookbook.Rows[0]["CookbookId"];
@@ -46,6 +55,7 @@ namespace RecipeSystem
             SqlCommand cmd = SQLutility.GetSqlCommand("CookbookRecipeDelete");
             cmd.Parameters["@CookbookRecipeId"].Value = cookbookrecipeid;
             SQLutility.ExecuteSQL(cmd);
+            
         }
     }
 }

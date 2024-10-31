@@ -24,7 +24,7 @@ namespace RecipeSystem
         {
 
             foreach (DataRow r in dt.Select("", "", DataViewRowState.Added))
-            {int id = WindowsFormsUtility.GetIdFromGrid(gData, rowindex, currenttabletype.ToString() + "Id");
+            {
                 r["DirectionsId"] = directionid;
                 r["RecipeId"] = recipeid;
             }

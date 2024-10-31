@@ -14,6 +14,7 @@ on r.cuisineid = c.cuisineid
 join staff s
 on r.staffid = s.staffid
 where r.RecipeId = @RecipeId
+or @All = 1
 
 
 

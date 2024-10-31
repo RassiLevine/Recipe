@@ -18,10 +18,19 @@ namespace RecipeWinForms
         public frmPopup()
         {
             InitializeComponent();
+            this.Shown += FrmPopup_Shown;
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
             btnSaveChild.Click += BtnSaveChild_Click;
             btnChangeStatus.Click += BtnChangeStatus_Click;
+        }
+
+        private void FrmPopup_Shown(object? sender, EventArgs e)
+        {
+            LoadIngredients();
+            LoadDirections();
+            WindowsFormsUtility.FormatGridForEdit(gIngredients, "RecipeIngredients");
+            WindowsFormsUtility.FormatGridForEdit(gDirections, "Directions");
         }
 
         public void ShowForm(int recipeidval)

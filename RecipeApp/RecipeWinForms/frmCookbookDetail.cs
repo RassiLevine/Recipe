@@ -18,12 +18,18 @@ namespace RecipeWinForms
         public frmCookbookDetail()
         {
             InitializeComponent();
+            this.Shown += FrmCookbookDetail_Shown;
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
             btnSaveRecipe.Click += BtnSaveRecipe_Click;
             gRecipes.CellContentClick += GRecipes_CellContentClick;
         }
-        
+        private void FrmCookbookDetail_Shown(object? sender, EventArgs e)
+        {
+            LoadRecipesForCookbook();
+            WindowsFormsUtility.FormatGridForEdit(gRecipes, "CookbookRecipe");
+        }
+
         public void ShowCookbookDetailForm(int cookbookidval)
         {
             cookbookid = cookbookidval;

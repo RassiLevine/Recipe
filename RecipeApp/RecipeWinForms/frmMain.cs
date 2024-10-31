@@ -1,8 +1,4 @@
-﻿using CPUFramework;
-using CPUWindowsFormFramework;
-using System.Data;
-using System.Data.SqlClient;
-using System.DirectoryServices.ActiveDirectory;
+﻿using CPUWindowsFormFramework;
 
 namespace RecipeWinForms
 {

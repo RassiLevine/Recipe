@@ -5,6 +5,7 @@ create or alter proc dbo.IngredientsUpdate(
 )
 as
 begin
+select @IngredientsId = isnull(@IngredientsId, 0)
     declare @return int = 0
 
     if @IngredientsId = 0

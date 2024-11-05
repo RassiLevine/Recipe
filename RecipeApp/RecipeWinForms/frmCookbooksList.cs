@@ -14,6 +14,7 @@ namespace RecipeWinForms
             BindData();
             gCookbookList.CellContentClick += GCookbookList_CellContentClick;
             btnNew.Click += BtnNew_Click;
+            gCookbookList.KeyDown += GCookbookList_KeyDown;
         }
 
         private void BindData()
@@ -57,6 +58,14 @@ namespace RecipeWinForms
         private void BtnNew_Click(object? sender, EventArgs e)
         {
             ShowDetailForm(-1);
+        }
+        private void GCookbookList_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter && gCookbookList.SelectedRows.Count >0)
+            {
+                ShowDetailForm(gCookbookList.SelectedRows[0].Index);
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }

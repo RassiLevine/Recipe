@@ -13,6 +13,7 @@ namespace RecipeWinForms
             BindData();
             btnNewRecipe.Click += BtnNewRecipe_Click;
             gData.CellContentClick += GData_CellContentClick;
+            gData.KeyDown += GData_KeyDown;
         }
 
         private void BindData()
@@ -40,7 +41,7 @@ namespace RecipeWinForms
             }
             if (this.MdiParent != null && this.MdiParent is frmMain)
             {
-                ((frmMain)this.MdiParent).OpenForm(typeof(frmPopup), id);
+                ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipeDetail), id);
             }
 
         }
@@ -55,6 +56,13 @@ namespace RecipeWinForms
             ShowDetailForm(e.RowIndex);
         }
 
-
+        private void GData_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter && gData.SelectedRows.Count > 0)
+            {
+                ShowDetailForm(gData.SelectedRows[0].Index);
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }

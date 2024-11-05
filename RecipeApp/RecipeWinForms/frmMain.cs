@@ -17,7 +17,10 @@ namespace RecipeWinForms
             mnuClone.Click += MnuClone_Click;
             mnuEditData.Click += MnuEditData_Click;
             mnuAutoCreate.Click += MnuAutoCreate_Click;
+            mnuTile.Click += MnuTile_Click;
+            mnuCascade.Click += MnuCascade_Click;
         }
+
         private void FrmMain_Shown(object? sender, EventArgs e)
         {
             OpenForm(typeof(frmDashboard));
@@ -76,9 +79,9 @@ namespace RecipeWinForms
                     frm = f;
                     f.ShowCookbookDetailForm(pkvalue);
                 }
-                else if (frmtype == typeof(frmPopup))
+                else if (frmtype == typeof(frmRecipeDetail))
                 {
-                    frmPopup f = new();
+                    frmRecipeDetail f = new();
                     frm = f;
                     f.ShowForm(pkvalue);
                 }
@@ -113,7 +116,7 @@ namespace RecipeWinForms
         }
         private void MnuNewRecipe_Click(object? sender, EventArgs e)
         {
-            OpenForm(typeof(frmPopup));
+            OpenForm(typeof(frmRecipeDetail));
         }
         private void MnuClone_Click(object? sender, EventArgs e)
         {
@@ -140,7 +143,15 @@ namespace RecipeWinForms
         {
             OpenForm(typeof(frmAutoCreateCookbook));
         }
+        private void MnuCascade_Click(object? sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
 
+        private void MnuTile_Click(object? sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileVertical);
+        }
 
     }
 }

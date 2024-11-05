@@ -5,6 +5,7 @@ create or alter proc dbo.CuisineUpdate(
 )
 as
 begin
+select @CuisineId = isnull(@CuisineId, 0)
     declare @return int = 0
 
     if @CuisineId = 0

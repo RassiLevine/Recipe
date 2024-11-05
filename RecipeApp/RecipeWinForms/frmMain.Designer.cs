@@ -45,6 +45,8 @@
             mnuEditData = new ToolStripMenuItem();
             mnuWindows = new ToolStripMenuItem();
             tsMain = new ToolStrip();
+            mnuTile = new ToolStripMenuItem();
+            mnuCascade = new ToolStripMenuItem();
             mnuMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,7 +70,7 @@
             // mnuDashboard
             // 
             mnuDashboard.Name = "mnuDashboard";
-            mnuDashboard.Size = new Size(180, 26);
+            mnuDashboard.Size = new Size(156, 26);
             mnuDashboard.Text = "Dashboard";
             // 
             // mnuRecipes
@@ -106,7 +108,7 @@
             // mnuMealsList
             // 
             mnuMealsList.Name = "mnuMealsList";
-            mnuMealsList.Size = new Size(180, 26);
+            mnuMealsList.Size = new Size(104, 26);
             mnuMealsList.Text = "List";
             // 
             // mnuCookbooks
@@ -149,6 +151,7 @@
             // 
             // mnuWindows
             // 
+            mnuWindows.DropDownItems.AddRange(new ToolStripItem[] { mnuTile, mnuCascade });
             mnuWindows.Name = "mnuWindows";
             mnuWindows.Size = new Size(87, 25);
             mnuWindows.Text = "Windows";
@@ -160,6 +163,18 @@
             tsMain.Size = new Size(1029, 25);
             tsMain.TabIndex = 3;
             tsMain.Text = "toolStrip1";
+            // 
+            // mnuTile
+            // 
+            mnuTile.Name = "mnuTile";
+            mnuTile.Size = new Size(180, 26);
+            mnuTile.Text = "Tile";
+            // 
+            // mnuCascade
+            // 
+            mnuCascade.Name = "mnuCascade";
+            mnuCascade.Size = new Size(180, 26);
+            mnuCascade.Text = "Cascade";
             // 
             // frmMain
             // 
@@ -199,5 +214,7 @@
         private ToolStripMenuItem mnuEditData;
         private ToolStripMenuItem mnuWindows;
         private ToolStrip tsMain;
+        private ToolStripMenuItem mnuTile;
+        private ToolStripMenuItem mnuCascade;
     }
 }

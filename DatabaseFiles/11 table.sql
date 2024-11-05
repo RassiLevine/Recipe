@@ -150,7 +150,7 @@ create table dbo.Cookbook(
     CookbookName varchar(30) not null 
         constraint ck_cookbookName_cant_be_blank check(CookbookName <> '' )
         constraint u_cookbookName unique,
-    Price decimal(4,2) not null
+    Price decimal(5,2) not null
         constraint ck_price_must_be_greater_than_zero check(Price>0),
     Active bit not null default (1),
     DateCreated date not null  default getdate()

@@ -2,6 +2,7 @@ create or alter proc dbo.DirectionsGet(
     @DirectionsId int = 0,
     @RecipeId int = 0,
     @All int = 0,
+    @IncludeBlank bit = 0,
     @Message varchar(500) = '' output
 )
 as

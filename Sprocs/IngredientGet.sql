@@ -20,7 +20,7 @@ join recipe r
 on r.recipeid = ri.recipeid
 where r.recipeid = @recipeid
 or @all =1
-order by ri.Ingredientsequence
+order by  i.IngredientName
 
     return @return
 end

@@ -6,6 +6,7 @@ create or alter proc dbo.CourseUpdate(
 )
 as
 begin
+    select @CourseId = isnull(@CourseId, 0)
     declare @return int = 0
 
     if @CourseId = 0

@@ -1,6 +1,6 @@
 ﻿namespace RecipeWinForms
 {
-    partial class frmPopup
+    partial class frmRecipeDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -34,10 +34,13 @@
             tblChildButton = new TableLayoutPanel();
             tabIngDir = new TabControl();
             tabIng = new TabPage();
+            tblTab = new TableLayoutPanel();
             gIngredients = new DataGridView();
-            tabDir = new TabPage();
-            gDirections = new DataGridView();
             btnSaveChild = new Button();
+            tabDir = new TabPage();
+            tblTab2 = new TableLayoutPanel();
+            gDirections = new DataGridView();
+            btnSaveChild2 = new Button();
             lblStatusDates = new Label();
             txtRecipeName = new TextBox();
             lblStatus = new Label();
@@ -62,8 +65,10 @@
             tblChildButton.SuspendLayout();
             tabIngDir.SuspendLayout();
             tabIng.SuspendLayout();
+            tblTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gIngredients).BeginInit();
             tabDir.SuspendLayout();
+            tblTab2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gDirections).BeginInit();
             tblStatus.SuspendLayout();
             tblButtons.SuspendLayout();
@@ -138,7 +143,6 @@
             tblChildButton.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 83F));
             tblChildButton.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 77F));
             tblChildButton.Controls.Add(tabIngDir, 0, 1);
-            tblChildButton.Controls.Add(btnSaveChild, 0, 0);
             tblChildButton.Dock = DockStyle.Left;
             tblChildButton.Location = new Point(118, 304);
             tblChildButton.Name = "tblChildButton";
@@ -154,62 +158,105 @@
             tabIngDir.Controls.Add(tabIng);
             tabIngDir.Controls.Add(tabDir);
             tabIngDir.Dock = DockStyle.Fill;
-            tabIngDir.Location = new Point(3, 42);
+            tabIngDir.Location = new Point(3, 3);
             tabIngDir.Name = "tabIngDir";
             tabIngDir.SelectedIndex = 0;
-            tabIngDir.Size = new Size(832, 281);
+            tabIngDir.Size = new Size(832, 320);
             tabIngDir.TabIndex = 2;
             // 
             // tabIng
             // 
-            tabIng.Controls.Add(gIngredients);
+            tabIng.Controls.Add(tblTab);
             tabIng.Location = new Point(4, 30);
             tabIng.Name = "tabIng";
             tabIng.Padding = new Padding(3);
-            tabIng.Size = new Size(824, 247);
+            tabIng.Size = new Size(824, 286);
             tabIng.TabIndex = 0;
             tabIng.Text = "Ingredients";
             tabIng.UseVisualStyleBackColor = true;
+            // 
+            // tblTab
+            // 
+            tblTab.ColumnCount = 1;
+            tblTab.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tblTab.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tblTab.Controls.Add(gIngredients, 0, 1);
+            tblTab.Controls.Add(btnSaveChild, 0, 0);
+            tblTab.Dock = DockStyle.Fill;
+            tblTab.Location = new Point(3, 3);
+            tblTab.Name = "tblTab";
+            tblTab.RowCount = 2;
+            tblTab.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5714283F));
+            tblTab.RowStyles.Add(new RowStyle(SizeType.Percent, 86.42857F));
+            tblTab.Size = new Size(818, 280);
+            tblTab.TabIndex = 0;
             // 
             // gIngredients
             // 
             gIngredients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gIngredients.Dock = DockStyle.Fill;
-            gIngredients.Location = new Point(3, 3);
+            gIngredients.Location = new Point(3, 41);
             gIngredients.Name = "gIngredients";
-            gIngredients.Size = new Size(818, 241);
+            gIngredients.Size = new Size(812, 236);
             gIngredients.TabIndex = 0;
+            // 
+            // btnSaveChild
+            // 
+            btnSaveChild.BackColor = Color.FromArgb(0, 192, 0);
+            btnSaveChild.Dock = DockStyle.Left;
+            btnSaveChild.Location = new Point(3, 3);
+            btnSaveChild.Name = "btnSaveChild";
+            btnSaveChild.Size = new Size(77, 32);
+            btnSaveChild.TabIndex = 3;
+            btnSaveChild.Text = "Save";
+            btnSaveChild.UseVisualStyleBackColor = false;
             // 
             // tabDir
             // 
-            tabDir.Controls.Add(gDirections);
-            tabDir.Location = new Point(4, 24);
+            tabDir.Controls.Add(tblTab2);
+            tabDir.Location = new Point(4, 30);
             tabDir.Name = "tabDir";
             tabDir.Padding = new Padding(3);
-            tabDir.Size = new Size(824, 283);
+            tabDir.Size = new Size(824, 286);
             tabDir.TabIndex = 1;
             tabDir.Text = "Directions";
             tabDir.UseVisualStyleBackColor = true;
+            // 
+            // tblTab2
+            // 
+            tblTab2.ColumnCount = 1;
+            tblTab2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tblTab2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tblTab2.Controls.Add(gDirections, 0, 1);
+            tblTab2.Controls.Add(btnSaveChild2, 0, 0);
+            tblTab2.Dock = DockStyle.Fill;
+            tblTab2.Location = new Point(3, 3);
+            tblTab2.Name = "tblTab2";
+            tblTab2.RowCount = 2;
+            tblTab2.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
+            tblTab2.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
+            tblTab2.Size = new Size(818, 280);
+            tblTab2.TabIndex = 0;
             // 
             // gDirections
             // 
             gDirections.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gDirections.Dock = DockStyle.Fill;
-            gDirections.Location = new Point(3, 3);
+            gDirections.Location = new Point(3, 45);
             gDirections.Name = "gDirections";
-            gDirections.Size = new Size(818, 277);
+            gDirections.Size = new Size(812, 232);
             gDirections.TabIndex = 0;
             // 
-            // btnSaveChild
+            // btnSaveChild2
             // 
-            btnSaveChild.BackColor = Color.FromArgb(0, 192, 0);
-            btnSaveChild.Dock = DockStyle.Fill;
-            btnSaveChild.Location = new Point(3, 3);
-            btnSaveChild.Name = "btnSaveChild";
-            btnSaveChild.Size = new Size(77, 33);
-            btnSaveChild.TabIndex = 3;
-            btnSaveChild.Text = "Save";
-            btnSaveChild.UseVisualStyleBackColor = false;
+            btnSaveChild2.BackColor = Color.FromArgb(0, 192, 0);
+            btnSaveChild2.Dock = DockStyle.Left;
+            btnSaveChild2.Location = new Point(3, 3);
+            btnSaveChild2.Name = "btnSaveChild2";
+            btnSaveChild2.Size = new Size(77, 36);
+            btnSaveChild2.TabIndex = 4;
+            btnSaveChild2.Text = "Save";
+            btnSaveChild2.UseVisualStyleBackColor = false;
             // 
             // lblStatusDates
             // 
@@ -422,7 +469,7 @@
             txtCalories.Size = new Size(529, 29);
             txtCalories.TabIndex = 4;
             // 
-            // frmPopup
+            // frmRecipeDetail
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -430,15 +477,17 @@
             Controls.Add(tblMain);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
-            Name = "frmPopup";
+            Name = "frmRecipeDetail";
             Text = "New Recipe";
             tblMain.ResumeLayout(false);
             tblMain.PerformLayout();
             tblChildButton.ResumeLayout(false);
             tabIngDir.ResumeLayout(false);
             tabIng.ResumeLayout(false);
+            tblTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gIngredients).EndInit();
             tabDir.ResumeLayout(false);
+            tblTab2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gDirections).EndInit();
             tblStatus.ResumeLayout(false);
             tblStatus.PerformLayout();
@@ -479,5 +528,8 @@
         private TableLayoutPanel tblButtons;
         private Button btnSaveChild;
         private Button btnChangeStatus;
+        private TableLayoutPanel tblTab;
+        private TableLayoutPanel tblTab2;
+        private Button btnSaveChild2;
     }
 }

@@ -7,7 +7,7 @@ create or alter proc dbo.CookbookRecipeUpdate(
 )
 as
 begin
-
+    select @CookbookRecipeId = ISNULL(@CookbookRecipeId, 0)
 declare @return int = 0
 
     if @CookbookRecipeId = 0
@@ -16,7 +16,7 @@ declare @return int = 0
         insert CookbookRecipe(CookbookId, recipeId, seq)
         select @CookbookId, @RecipeId, @Seq
 
-        set @Message = 'Duplicate entry for CookbookId and Seq.'
+        --set @Message = 'Duplicate entry for CookbookId and Seq.'
 
         end
 
@@ -29,13 +29,11 @@ declare @return int = 0
     recipeId = @RecipeId,
     Seq = @Seq
     where CookbookRecipeId = @CookbookRecipeId
-    
+
     end
     
 return @return
 
 end
 go
-
-
 

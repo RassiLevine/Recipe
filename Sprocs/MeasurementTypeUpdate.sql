@@ -5,6 +5,7 @@ create or alter proc dbo.MeasurementTypeUpdate(
 )
 as
 begin
+select @MeasurementTypeId = isnull(@MeasurementTypeId, 0)
     declare @return int = 0
 
     if @MeasurementTypeId = 0

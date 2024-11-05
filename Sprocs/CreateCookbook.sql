@@ -15,13 +15,21 @@ begin
     group by s.StaffId,  s.StaffFirstName, s.StaffLastName
  
     insert CookbookRecipe (CookbookId, recipeId, Seq)
-    select cb.cookbookid, r.recipeid, ROW_NUMBER() over (order by r.RecipeName)
-    from recipe r 
-    join Staff s on r.StaffId = s.StaffId 
-    join Cookbook cb on cb.StaffId = s.StaffId
-    where s.StaffId = @staffId
-    and cb.CookbookName = concat('Recipes by', s.StaffFirstName, s.StaffLastName)
+    select c.CookbookId, r.RecipeId, ROW_NUMBER() over (order by r.RecipeName)
+    from Cookbook c
+    join Staff s
+    on s.StaffId = c.StaffId
+    join Recipe r
+    on r.StaffId = s.StaffId
+    where s.StaffId = @StaffId
+    and c.CookbookName = concat('Recipes by ', s.StaffFirstName, ' ', s.StaffLastName)
 
     return @return
 end
-go
+
+/*select * from Cookbook C 
+join CookbookRecipe r 
+on r.CookbookId = c.CookbookId
+where c.CookbookName like 'recipes by%'
+*/
+

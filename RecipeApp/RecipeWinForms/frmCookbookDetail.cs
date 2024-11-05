@@ -66,7 +66,7 @@ namespace RecipeWinForms
         {
             bool b = cookbookid == 0 ? false : true;
             btnDelete.Enabled = b;
-            btnSaveRecipe.Enabled = b;
+            //btnSaveRecipe.Enabled = b;
         }
         private void SetCheckBox()
         {

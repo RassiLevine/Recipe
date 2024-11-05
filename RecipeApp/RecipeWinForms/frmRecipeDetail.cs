@@ -5,7 +5,7 @@ using RecipeSystem;
 
 namespace RecipeWinForms
 {
-    public partial class frmPopup : Form
+    public partial class frmRecipeDetail : Form
     {
         DataTable dtrecipe = new DataTable();
         DataTable dtIngredients = new DataTable();
@@ -15,7 +15,7 @@ namespace RecipeWinForms
         int recipeingredientid = 0;
         int directionsid = 0;
         string deletecolumn = "del col";
-        public frmPopup()
+        public frmRecipeDetail()
         {
             InitializeComponent();
             this.Shown += FrmPopup_Shown;
@@ -23,6 +23,7 @@ namespace RecipeWinForms
             btnDelete.Click += BtnDelete_Click;
             btnSaveChild.Click += BtnSaveChild_Click;
             btnChangeStatus.Click += BtnChangeStatus_Click;
+            btnSaveChild2.Click += BtnSaveChild_Click;
         }
 
         private void FrmPopup_Shown(object? sender, EventArgs e)
@@ -58,7 +59,7 @@ namespace RecipeWinForms
             this.Text = GetRecipeDesc();
             LoadIngredients();
             LoadDirections();
-            //SetButtonsEnabledBasedOnNewRecord();
+            SetButtonsEnabledBasedOnNewRecord();
 
         }
         private void LoadIngredients()
@@ -66,8 +67,8 @@ namespace RecipeWinForms
             dtIngredients = Ingredients.LoadByRecipeId(recipeid);
             gIngredients.Columns.Clear();
             gIngredients.DataSource = dtIngredients;
-            WindowsFormsUtility.AddComboBoxToGrid(gIngredients, DataMaintenance.GetDataList("Ingredients"), "Ingredients", "IngredientName");
-            WindowsFormsUtility.AddComboBoxToGrid(gIngredients, DataMaintenance.GetDataList("MeasurementType"), "MeasurementType", "MeasurementType");
+            WindowsFormsUtility.AddComboBoxToGrid(gIngredients, DataMaintenance.GetDataList("Ingredients", true), "Ingredients", "IngredientName");
+            WindowsFormsUtility.AddComboBoxToGrid(gIngredients, DataMaintenance.GetDataList("MeasurementType", true), "MeasurementType", "MeasurementType");
             WindowsFormsUtility.AddDeleteButtonToGrid(gIngredients, deletecolumn);
             WindowsFormsUtility.FormatGridForEdit(gIngredients, "RecipeIngredients");
             recipeingredientid = SQLutility.GetValueFromFirstRowAsInt(dtIngredients, "RecipeIngredientId");
@@ -91,6 +92,7 @@ namespace RecipeWinForms
             bool b = recipeid == 0 ? false : true;
             btnDelete.Enabled = b;
             btnSaveChild.Enabled = b;
+            btnChangeStatus.Enabled = b;
         }
         private void Save()
         {

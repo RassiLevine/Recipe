@@ -7,7 +7,12 @@ namespace RecipeWinForms
         {
             InitializeComponent();
             btnNew.Click += BtnNew_Click;
-            gRecipe.CellDoubleClick += GRecipe_DoubleClick;
+            gRecipe.CellContentDoubleClick += GRecipe_CellContentDoubleClick;
+        }
+
+        private void GRecipe_CellContentDoubleClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            ShowDetailForm(e.RowIndex);
         }
 
         private void ShowDetailForm(int rowindex)
@@ -19,7 +24,7 @@ namespace RecipeWinForms
             }
             if (this.MdiParent != null && this.MdiParent is frmMain)
             {
-                ((frmMain)this.MdiParent).OpenForm(typeof(frmPopup), id);
+                ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipeDetail), id);
             }
 
         }
@@ -27,10 +32,6 @@ namespace RecipeWinForms
         private void BtnNew_Click(object? sender, EventArgs e)
         {
             ShowDetailForm(-1);
-        }
-        private void GRecipe_DoubleClick(object? sender, DataGridViewCellEventArgs e)
-        {
-            ShowDetailForm(e.RowIndex);
         }
 
     }

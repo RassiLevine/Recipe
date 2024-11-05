@@ -5,7 +5,8 @@ create or alter proc dbo.StaffUpdate(
     @Message varchar(500) = '' output
 )
 as
-begin
+
+select @StaffId = isnull(@StaffId, 0)
     declare @return int = 0
 
     if @StaffId = 0
@@ -30,5 +31,4 @@ begin
         end
 
     return @return
-end
 go

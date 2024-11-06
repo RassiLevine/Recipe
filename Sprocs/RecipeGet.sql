@@ -20,10 +20,10 @@ exec RecipeGet @RecipeName = 't'
 declare @recipeId int
 select top 1 @recipeId = r.recipeid from recipe r
 exec RecipeGet @RecipeId = @recipeId
-*/
+
 select r.*, c.cuisineid, s.staffid from recipe r 
 join cuisine c 
 on r.cuisineid = c.cuisineid 
 join staff s
  on r.staffid = s.staffid
-  where r.RecipeId =
+  where r.RecipeId = @*/

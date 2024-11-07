@@ -23,6 +23,14 @@ namespace RecipeWinForms
 
         private void FrmMain_Shown(object? sender, EventArgs e)
         {
+            frmLogin f = new() { StartPosition = FormStartPosition.CenterParent };
+            bool b = f.ShowLogin();
+            if (b == false)
+            {
+                this.Close();
+                Application.Exit();
+                return;
+            }
             OpenForm(typeof(frmDashboard));
         }
 

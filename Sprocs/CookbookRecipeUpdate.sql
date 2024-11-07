@@ -7,7 +7,7 @@ create or alter proc dbo.CookbookRecipeUpdate(
 )
 as
 begin
-    select @CookbookRecipeId = ISNULL(@CookbookRecipeId, 0)
+    select @CookbookRecipeId = ISNULL(@CookbookRecipeId, 0), @CookbookId = ISNULL(@CookbookId, 0)
 declare @return int = 0
 
     if @CookbookRecipeId = 0

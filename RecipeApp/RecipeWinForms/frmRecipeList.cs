@@ -12,7 +12,7 @@ namespace RecipeWinForms
             InitializeComponent();
             BindData();
             btnNewRecipe.Click += BtnNewRecipe_Click;
-            gData.CellContentClick += GData_CellContentClick;
+            gData.CellDoubleClick += GData_CellDoubleClick;
             gData.KeyDown += GData_KeyDown;
         }
 
@@ -50,8 +50,7 @@ namespace RecipeWinForms
         {
             ShowDetailForm(-1);  
         }
-
-        private void GData_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        private void GData_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
             ShowDetailForm(e.RowIndex);
         }

@@ -113,6 +113,7 @@ namespace RecipeWinForms
             {
                 Application.UseWaitCursor = false;
             }
+            SetButtonsEnabledBasedOnNewRecord();
 
         }
 

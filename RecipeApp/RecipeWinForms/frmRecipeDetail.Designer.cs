@@ -214,10 +214,10 @@
             // tabDir
             // 
             tabDir.Controls.Add(tblTab2);
-            tabDir.Location = new Point(4, 30);
+            tabDir.Location = new Point(4, 24);
             tabDir.Name = "tabDir";
             tabDir.Padding = new Padding(3);
-            tabDir.Size = new Size(824, 286);
+            tabDir.Size = new Size(824, 322);
             tabDir.TabIndex = 1;
             tabDir.Text = "Directions";
             tabDir.UseVisualStyleBackColor = true;
@@ -235,16 +235,16 @@
             tblTab2.RowCount = 2;
             tblTab2.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tblTab2.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
-            tblTab2.Size = new Size(818, 280);
+            tblTab2.Size = new Size(818, 316);
             tblTab2.TabIndex = 0;
             // 
             // gDirections
             // 
             gDirections.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gDirections.Dock = DockStyle.Fill;
-            gDirections.Location = new Point(3, 45);
+            gDirections.Location = new Point(3, 50);
             gDirections.Name = "gDirections";
-            gDirections.Size = new Size(812, 232);
+            gDirections.Size = new Size(812, 263);
             gDirections.TabIndex = 0;
             // 
             // btnSaveChild2
@@ -253,7 +253,7 @@
             btnSaveChild2.Dock = DockStyle.Left;
             btnSaveChild2.Location = new Point(3, 3);
             btnSaveChild2.Name = "btnSaveChild2";
-            btnSaveChild2.Size = new Size(77, 36);
+            btnSaveChild2.Size = new Size(77, 41);
             btnSaveChild2.TabIndex = 4;
             btnSaveChild2.Text = "Save";
             btnSaveChild2.UseVisualStyleBackColor = false;

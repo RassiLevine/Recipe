@@ -3,9 +3,14 @@ namespace RecipeSystem
 {
     public class DBmanager
     {
-        public static void SetConnectionString(string connectionstring)
+        //public static void SetConnectionString(string connectionstring)
+        //{
+        //    SQLutility.ConnectionString = connectionstring;
+        //}
+        public static void SetConnectionString(string connectionstring, bool tryopen, string userid = "", string password = "")
         {
-            SQLutility.ConnectionString = connectionstring;
+            SQLutility.SetConnectionString(connectionstring, tryopen, userid, password);
         }
+
     }
 }

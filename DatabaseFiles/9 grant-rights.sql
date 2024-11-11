@@ -23,6 +23,7 @@ grant execute on CuisineUpdate to recipeapprole
 grant execute on RecipeDelete to recipeapprole
 grant execute on DashboardGet to recipeapprole
 grant execute on DirectionsDelete to recipeapprole
+grant execute on DirectionsUpdate to recipeapprole
 grant execute on DirectionsGet to recipeapprole
 grant execute on IngredientsGet to recipeapprole
 grant execute on IngredientsDelete to recipeapprole

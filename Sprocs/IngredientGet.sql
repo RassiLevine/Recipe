@@ -20,6 +20,8 @@ join recipe r
 on r.recipeid = ri.recipeid
 where r.recipeid = @recipeid
 or @all =1
+union select null, null
+where @IncludeBlank = 1
 order by  i.IngredientName
 
     return @return

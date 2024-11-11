@@ -6,7 +6,7 @@ namespace RecipeSystem
 {
     public class Cookbook
     {
-
+        public static int newcookbookid;
         public static DataTable LoadCookbook(int cookbookid)
         {
             DataTable dt = new DataTable();
@@ -25,7 +25,7 @@ namespace RecipeSystem
 
         }
     
-        public static void Save(DataTable dtcookbook, string tablename)
+        public static void Save(DataTable dtcookbook, string tablename, int cookbookid)
         {
             if (dtcookbook.Rows.Count == 0)
             {
@@ -33,6 +33,17 @@ namespace RecipeSystem
             }
             DataRow r = dtcookbook.Rows[0];
             SQLutility.SaveDataRow(r, tablename+"Update");
+
+            if (r.Table.Columns.Contains("CookbookId"))
+            {
+               newcookbookid = Convert.ToInt32(r["CookbookId"]);
+            }
+
+            if (newcookbookid == 0)
+            {
+                throw new Exception("Error: CookbookId is 0. The cookbook was not saved properly.");
+            }
+
         }
         public static void SaveRecipe(DataTable dt, int cookbookid)
         {

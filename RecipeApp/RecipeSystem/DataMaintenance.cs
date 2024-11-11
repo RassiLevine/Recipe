@@ -14,8 +14,8 @@ namespace RecipeSystem
             {
                 SQLutility.SetParamValue(cmd, "@IncludeBlank", includeblank);
             }
-            dt = SQLutility.GetDataTable(cmd); 
-            return dt;
+            dt = SQLutility.GetDataTable(cmd);
+                return dt;
         }
 
         public static void SaveDataList(DataTable dt, string tablename)

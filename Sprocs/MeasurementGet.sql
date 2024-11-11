@@ -15,6 +15,8 @@ begin
 select mt.MeasurementTypeId,  mt.MeasurementType
 from MeasurementType mt
 where @All = 1
+union select null, null 
+where @IncludeBlank = 1
 
     return @return
 end

@@ -20,6 +20,10 @@ join recipe r
 on r.recipeid = ri.recipeid
 where ri.RecipeId = @RecipeId
 or @All = 1
+
+--union select 0, 0, IngredientAmt= 0,ingredientsequence = 0, 0, 0
+union select null, null, null, null, null, null
+where @includeblank = 1
 order by ri.ingredientsequence
     return @return
 end

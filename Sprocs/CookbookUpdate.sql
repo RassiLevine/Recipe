@@ -36,3 +36,6 @@ select @CookbookId = isnull(@CookbookId, 0), @StaffId = ISNULL(@StaffId, 0), @Ac
 
 end
 go
+
+exec CookbookUpdate @Staffid = 1, @Cookbookname = 'create cookbook', @price = 11
+

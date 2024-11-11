@@ -2,8 +2,6 @@
 using CPUWindowsFormFramework;
 using RecipeSystem;
 using System.Data;
-using System.Data.SqlClient;
-using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -12,7 +10,7 @@ namespace RecipeWinForms
     {
         DataTable dtCookbook = new DataTable();
         DataTable dtCookbookrecipe = new DataTable();
-        int cookbookid = 0;
+        public static int cookbookid = 0;
         string deletecolumn = "del col";
         BindingSource bindsource = new BindingSource();
         public frmCookbookDetail()
@@ -98,7 +96,7 @@ namespace RecipeWinForms
             Application.UseWaitCursor = true;
             try
             {
-                RecipeSystem.Cookbook.Save(dtCookbook, "Cookbook");
+                RecipeSystem.Cookbook.Save(dtCookbook, "Cookbook", cookbookid);
             }
             catch(Exception ex)
             {
@@ -165,8 +163,7 @@ namespace RecipeWinForms
         }
         private void BtnSaveRecipe_Click(object? sender, EventArgs e)
         {
-            SaveRecipe();
-              
+             SaveRecipe();
         }
         private void SaveRecipe()
         {
@@ -174,7 +171,7 @@ namespace RecipeWinForms
             {
                 if (IsAnyRowWithData() == true)
                 {
-                    RecipeSystem.Cookbook.SaveRecipe(dtCookbookrecipe, cookbookid);
+                    RecipeSystem.Cookbook.SaveRecipe(dtCookbookrecipe,Cookbook.newcookbookid);
                 }
                 else
                 {

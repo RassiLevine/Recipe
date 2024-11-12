@@ -171,7 +171,15 @@ namespace RecipeWinForms
             {
                 if (IsAnyRowWithData() == true)
                 {
-                    RecipeSystem.Cookbook.SaveRecipe(dtCookbookrecipe,Cookbook.newcookbookid);
+                    if (cookbookid == 0)
+                    {
+                        RecipeSystem.Cookbook.SaveRecipe(dtCookbookrecipe, Cookbook.newcookbookid);
+                    }
+                    else
+                    {
+                        RecipeSystem.Cookbook.SaveRecipe(dtCookbookrecipe, cookbookid);
+                    }
+                   
                 }
                 else
                 {

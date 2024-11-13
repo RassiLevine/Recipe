@@ -22,7 +22,7 @@ namespace RecipeSystem
             dt = SQLutility.GetDataTable(cmd);
             return dt;
         }
-        public static void Save(DataTable dtrecipe)
+        public static void Save(DataTable dtrecipe) 
         {
             if (dtrecipe.Rows.Count == 0)
             {

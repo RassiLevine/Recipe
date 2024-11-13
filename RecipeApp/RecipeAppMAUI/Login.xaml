@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeAppMAUI.Login"
+             Title="Login">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="MinimumWidthRequest" Value="200"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Label 
+            Text="Login"
+            FontSize="Header"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label x:Name="MessageLbl" FontSize="Medium" TextColor="Red" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+        <Border Padding="10">
+
+            <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto" HorizontalOptions="Center" ColumnSpacing="10" RowSpacing="10">
+                <Label x:Name="UsernameLbl" Text="User Name" Grid.Row="1" Grid.Column="0"/>
+                <Entry x:Name="UserNameTxt" Grid.Row="1" Grid.Column="1" Text="appadmin"/>
+                <Label x:Name="PasswordLbl" Text="Password" Grid.Row="2" Grid.Column="0"/>
+                <Entry x:Name="PasswordTxt" Grid.Row="2" Grid.Column="1" IsPassword="True"/>
+                <Button x:Name="LoginBtn" Text="Login" Grid.Row="3" Grid.Column="0" Clicked="LoginBtn_Clicked"/>
+                <Button x:Name="CancelBtn" Text="Cancel" Background="Red" Grid.Row="3" Grid.Column="1" Clicked="CancelBtn_Clicked"/>
+            </Grid>
+
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

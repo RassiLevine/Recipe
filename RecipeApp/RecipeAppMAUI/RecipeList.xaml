@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeAppMAUI.RecipeList"
+             Title="RecipeList">
+    <Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="Auto,*" HorizontalOptions="Center" VerticalOptions="Start" ColumnSpacing="10">
+        <Label x:Name="RecipeListLbl" Text="Recipe List" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" HorizontalOptions="Center" FontSize="Header"/>
+        <ListView x:Name="RecipeListLst" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="10">
+                            <Label Text="{Binding Path=[RecipeName]}" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding Path=[RecipeStatus]}" Grid.Row="0" Grid.Column="1"/>
+                            <Label Text="{Binding Path=[UserName]}" Grid.Row="0" Grid.Column="2"/>
+                            <Label Text="{Binding Path=[Calories]}" Grid.Row="0" Grid.Column="3"/>
+                            <Label Text="{Binding Path=[NumIngredients]}" Grid.Row="0" Grid.Column="4"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+    
+</ContentPage>

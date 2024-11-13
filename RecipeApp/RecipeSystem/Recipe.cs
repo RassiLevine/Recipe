@@ -41,5 +41,13 @@ namespace RecipeSystem
             SQLutility.ExecuteSQL(cmd);
         }
 
+        public static DataTable GetRecipeListDataTable()
+        {
+            DataTable dt = new();
+            SqlCommand cmd = SQLutility.GetSqlCommand("RecipeList");
+            dt = SQLutility.GetDataTable(cmd);
+            return dt;
+        }
+
     }
 }

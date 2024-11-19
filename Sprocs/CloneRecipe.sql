@@ -15,7 +15,7 @@ select concat(r.RecipeName, '-clone'), r.Calories, r.CuisineId, r.StaffId
 from recipe r
 where r.RecipeId = @RecipeId
 
-select @RecipeId = SCOPE_IDENTITY()
+select @CloneRecipeId = SCOPE_IDENTITY()
 
 ;with x as(
     select recipeName = concat(r.RecipeName, '-clone'), d.direction, d.DirectionSequence
@@ -47,16 +47,13 @@ join recipe r
 on r.recipename = x.recipename
 
 select @RecipeIngredientId = SCOPE_IDENTITY()
-
+/*
 --return cloned recipe 
 
 select top 1 @RecipeIngredientId = ri.RecipeIngredientId from RecipeIngredient ri order by RecipeIngredientId desc
 select @DirectionId = d.DirectionsId from Directions d join recipe r on r.recipeid = d.DirectionsId where r.RecipeId = @RecipeId
 
-select r.RecipeId, r.RecipeName, r.Calories, r.CuisineId, r.StaffId
-from recipe r
-where r.RecipeId = @RecipeId
-return  @return
+
 
 select d.DirectionsId, d.Direction, d.DirectionSequence
 from Directions d
@@ -68,9 +65,12 @@ select RecipeIngredientId, ri.RecipeId, IngredientAmt, ingredientId, IngredientS
 from RecipeIngredient ri
 join recipe r
 on r.RecipeId = ri.RecipeId
-where r.RecipeId = @RecipeId
-
-return @RecipeId
+where r.RecipeId = @RecipeId*/
+select r.RecipeId, r.RecipeName, r.Calories, r.CuisineId, r.StaffId
+from recipe r
+where r.RecipeId = @CloneRecipeId
+return  @return
+return @CloneRecipeId
 return @DirectionId
 RETURN @RecipeIngredientId
 
@@ -78,9 +78,5 @@ end
 go
 
 
-exec CloneRecipe  @recipeid = 75
-select *
-from recipe r
-join Directions d
-on r.RecipeId = d.RecipeId
-where r.RecipeId = 79
+
+

@@ -20,8 +20,6 @@ select @CookbookId = isnull(@CookbookId, 0), @StaffId = ISNULL(@StaffId, 0), @Ac
 
             select @CookbookId = SCOPE_IDENTITY()
 
-            set @Message = 'New cookbook inserted with ID: ' + cast(@CookbookId as varchar)
-
         end
     else
         begin

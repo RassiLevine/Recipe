@@ -32,7 +32,6 @@ select @CookbookId = isnull(@CookbookId, 0), @StaffId = ISNULL(@StaffId, 0), @Ac
             where CookbookId = @CookbookId
         end
     
-    set @return = 1
     return @return
 
 end

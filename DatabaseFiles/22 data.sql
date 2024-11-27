@@ -32,6 +32,8 @@ union select 'Apple Yogurt Smoothie', 200,c.cuisineId, (select s.staffid from st
 union select 'cheese Bread', 250, c.cuisineId,(select s.staffid from staff s where s.StaffFirstName = 'John' and s.StaffLastName = 'Smith' ), '2024/01/02', '2024/02/05', null from cuisine c where c.CuisineType = 'English'
 union select 'Butter Muffins', 300, c.cuisineId,(select s.staffid from staff s where s.StaffFirstName = 'John' and s.StaffLastName = 'Smith' ), '2024/02/02', null, '2024/02/05' from cuisine c where c.CuisineType = 'English'
 union select 'Iced Coffee', 60, c.cuisineId, (select s.staffid from staff s where s.StaffFirstName = 'John' and s.StaffLastName = 'Smith'), '2024/01/01',null, null from cuisine c where c.CuisineType = 'American' 
+union select 'Lemon Cookies', 100, c.cuisineId,  (select s.staffid from staff s where s.StaffFirstName = 'John' and s.StaffLastName = 'Smith'), '2024/04/01',null, null from cuisine c where c.CuisineType = 'American' 
+
 insert measurementType(measurementType)
 select 'cup'
 union select 'pinch'

@@ -147,12 +147,49 @@ and cm.CourseRecipeId is null";
             TestContext.WriteLine("existing recipe without ingredients' id with recipeid of = " + recipeid);
             TestContext.WriteLine("ensure that app can delete " + recipeid);
             bizRecipe recipe = new();
-            recipe.Delete(dt);
+            recipe.Delete();
             DataTable dtafterdelete = GetDataTable("select recipeid from recipe where recipeid =" + recipeid);
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "record with recipeid " + recipeid + " exists in db");
             TestContext.WriteLine("record with recipeid " + recipeid + "does not exist in db");
         }
 
+        [Test]
+        public void DeleteById()
+        {
+            DataTable dt = GetRecipeForDelete();
+            int recipeid = 0;
+            if (dt.Rows.Count > 0)
+            {
+                recipeid = (int)dt.Rows[0]["recipeid"];
+            }
+            Assume.That(recipeid > 0, "no recipes without ingredients in db, cant run");
+            TestContext.WriteLine("existing recipe without ingredients' id with recipeid of = " + recipeid);
+            TestContext.WriteLine("ensure that app can delete " + recipeid);
+            bizRecipe recipe = new();
+            recipe.Delete(recipeid);
+            DataTable dtafterdelete = GetDataTable("select recipeid from recipe where recipeid =" + recipeid);
+            Assert.IsTrue(dtafterdelete.Rows.Count == 0, "record with recipeid " + recipeid + " exists in db");
+            TestContext.WriteLine("record with recipeid " + recipeid + "does not exist in db");
+        }
+
+        [Test]
+        public void DeleteByDatatable()
+        {
+            DataTable dt = GetRecipeForDelete();
+            int recipeid = 0;
+            if (dt.Rows.Count > 0)
+            {
+                recipeid = (int)dt.Rows[0]["recipeid"];
+            }
+            Assume.That(recipeid > 0, "no recipes without ingredients in db, cant run");
+            TestContext.WriteLine("existing recipe without ingredients' id with recipeid of = " + recipeid);
+            TestContext.WriteLine("ensure that app can delete " + recipeid);
+            bizRecipe recipe = new();
+            recipe.Delete(dt);
+            DataTable dtafterdelete = GetDataTable("select recipeid from recipe where recipeid =" + recipeid);
+            Assert.IsTrue(dtafterdelete.Rows.Count == 0, "record with recipeid " + recipeid + " exists in db");
+            TestContext.WriteLine("record with recipeid " + recipeid + "does not exist in db");
+        }
 
         [Test]
         public void DeleteRecipeWithDirections()

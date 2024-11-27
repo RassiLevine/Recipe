@@ -213,7 +213,7 @@ where Datediff(day, getdate(), datearchived) <30
             TestContext.WriteLine("existing recipe with id = " + recipeid);
             TestContext.WriteLine("ensure that app loads recipe" + recipeid);
             bizRecipe recipe = new();
-            DataTable dt = recipe.LoadRecipe(recipeid);
+            DataTable dt = recipe.Load(recipeid);
             int loadedid = (int)dt.Rows[0]["recipeid"];
             Assert.IsTrue(loadedid == recipeid, loadedid + "<>" + recipeid);
             TestContext.WriteLine("loaded recipe(" + loadedid + ")" + recipeid);

@@ -37,6 +37,7 @@ grant execute on RecipeIngredientsGet to recipeapprole
 grant execute on RecipeIngredientUpdate to recipeapprole
 grant execute on RecipeList to recipeapprole
 grant execute on RecipeGet to recipeapprole
+grant execute on RecipeGet to recipeapprole
 grant execute on RecipeUpdate to recipeapprole
 grant execute on CuisineGet to recipeapprole
 grant execute on StatusUpdate to recipeapprole

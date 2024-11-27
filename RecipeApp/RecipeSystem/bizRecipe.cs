@@ -2,7 +2,7 @@
 using System.Dynamic;
 namespace RecipeSystem
 {
-    public class bizRecipe: bizObject
+    public class bizRecipe: bizObject<bizRecipe>
     {
         public bizRecipe() 
         {
@@ -19,7 +19,13 @@ namespace RecipeSystem
         private DateTime? _datearchived;
         private string _recipestatus = "";
         private string _recipepic = "";
-
+        public List<bizRecipe> Search(string recipenameval)
+        {
+            SqlCommand cmd = SQLutility.GetSqlCommand(this.GetSprocName);
+            SQLutility.SetParamValue(cmd, "@RecipeName", recipenameval);
+            DataTable dt = SQLutility.GetDataTable(cmd);
+            return this.GetListFromDatatable(dt);
+        }
         public int RecipeId
         {
             get => _recipeid;

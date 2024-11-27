@@ -7,7 +7,7 @@ create or alter proc dbo.RecipeIngredientsGet(
 as
 begin
     declare @return int = 0
-
+ 
 select @RecipeId = isnull(@recipeid, 0), @All = isnull(@All, 0)
 
 select ri.RecipeIngredientId, r.recipeid, ri.IngredientAmt,  ri.IngredientSequence, i.IngredientsId, ri.MeasurementTypeId

@@ -317,7 +317,6 @@ where Datediff(day, getdate(), datearchived) <30
         [Test]
         public void SearchRecipe()
         {
-            //need to switch to testconnstring to run search test
             string criteria = "a";
             int num = SQLutility.GetFirstRowFirstColumn("select total = count(*) from recipe where recipename like '%" + criteria + "%'");
             Assume.That(num > 0, "cant run - no match");
@@ -335,7 +334,6 @@ where Datediff(day, getdate(), datearchived) <30
         [Test]
         public void SearchIngredients()
         {
-            //need to switch to testconnstring to run search test
             string criteria = "a";
             int num = SQLutility.GetFirstRowFirstColumn("select total = count(*) from ingredients where ingredientname like '%" + criteria + "%'");
             Assume.That(num > 0, "cant run - no match");

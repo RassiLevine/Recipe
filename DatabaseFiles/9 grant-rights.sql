@@ -45,3 +45,4 @@ grant execute on StaffGet to recipeapprole
 grant execute on StaffDelete to recipeapprole
 grant execute on StaffUpdate to recipeapprole
 grant execute on StatusGet to recipeapprole
+ALTER ROLE db_datareader ADD member recipeapprole

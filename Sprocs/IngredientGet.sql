@@ -1,6 +1,7 @@
 create or alter proc dbo.IngredientsGet(
     @RecipeId int = 0,
     @IngredientsId int = 0,
+    @IngredientName varchar(30) = '',
     @All int = 0,
     @IncludeBlank int = 0,
     @Message varchar(500) = '' output
@@ -20,6 +21,7 @@ join recipe r
 on r.recipeid = ri.recipeid
 where r.recipeid = @recipeid
 or @all =1
+or i.IngredientName like '%' + @IngredientName + '%'
 union select null, null
 where @IncludeBlank = 1
 order by  i.IngredientName

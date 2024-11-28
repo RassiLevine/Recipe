@@ -12,13 +12,13 @@ namespace RecipeSystem
         private string _ingredientname = "";
         private string _ingpic = "";
 
-        //public List<bizIngredients> Search(string partynameval)
-        //{
-        //    SqlCommand cmd = SQLutility.GetSqlCommand(this.GetSprocName);
-        //    SQLutility.SetParamValue(cmd, "@IngredientName", partynameval);
-        //    DataTable dt = SQLutility.GetDataTable(cmd);
-        //    return this.GetListFromDatatable(dt);
-        //}
+        public List<bizIngredients> Search(string ingredientnameval)
+        {
+            SqlCommand cmd = SQLutility.GetSqlCommand(this.GetSprocName);
+            SQLutility.SetParamValue(cmd, "@IngredientName", ingredientnameval);
+            DataTable dt = SQLutility.GetDataTable(cmd);
+            return this.GetListFromDatatable(dt);
+        }
         public int IngredientsId { get=> _ingredientsid;
             set
             {

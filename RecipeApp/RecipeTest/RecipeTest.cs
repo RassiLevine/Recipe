@@ -12,7 +12,8 @@ namespace RecipeTest
         [SetUp]
         public void Setup()
         {
-            DBmanager.SetConnectionString(testconnstring, true);
+            DBmanager.SetConnectionString(connstring, true);
+           // DBmanager.SetConnectionString(testconnstring, true);
         }
         private DataTable GetDataTable(string sql)
         {
@@ -316,6 +317,7 @@ where Datediff(day, getdate(), datearchived) <30
         [Test]
         public void SearchRecipe()
         {
+            //need to switch to testconnstring to run search test
             string criteria = "a";
             int num = SQLutility.GetFirstRowFirstColumn("select total = count(*) from recipe where recipename like '%" + criteria + "%'");
             Assume.That(num > 0, "cant run - no match");
@@ -330,6 +332,23 @@ where Datediff(day, getdate(), datearchived) <30
             TestContext.WriteLine("number of rows returned by search is " + results);
         }
 
+        [Test]
+        public void SearchIngredients()
+        {
+            //need to switch to testconnstring to run search test
+            string criteria = "a";
+            int num = SQLutility.GetFirstRowFirstColumn("select total = count(*) from ingredients where ingredientname like '%" + criteria + "%'");
+            Assume.That(num > 0, "cant run - no match");
+            TestContext.WriteLine(num + " ingredients that match " + criteria);
+            TestContext.WriteLine("ensure that ingredient search returns " + num + " with criteria " + criteria);
+            bizIngredients ing = new();
+            List<bizIngredients> lst = ing.Search(criteria);
+
+            int results = lst.Count;
+
+            Assert.IsTrue(results == num, "results of recipe search does not match number of recipes " + results + "<>" + num);
+            TestContext.WriteLine("number of rows returned by search is " + results);
+        }
         private int GetRecipeId()
         {
            return GetFirstRowFirstColumn("select top 1 r.recipeid from Recipe r");

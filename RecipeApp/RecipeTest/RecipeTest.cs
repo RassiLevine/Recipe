@@ -1,11 +1,9 @@
 using CPUFramework;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.Serialization;
 using RecipeSystem;
 using System.Data;
 using System.Configuration;
-using System;
 namespace RecipeTest
-    
+
 {
     public class RecipeTest
     {
@@ -14,7 +12,7 @@ namespace RecipeTest
         [SetUp]
         public void Setup()
         {
-            DBmanager.SetConnectionString(connstring, true);
+            DBmanager.SetConnectionString(testconnstring, true);
         }
         private DataTable GetDataTable(string sql)
         {
@@ -299,7 +297,7 @@ where Datediff(day, getdate(), datearchived) <30
             bizIngredients ing = new();
             var lst = ing.GetList();
 
-            Assert.IsTrue(lst.Count == ingredientcount, "um rows returned (" + lst.Count + ")<>" + ingredientcount);
+            Assert.IsTrue(lst.Count == ingredientcount, "num rows returned (" + lst.Count + ")<>" + ingredientcount);
             TestContext.WriteLine("number of staff members returned = " + lst.Count);
         }
         [Test]

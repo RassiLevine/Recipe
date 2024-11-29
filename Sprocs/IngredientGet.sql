@@ -1,7 +1,7 @@
 create or alter proc dbo.IngredientsGet(
     @RecipeId int = 0,
     @IngredientsId int = 0,
-    @IngredientName varchar(30) = '',
+    @IngredientName varchar(30) = '', 
     @All int = 0,
     @IncludeBlank int = 0,
     @Message varchar(500) = '' output

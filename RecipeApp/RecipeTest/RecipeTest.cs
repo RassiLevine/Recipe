@@ -2,13 +2,15 @@ using CPUFramework;
 using RecipeSystem;
 using System.Data;
 using System.Configuration;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 namespace RecipeTest
 
 {
     public class RecipeTest
     {
-        string connstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
-        string testconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
+        string connstring = ConfigurationManager.ConnectionStrings["devconnlive"].ConnectionString;
+        string testconnstring = ConfigurationManager.ConnectionStrings["unittestconnlive"].ConnectionString;
+
         [SetUp]
         public void Setup()
         {
@@ -116,6 +118,24 @@ namespace RecipeTest
             TestContext.WriteLine("recipename for reicpe with id " + recipeid + " is " + name);
         }
 
+        [Test]
+        public void InsertIngredient()
+        {
+            bizIngredients ing = new();
+            int ingredientid = GetFirstRowFirstColumn("select top 1 ingredientsid from ingredients");
+            DateTime now = DateTime.Now;
+            string ingname = "nuts" + now.ToString();
+            TestContext.WriteLine("insert new ingredient " + ingredientid + " " + ingname);
+            ing.IngredientName = ingname;
+            ing.Save();
+
+            TestContext.WriteLine("New ingredient " + ingname);
+
+            int pkid = ing.IngredientsId;
+            Assert.IsTrue(pkid > 0, "pk not updated in datatable");
+            TestContext.WriteLine("ingredient name for ingredient with id " + ingredientid + " is " + ingname);
+        }
+        
 
         private DataTable GetRecipeForDelete()
         {
@@ -133,7 +153,8 @@ and cm.CourseRecipeId is null";
             return dt;
         }
         [Test]  
-        ///need to add a recipe that doesnt have ingredients to be able to delete...
+        // there arent enough recipes in the db without ingredients to run all th versions of the delete tests. 
+        //re-run data if this rest deos not run...
         public void DeleteRecipe()
         {
            DataTable dt = GetRecipeForDelete();
@@ -146,11 +167,14 @@ and cm.CourseRecipeId is null";
             TestContext.WriteLine("existing recipe without ingredients' id with recipeid of = " + recipeid);
             TestContext.WriteLine("ensure that app can delete " + recipeid);
             bizRecipe recipe = new();
+            recipe.Load(recipeid);
             recipe.Delete();
             DataTable dtafterdelete = GetDataTable("select recipeid from recipe where recipeid =" + recipeid);
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "record with recipeid " + recipeid + " exists in db");
             TestContext.WriteLine("record with recipeid " + recipeid + "does not exist in db");
         }
+
+
 
         [Test]
         public void DeleteById()
@@ -318,7 +342,7 @@ where Datediff(day, getdate(), datearchived) <30
         public void SearchRecipe()
         {
             string criteria = "a";
-            int num = SQLutility.GetFirstRowFirstColumn("select total = count(*) from recipe where recipename like '%" + criteria + "%'");
+            int num = GetFirstRowFirstColumn("select total = count(*) from recipe where recipename like '%" + criteria + "%'");
             Assume.That(num > 0, "cant run - no match");
             TestContext.WriteLine(num + " recipes that match " + criteria);
             TestContext.WriteLine("ensure that recipe search returns " + num + " with criteria " + criteria);
@@ -335,7 +359,7 @@ where Datediff(day, getdate(), datearchived) <30
         public void SearchIngredients()
         {
             string criteria = "a";
-            int num = SQLutility.GetFirstRowFirstColumn("select total = count(*) from ingredients where ingredientname like '%" + criteria + "%'");
+            int num = GetFirstRowFirstColumn("select total = count(*) from ingredients where ingredientname like '%" + criteria + "%'");
             Assume.That(num > 0, "cant run - no match");
             TestContext.WriteLine(num + " ingredients that match " + criteria);
             TestContext.WriteLine("ensure that ingredient search returns " + num + " with criteria " + criteria);
@@ -347,6 +371,32 @@ where Datediff(day, getdate(), datearchived) <30
             Assert.IsTrue(results == num, "results of recipe search does not match number of recipes " + results + "<>" + num);
             TestContext.WriteLine("number of rows returned by search is " + results);
         }
+
+        //[Test]
+        //public void zCheckIfDataBeingRefereshed()
+        //{
+        //    string query = "SELECT COUNT(*) FROM ingredients WHERE ingredientname LIKE '%almonds%'";
+        //    int newnum = GetFirstRowFirstColumn(query);
+        //    Assert.IsTrue(newnum > 0, "not picking up fresh data");
+        //    TestContext.WriteLine("data being refreshed. new ingredient inserted has id " + newnum);
+        //}
+
+
+        //[TestCase("milk")]
+        //public void InsertIngredientTest(string ingredientname)
+        //{
+        //    int ingredientid = GetFirstRowFirstColumn("select top 1 ingredientsid from ingredients");
+        //    Assume.That(ingredientid > 0, "cant run test, no parties in db");
+        //    TestContext.WriteLine("insert ingredient " + ingredientname);
+        //    bizIngredients ing = new();
+        //    ing.IngredientName = ingredientname;
+        //    ing.Save();
+        //    int pkid = ing.IngredientsId;
+
+        //    Assert.IsTrue(pkid > 0, "pk not updated in datatable");
+        //    TestContext.WriteLine("new ingredient added to datatable with id " + pkid);
+        //}
+
         private int GetRecipeId()
         {
            return GetFirstRowFirstColumn("select top 1 r.recipeid from Recipe r");

@@ -1,5 +1,5 @@
 create or alter proc dbo.IngredientsUpdate(
-    @IngredientsId int = 0,
+    @IngredientsId int = 0 output,
     @IngredientName varchar(30) = '',
     @Message varchar(500) = '' output
 )

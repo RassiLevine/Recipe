@@ -31,7 +31,7 @@ Recipe list page:
     Tip: You'll need to use the convert function for the dates
 */
 select 
--- SM This column should be called RecipeName--
+
 RecipeName = 
 case
 when r.RecipeStatus = 'archived' then concat('<span style="color:gray">', r.RecipeName, '</span>')
@@ -56,7 +56,7 @@ Recipe details page:
         b) List of ingredients: show the measurement quantity, measurement type and ingredient in one column, sorted by sequence. Ex. 1 Teaspoon Salt  
         c) List of prep steps sorted by sequence.
 */
--- SM You should count distinct in both count() and remove the select distinct.??
+
 select  r.recipename, r.calories, NumIng =  count(distinct ri.ingredientId), NumDir = count (distinct d.Direction)
 from RecipeIngredient ri
 join Recipe r
@@ -89,8 +89,8 @@ order by d.DirectionSequence
 Meal list page:
     For all active meals, show the meal name, user that created the meal, number of calories for the meal, number of courses, and number of recipes per each meal, sorted by name of meal
 */
--- SM This returns the results it should but there's some issue how you insert the data.
--- Not every course in every meal needs to have the same recipe. In you data you should choose the meal when inserting the recipe not the course.
+
+
 select m.MealName, s.UserName, NumCourses = count(distinct c.CourseId), NumRecipes = count(distinct r.RecipeId), Calories = sum(r.Calories)
 from meals m
 join Staff s
@@ -204,7 +204,7 @@ April Fools Page:
     b) When the user clicks on any recipe they should see a spoof steps lists showing the step instructions for the LAST step of EACH recipe in the system. No sequence required.
         Hint: Use CTE
 */
--- SM Instead of setting the image based on the real image, use the code you use in the table to add the image and combine it with the code you get the fake recipe name.
+
 select Recipe = 
 concat(upper(substring(reverse(r.RecipeName), 1, 1)), substring((reverse(lower(r.RecipeName))), 2, len(r.RecipeName))),
 pic=concat(substring(r.recipepic,1,7), upper(substring(reverse(r.RecipePic), 6, 1)), substring((reverse(lower(r.RecipePic))),  7, len(r.RecipePic)-12), '.jpeg')

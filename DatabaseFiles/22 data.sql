@@ -1,4 +1,4 @@
--- SM Excellent
+
 use RecipeWebsiteDB
 go
 delete cookbookrecipe

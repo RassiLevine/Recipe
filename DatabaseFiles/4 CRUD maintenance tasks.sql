@@ -1,4 +1,4 @@
--- SM Excellent! 100% See comment, no need to resubmit.
+
 use RecipeWebsiteDB
 --Note: some of these scripts are needed for specific items, when the instructions say "specific" pick one item in your data and specify it in the where clause using a unique value that identifies it, do not use the primary key.
 
@@ -202,7 +202,7 @@ Order cookbooks from HeartyHearth.com! We have [X] books for sale, average price
 for a total of [Z].
 Click <a href = "www.heartyhearth.com/order/[GUID]">here</a> to order.
 */
--- SM Tip: Convert the prices to 2 decimal places. Use sum() * .75
+
 select EmailBody = 
 concat(
 	'Order cookbooks from HeartyHearth.com! We have ', count(*), ' for sale, average price is, ', avg(Price), '. 

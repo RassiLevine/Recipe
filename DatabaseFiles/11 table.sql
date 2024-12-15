@@ -1,4 +1,4 @@
--- SM Excellent! See comments, no need to resubmit.
+
 use RecipeWebsiteDB
 go
 go
@@ -6,16 +6,18 @@ go
 drop table if exists CookBookRecipe
 drop table if exists Cookbook
 drop table if exists CourseRecipeCourseMeal
-drop table if exists CourseMealr
-drop table if exists course
+drop table if exists CourseMeal
 drop table if exists Directions
-drop table if exists Meals
 drop table if exists RecipeIngredient
 drop table if exists Ingredients
 drop table if exists measurementType
 drop table if exists Recipe
 drop table if exists Cuisine
+drop table if exists RecipeIngredient
+drop table if exists CourseRecipe
+drop table if exists Meals
 drop table if exists Staff
+drop table if exists course
 go
 
 create table dbo.Staff(

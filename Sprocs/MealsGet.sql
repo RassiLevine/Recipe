@@ -9,7 +9,7 @@ as
 begin
     declare @return int = 0
 
-    select MealsId, StaffId, MealName, Active
+    select MealsId, StaffId, MealName, Active, MealsDesc
     from Meals
     where MealsId = @MealsId 
     or @All = 1
@@ -17,5 +17,6 @@ begin
     return @return
 end
 go
+
 
 

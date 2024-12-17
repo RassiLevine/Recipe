@@ -8,7 +8,7 @@ as
 begin
  declare @return int = 0
 
-select cbr.CookBookRecipeId, cbr.CookbookId, r.RecipeId, cbr.Seq
+select cbr.CookBookRecipeId, cbr.CookbookId, r.RecipeId, cbr.Seq, r.RecipeName
 from CookbookRecipe cbr
 join Recipe r
 on r.RecipeId = cbr.RecipeId

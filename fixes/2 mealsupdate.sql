@@ -31,7 +31,7 @@ SET r.IsVegan = rvs.IsVeganStatus
 FROM dbo.Recipe r
 JOIN RecipeVeganStatus rvs ON r.RecipeId = rvs.RecipeId;
 
-WITH SkillLevelCTE AS (
+/*WITH SkillLevelCTE AS (
     SELECT CookbookId,
            CASE 
                WHEN Price <= 10 THEN 'Beginner'
@@ -43,4 +43,12 @@ WITH SkillLevelCTE AS (
 UPDATE dbo.Cookbook
 SET SkillLevel = SkillLevelCTE.SkillLevel
 FROM SkillLevelCTE
-WHERE dbo.Cookbook.CookbookId = SkillLevelCTE.CookbookId
+WHERE dbo.Cookbook.CookbookId = SkillLevelCTE.CookbookId*/
+UPDATE dbo.Cookbook
+SET SkillLevel = 
+    CASE
+        WHEN CookbookName LIKE '%Treats%' THEN 1   -- Treats for Two should be Beginner
+        WHEN CookbookName LIKE '%Brunch%' THEN 2   -- Brunch Recipes should be Intermediate
+        WHEN CookbookName LIKE '%Dinner%' THEN 3   -- Dinner in Two should be Advanced
+        ELSE 1   -- Default to Beginner if no match
+    END;

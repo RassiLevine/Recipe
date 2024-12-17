@@ -2,7 +2,12 @@
 create or alter procedure dbo.RecipeGet(@RecipeId int =0, @All bit = 0, @RecipeName varchar(30) = '')
 as 
 begin
-    select r.RecipeId, r.RecipeName, r.RecipeStatus, r.Calories, r.CuisineId, r.DateDraft, r.DatePublished, r.DateArchived, r.StaffId, r.RecipePic, r.IsVegan, NumIngredients = count(ri.ingredientid)
+declare @TotalRecipes int = 0
+SELECT @TotalRecipes = COUNT(*) 
+    FROM recipe;
+
+    select r.RecipeId, r.RecipeName, r.RecipeStatus, r.Calories, r.CuisineId, r.DateDraft, r.DatePublished,
+     r.DateArchived, r.StaffId, r.RecipePic, r.IsVegan, NumIngredients = count(ri.ingredientid),  @TotalRecipes AS TotalRecipes
     from recipe r
     
     join recipeingredient ri

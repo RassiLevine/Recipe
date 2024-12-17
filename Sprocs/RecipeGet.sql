@@ -2,7 +2,7 @@
 create or alter procedure dbo.RecipeGet(@RecipeId int =0, @All bit = 0, @RecipeName varchar(30) = '')
 as 
 begin
-    select r.RecipeId, r.RecipeName, r.Calories, r.CuisineId, r.DateDraft, r.DatePublished, r.DateArchived, r.StaffId, r.StaffId, r.RecipePic
+    select r.RecipeId, r.RecipeName, r.Calories, r.CuisineId, r.DateDraft, r.DatePublished, r.DateArchived, r.StaffId, r.StaffId, r.RecipePic, r.IsVegan
     from recipe r
     where r.recipeid = @RecipeId
     or @All = 1

@@ -7,7 +7,7 @@ as
 begin
     declare @return int = 0
 
-select c.CookbookId, c.CookbookName, c.Price, c.Active, c.DateCreated, s.StaffId, 'User' = concat(s.StaffFirstName, ' ', s.StaffLastName)
+select c.CookbookId, c.CookbookName, c.Price, c.Active, c.DateCreated, s.StaffId, 'User' = concat(s.StaffFirstName, ' ', s.StaffLastName), c.SkillLevel
 from cookbook c
 join staff s
 on s.staffid = c.staffid

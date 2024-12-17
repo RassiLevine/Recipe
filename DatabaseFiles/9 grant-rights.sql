@@ -46,3 +46,4 @@ grant execute on StaffDelete to recipeapprole
 grant execute on StaffUpdate to recipeapprole
 grant execute on StatusGet to recipeapprole
 grant SELECT on ingredients to recipeapprole
+grant execute on MealsGet to recipeapprole

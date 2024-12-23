@@ -22,7 +22,6 @@ exec RecipeGet @all =1
 exec RecipeGet
 
 
-
 exec RecipeGet @RecipeName = 't'
 
 declare @recipeId int

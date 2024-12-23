@@ -21,5 +21,13 @@ namespace RecipeAPI.Controllers
             r.Load(id);
             return r;
         }
+
+        [HttpGet("bycookbookid/{cookbookid:int:min(1)}")]
+        public List<bizRecipe> GetBasedOnCookbook(int cookbookid)
+        {
+           // return new bizRecipe().ListRecipeBasedOnCookbook(cookbookid);
+            bizRecipe r = new bizRecipe();
+            return r.ListRecipeBasedOnCookbook(cookbookid);
+        }
     }
 }

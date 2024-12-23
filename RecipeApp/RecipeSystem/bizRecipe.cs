@@ -1,4 +1,5 @@
 ﻿using CPUFramework;
+using System.Diagnostics;
 using System.Dynamic;
 namespace RecipeSystem
 {
@@ -28,6 +29,12 @@ namespace RecipeSystem
             SQLutility.SetParamValue(cmd, "@RecipeName", recipenameval);
             DataTable dt = SQLutility.GetDataTable(cmd);
             return this.GetListFromDatatable(dt);
+        }
+
+        public List<bizRecipe> ListRecipeBasedOnCookbook(int cookbookid)
+        {
+            DataTable dt = Cookbook.LoadCookbookRecipe(cookbookid);
+            return GetListFromDatatable(dt);
         }
         public int RecipeId
         {

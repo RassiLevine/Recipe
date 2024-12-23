@@ -10,7 +10,7 @@ namespace RecipeSystem
     {
         private int _cookbookid;
         private int _staffid;
-        private string _user;
+        private string _user="";
         private string _cookbookname = "";
         private decimal _price;
         private bool _active = true;

@@ -25,9 +25,31 @@ namespace RecipeAPI.Controllers
         [HttpGet("bycookbookid/{cookbookid:int:min(1)}")]
         public List<bizRecipe> GetBasedOnCookbook(int cookbookid)
         {
-           // return new bizRecipe().ListRecipeBasedOnCookbook(cookbookid);
+            // return new bizRecipe().ListRecipeBasedOnCookbook(cookbookid);
             bizRecipe r = new bizRecipe();
             return r.ListRecipeBasedOnCookbook(cookbookid);
         }
+
+        [HttpGet("bycuisineid/{cuisineid:int:min(1)}")]
+        public List<bizRecipe> GetBasedOnCuisine(int cuisineid)
+        {
+            // return new bizRecipe().ListRecipeBasedOnCookbook(cookbookid);
+            bizRecipe r = new bizRecipe();
+            return r.ListRecipeBaseOnCuisine(cuisineid);
+        }
+        [HttpPost]
+        public IActionResult Post([FromForm] bizRecipe recipe)
+        {
+            try
+            {
+                recipe.Save();
+                return Ok(new { message = "recipes saved", recipeid = recipe.RecipeId });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+
     }
 }

@@ -14,6 +14,13 @@ namespace RecipeSystem
             DataTable dt = SQLutility.GetDataTable(cmd);
             return dt;
         }
+        public static DataTable LoadRecipeByCuisine(int cuisineid)
+        {
+            SqlCommand cmd = SQLutility.GetSqlCommand("CuisineRecipeGet");
+            SQLutility.SetParamValue(cmd, "@CuisineId", cuisineid);
+            DataTable dt = SQLutility.GetDataTable(cmd);
+            return dt;
+        }
         public static DataTable LoadRecipeStatus(int recipeid)
         {
             DataTable dt = new DataTable();

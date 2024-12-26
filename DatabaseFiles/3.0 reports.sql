@@ -69,7 +69,7 @@ group by r.RecipeName, r.Calories, d.DirectionSequence
 select Ingredients = concat(ri.ingredientamt, ' ', mt.MeasurementType, ' ', i.IngredientName)
 from Ingredients i
 join RecipeIngredient ri
-on i.IngredientId = ri.ingredientId
+on i.IngredientsId = ri.ingredientId
 join Recipe r
 on r.RecipeId = ri.recipeId
 left join measurementtype mt 

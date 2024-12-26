@@ -28,3 +28,6 @@ order by ri.ingredientsequence
     return @return
 end
 go
+
+exec RecipeIngredientsGet
+FOR JSON AUTO;

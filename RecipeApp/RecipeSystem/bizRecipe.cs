@@ -36,6 +36,11 @@ namespace RecipeSystem
             DataTable dt = Cookbook.LoadCookbookRecipe(cookbookid);
             return GetListFromDatatable(dt);
         }
+        public List<bizRecipe> ListRecipeBaseOnCuisine(int cuisineid)
+        {
+            DataTable dt = Recipe.LoadRecipeByCuisine(cuisineid);
+            return GetListFromDatatable(dt);
+        }
         public int RecipeId
         {
             get => _recipeid;

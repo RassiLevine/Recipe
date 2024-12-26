@@ -13,6 +13,16 @@ namespace RecipeAPI.Controllers
         {
             return new bizRecipe().GetList();
         }
+        [HttpGet("colors")]
+        public List<bizCuisine> GetCuisine()
+        {
+            return new bizCuisine().GetList();
+        }
+        [HttpGet("staff")]
+        public List<bizStaff> GetStaff()
+        {
+            return new bizStaff().GetList();
+        }
 
         [HttpGet("{id:int:min(0)}")]
         public bizRecipe Get(int id)
@@ -51,5 +61,19 @@ namespace RecipeAPI.Controllers
             }
         }
 
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                bizRecipe r = new();
+                r.Delete(id);
+                return Ok(new { message = "Recipe Deleted" });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
     }
 }

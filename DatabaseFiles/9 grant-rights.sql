@@ -48,3 +48,4 @@ grant execute on StatusGet to recipeapprole
 grant SELECT on ingredients to recipeapprole
 grant execute on MealsGet to recipeapprole
 grant execute on CuisineRecipeGet to recipeapprole
+grant execute on RecipeDelete to recipeapprole

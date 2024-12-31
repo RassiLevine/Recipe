@@ -13,7 +13,7 @@ namespace RecipeSystem
         private int _recipeid;
         private int _cuisineid;
         private int _staffid;
-        private string _user;
+        private string _user ="";
         private string _recipename = "";
         private int _calories;
         private DateTime _datedraft;

@@ -13,7 +13,7 @@ namespace RecipeAPI.Controllers
         {
             return new bizRecipe().GetList();
         }
-        [HttpGet("colors")]
+        [HttpGet("cuisine")]
         public List<bizCuisine> GetCuisine()
         {
             return new bizCuisine().GetList();
@@ -48,31 +48,33 @@ namespace RecipeAPI.Controllers
             return r.ListRecipeBaseOnCuisine(cuisineid);
         }
         [HttpPost]
-        public IActionResult Post([FromForm] bizRecipe recipe)
+        public IActionResult Post( bizRecipe recipe)
         {
             try
             {
                 recipe.Save();
-                return Ok(new { message = "recipes saved", recipeid = recipe.RecipeId });
+                return Ok(recipe);
             }
             catch (Exception ex)
             {
-                return BadRequest(new { ex.Message });
+                recipe.ErrorMessage = ex.Message;
+                return BadRequest(recipe);
             }
         }
 
         [HttpDelete]
         public IActionResult Delete(int id)
         {
+            bizRecipe r = new();
             try
             {
-                bizRecipe r = new();
                 r.Delete(id);
-                return Ok(new { message = "Recipe Deleted" });
+                return Ok(r);
             }
             catch(Exception ex)
             {
-                return BadRequest(new { ex.Message });
+                r.ErrorMessage = ex.Message;
+                return BadRequest(r);
             }
         }
     }

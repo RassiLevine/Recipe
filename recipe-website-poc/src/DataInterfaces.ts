@@ -1,6 +1,7 @@
 export interface ICuisine {
     cuisineId: number,
-    cuisineType: string
+    cuisineType: string,
+    errorMessage: string;
 }
 export interface IRecipe {
     recipeId: number,
@@ -9,11 +10,20 @@ export interface IRecipe {
     user: string,
     recipeName: string,
     calories: number,
-    dateDraft: string,
-    datePublished: string
-    dateArchived: string,
+    dateDraft: Date,
+    datePublished: Date
+    dateArchived: Date,
     recipeStatus: string,
     recipePic: string,
     isVegan: string,
-    numIngredients: number
+    numIngredients: number,
+    errorMessage: string;
+}
+
+export interface IStaff {
+    staffId: number,
+    staffFirstName: string,
+    staffLastName: string,
+    userName: string,
+    errorMessage: string;
 }

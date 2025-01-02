@@ -14,8 +14,8 @@ as
     begin 
         declare @return int = 0
         select @RecipeId = isnull(@RecipeId, 0), @CuisineId = isnull(@CuisineId, 0), @Calories = isnull(@Calories, 0), 
-        @StaffId = ISNULL(@StaffId, 0), @DateDraft = ISNULL(@DateDraft, GETDATE()), @DatePublished = ISNULL(@DatePublished, null),
-        @DateArchived = ISNULL(@DateArchived, null)
+        @StaffId = ISNULL(@StaffId, 0), @DateDraft = ISNULL(@DateDraft, GETDATE()), @DatePublished = ISNULL(NULLIF(@DatePublished, ''), NULL),
+        @DateArchived = ISNULL(NULLIF(@DateArchived, ''), NULL)
 
         if @recipeid = 0
         begin

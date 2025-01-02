@@ -21,7 +21,7 @@ namespace RecipeAPI.Controllers
         [HttpGet("staff")]
         public List<bizStaff> GetStaff()
         {
-            return new bizStaff().GetList();
+            return new bizStaff().GetList(true);
         }
 
         [HttpGet("{id:int:min(0)}")]

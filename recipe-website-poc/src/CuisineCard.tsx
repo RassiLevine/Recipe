@@ -26,18 +26,4 @@ function CuisineCard({ cuisine, onSelected }: Props) {
     )
 }
 
-// 
 export default CuisineCard;
-
-{/* <div
-className="card-img-top"
-style={{
-    backgroundImage: (`images/${cuisine.cuisineType}Cuisine.jpg`),
-    backgroundSize: 'cover',    // Ensures the image covers the area
-    backgroundPosition: 'center', // Centers the image
-    height: '400px',             // Adjust the height as needed
-    borderTopLeftRadius: '0',    // Optional: Ensures no border radius on top
-    borderTopRightRadius: '0',   // Optional: Ensures no border radius on top
-    backgroundRepeat: 'no-repeat'
-}}
-></div> */}

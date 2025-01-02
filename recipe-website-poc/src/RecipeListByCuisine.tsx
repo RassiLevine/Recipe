@@ -5,10 +5,11 @@ import { fetchRecipeByCuisine } from "./DataUtil"
 interface Props {
     cuisineId: number,
     onRecipeSelected: (recipeId: number) => void;
-    onRecipeSelectedForEdit: (recipe: IRecipe) => void;
-}
+    onRecipeSelectedForEdit: (recipe: IRecipe) => void
+};
 
 function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForEdit }: Props) {
+    console.log('onrec selected for edit in recipelist comp', onRecipeSelectedForEdit);
     const [recipeList, setRecipeList] = useState<IRecipe[]>([]);
     const [selectedRecipeId, setSelectedRecipeId] = useState(0);
     useEffect(() => {
@@ -55,7 +56,7 @@ function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForE
                             <td scope="row" style={{ verticalAlign: 'middle' }} >{r.isVegan}</td>
                             <td scope="row" style={{ verticalAlign: 'middle' }} >{r.numIngredients}</td>
                             <td scope="row" style={{ verticalAlign: 'middle' }}><button onClick={() => onRecipeSelectedForEdit(r)} className="btn btn-secondary">Edit</button></td>
-                            <td><button onClick={() => onDeleteRecipe(r.recipeId)} className="btn btn-danger">X</button></td>
+                            {/* <td><button onClick={() => onDeleteRecipe(r.recipeId)} className="btn btn-danger">X</button></td> */}
                         </tr>)
                 }
                 </tbody>

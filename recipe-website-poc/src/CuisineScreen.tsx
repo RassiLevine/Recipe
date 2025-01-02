@@ -29,9 +29,11 @@ function CuisineScreen({ onCuisineSelected }: Props) {
         <>
             <div className="row">
                 {cuisineList.map(c =>
-                    <div key={c.cuisineId} className="col-4">
-                        <CuisineCard cuisine={c} onSelected={handleSelectedCuisine} />
-                    </div>
+                    c.cuisineId > 0 && (
+                        <div key={c.cuisineId} className="col-4">
+                            <CuisineCard cuisine={c} onSelected={handleSelectedCuisine} />
+                        </div>
+                    )
                 )}
 
             </div>

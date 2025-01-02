@@ -32,8 +32,16 @@ function RecipeEdit({ recipe }: Props) {
     }
         , []);
     const submitForm = async (data: FieldValues) => {
+        if (data.datePublished === "") {
+            data.datePublished = null;
+        }
+        if (data.dateArchived === "") {
+            data.dateArchived = null;
+        }
+
         const r = await PostRecipe(data);
         setErrorMsg(r.errorMessage)
+        console.log(data.dateDraft, 'pub', data.datePublished, 'arc', data.dateArchived);
         reset(r);
         console.log("data", data, 'errormsg', errorMsg);
     };
@@ -51,7 +59,7 @@ function RecipeEdit({ recipe }: Props) {
             <div className="bg-light mt-4 p-4">
                 <div className="row">
                     <div className="col-12">
-                        <h2 id="hmsg">{errorMsg}</h2>
+                        <h2 id="msg">{errorMsg}</h2>
                     </div>
                 </div>
                 <div className="row">
@@ -73,19 +81,19 @@ function RecipeEdit({ recipe }: Props) {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataDraft" className="form-label">Date Draft:</label>
-                                <input type="date" {...register("dateDraft")} className="form-control" required defaultValue={new Date().toISOString().split('T')[0]} />
+                                <input type="date" {...register("dateDraft")} className="form-control" defaultValue={new Date(recipe.datePublished).toISOString().split('T')[0]} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataPublished" className="form-label">Date Published:</label>
-                                <input type="date" {...register("datePublished")} className="form-control" />
+                                <input type="date" {...register("datePublished")} className="form-control" defaultValue={recipe.datePublished ? new Date(recipe.datePublished).toISOString().split('T')[0] : ""} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataArchived" className="form-label">Date Archived:</label>
-                                <input type="date" {...register("dateArchived")} className="form-control" />
+                                <input type="date" {...register("dateArchived")} className="form-control" defaultValue={recipe.dateArchived ? new Date(recipe.datePublished).toISOString().split('T')[0] : ""} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="recipeStatus" className="form-label">Recipe Status:</label>
-                                <input type="text" {...register("recipeStatus")} className="form-control" required />
+                                <input type="text" {...register("recipeStatus")} className="form-control" />
                             </div>
                             {/* <div className="mb-3">
                                 <label htmlFor="recipePic" className="form-label">recipe:</label>
@@ -93,7 +101,7 @@ function RecipeEdit({ recipe }: Props) {
                             </div> */}
                             <div className="mb-3">
                                 <label htmlFor="isVegan" className="form-label">Is Vegan?:</label>
-                                <input type="text" {...register("isVegan")} className="form-control" required />
+                                <input type="text" {...register("isVegan")} className="form-control" />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="cuisineId" className="form-label">CuisineId:</label>

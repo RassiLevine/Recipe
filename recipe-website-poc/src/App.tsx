@@ -1,23 +1,26 @@
 import { useState } from "react"
 import "./assets/css/bootstrap.min (4).css"
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // This includes both Bootstrap JS and Popper.js
 import Navbar from "./Navbar"
 
 import CuisineScreen from "./CuisineScreen"
 import RecipeListByCuisine from "./RecipeListByCuisine";
-import { blankRecipe } from "./DataUtil";
 import { IRecipe } from "./DataInterfaces";
 import RecipeEdit from "./RecipeEdit";
+import { blankRecipe } from "./DataUtil";
 
 function App() {
 
   const [selectedCuisineId, setSelectedCuisineId] = useState(0);
 
   const [selectedRecipeId, setSelectedRecipeId] = useState(0);
+
   const [isRecipeEdit, setIsRecipeEdit] = useState(false);
   const [recipeForEdit, setRecipeForEdit] = useState(blankRecipe);
 
 
   const handleSelectedCuisineId = (cuisineId: number) => {
+    setIsRecipeEdit(false);
     setSelectedCuisineId(cuisineId);
   }
   const handleRecipeSelected = (recipeId: number) => {
@@ -25,8 +28,11 @@ function App() {
     setSelectedRecipeId(recipeId);
   };
   const handleRecipeSelectedForEdit = (recipe: IRecipe) => {
+    console.log('recipeselected fore edut', recipe);
     setRecipeForEdit(recipe);
+    console.log('rec for edit', recipeForEdit);
     setIsRecipeEdit(true);
+    console.log('isreicipe eidt', isRecipeEdit);
   };
 
   return (
@@ -45,12 +51,12 @@ function App() {
         </div>
         <div className="row">
           <div className="col-12 md-6 col-lg-8 text-wrap">
-            {isRecipeEdit ? <RecipeEdit recipe={recipeForEdit} /> : <CuisineScreen onCuisineSelected={handleSelectedCuisineId} />}
+            <CuisineScreen onCuisineSelected={handleSelectedCuisineId} />
           </div>
         </div>
         <div className="row">
           <div className="col-12 col-lg-8 text-wrap">
-            <RecipeListByCuisine onRecipeSelectedForEdit={handleRecipeSelectedForEdit} onRecipeSelected={handleRecipeSelected} cuisineId={selectedCuisineId} />
+            {isRecipeEdit ? <RecipeEdit key={recipeForEdit.recipeId} recipe={recipeForEdit} /> : <RecipeListByCuisine key={selectedCuisineId} onRecipeSelectedForEdit={handleRecipeSelectedForEdit} onRecipeSelected={handleRecipeSelected} cuisineId={selectedCuisineId} />}
           </div>
         </div>
       </div>

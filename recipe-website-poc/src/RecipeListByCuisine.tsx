@@ -11,7 +11,7 @@ interface Props {
 function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForEdit }: Props) {
     console.log('onrec selected for edit in recipelist comp', onRecipeSelectedForEdit);
     const [recipeList, setRecipeList] = useState<IRecipe[]>([]);
-    const [selectedRecipeId, setSelectedRecipeId] = useState(0);
+    // const [selectedRecipeId, setSelectedRecipeId] = useState(0);
     useEffect(() => {
         if (cuisineId > 0) { }
         const fetchRecipeByCuisineId = async () => {
@@ -27,7 +27,7 @@ function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForE
     }, [cuisineId]);
 
     function handleSelecteRecipe(recipeId: number) {
-        setSelectedRecipeId(recipeId);
+        // setSelectedRecipeId(recipeId);
         onRecipeSelected(recipeId);
     }
     return (

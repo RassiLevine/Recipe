@@ -8,7 +8,7 @@ interface Props { onCuisineSelected: (cuisineId: number) => void }
 
 function CuisineScreen({ onCuisineSelected }: Props) {
     const [cuisineList, setCuisineList] = useState<ICuisine[]>([]);
-    // const [selectedCuisine, setSelectedCuisine] = useState(0);
+    const [selectedCuisine, setSelectedCuisine] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetchCuisine();
@@ -19,10 +19,10 @@ function CuisineScreen({ onCuisineSelected }: Props) {
         }
         fetchData();
     }
-        , []);
+        , [selectedCuisine]);
 
     function handleSelectedCuisine(cuisineId: number) {
-        // setSelectedCuisine(cuisineId);
+        setSelectedCuisine(cuisineId);
         onCuisineSelected(cuisineId);
     }
     return (

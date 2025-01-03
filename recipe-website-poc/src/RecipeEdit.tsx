@@ -48,6 +48,7 @@ function RecipeEdit({ recipe }: Props) {
     const handleDelete = async () => {
         const r = await DeleteRecipe(recipe.recipeId);
         setErrorMsg(r.errorMessage);
+        console.log(r.errorMessage);
         if (r.errorMessage == "") {
             reset(blankRecipe);
         }
@@ -59,15 +60,18 @@ function RecipeEdit({ recipe }: Props) {
             <div className="bg-light mt-4 p-4">
                 <div className="row">
                     <div className="col-12">
-                        <h2 id="msg">{errorMsg}</h2>
+                        {/* <h2 id="msg">{errorMsg}</h2>
+                         */}
+                        <h2 id="msg">{errorMsg ? errorMsg : null}</h2>
+
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-6">
                         <form onSubmit={handleSubmit(submitForm)} className="needs-validation">
                             <div className="mb-3">
-                                <label htmlFor="recipeId" className="form-label">Recipe ID:</label>
-                                <input type="number"  {...register("recipeId")} className="form-control" required />
+                                <label htmlFor="recipeId" className="form-label" hidden>Recipe ID:</label>
+                                <input type="number"  {...register("recipeId")} className="form-control" hidden />
                             </div>
 
                             <div className="mb-3">
@@ -81,15 +85,15 @@ function RecipeEdit({ recipe }: Props) {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataDraft" className="form-label">Date Draft:</label>
-                                <input type="date" {...register("dateDraft")} className="form-control" defaultValue={new Date(recipe.datePublished).toISOString().split('T')[0]} />
+                                <input type="date" {...register("dateDraft")} className="form-control" required defaultValue={recipe.dateDraft ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataPublished" className="form-label">Date Published:</label>
-                                <input type="date" {...register("datePublished")} className="form-control" defaultValue={recipe.datePublished ? new Date(recipe.datePublished).toISOString().split('T')[0] : ""} />
+                                <input type="date" {...register("datePublished")} className="form-control" defaultValue={recipe.datePublished ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataArchived" className="form-label">Date Archived:</label>
-                                <input type="date" {...register("dateArchived")} className="form-control" defaultValue={recipe.dateArchived ? new Date(recipe.datePublished).toISOString().split('T')[0] : ""} />
+                                <input type="date" {...register("dateArchived")} className="form-control" defaultValue={recipe.dateArchived ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="recipeStatus" className="form-label">Recipe Status:</label>
@@ -104,13 +108,13 @@ function RecipeEdit({ recipe }: Props) {
                                 <input type="text" {...register("isVegan")} className="form-control" />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="cuisineId" className="form-label">CuisineId:</label>
+                                <label htmlFor="cuisineId" className="form-label">Cuisine:</label>
                                 <select {...register("cuisineId")} className="form-select">
                                     {cuisine.map(c => <option key={c.cuisineId} value={c.cuisineId}>{c.cuisineType}</option>)}
                                 </select>
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="staffId" className="form-label">Staff Id:</label>
+                                <label htmlFor="staffId" className="form-label">Staff:</label>
                                 <select {...register("staffId")} className="form-select">
                                     {staff.map(s => <option key={s.staffId} value={s.staffId}>{s.staffLastName}</option>)}
                                 </select>

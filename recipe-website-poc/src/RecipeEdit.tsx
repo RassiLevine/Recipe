@@ -2,17 +2,33 @@ import { FieldValues, useForm } from "react-hook-form"
 import { ICuisine, IRecipe, IStaff } from "./DataInterfaces"
 import { useState, useEffect } from "react";
 import { blankRecipe, DeleteRecipe, fetchCuisine, fetchStaff, PostRecipe } from "./DataUtil";
+import React from "react";
+import { getUserStore } from "@rassilevine/reactutils";
+// import { useUserStore } from "./UserStore/User";
 
 interface Props {
     recipe: IRecipe;
 }
 function RecipeEdit({ recipe }: Props) {
-
+    const apiurl = import.meta.env.VITE_API_URL;
+    const useUserStore = getUserStore(apiurl);
     const { register, handleSubmit, reset } = useForm({ defaultValues: recipe })
     const [staff, setStaff] = useState<IStaff[]>([]);
     const [cuisine, setCuisine] = useState<ICuisine[]>([]);
     const [errorMsg, setErrorMsg] = useState("");
 
+    const roleRank = useUserStore(state => state.roleRank);
+
+    // useEffect(() => {
+    //     // Ensure dates are formatted correctly before resetting form
+    //     const formattedRecipe = {
+    //         ...recipe,
+    //         dateDraft: recipe.dateDraft ? recipe.dateDraft.split('T')[0] : '',
+    //         datePublished: recipe.datePublished ? recipe.datePublished.split('T')[0] : '',
+    //         dateArchived: recipe.dateArchived ? recipe.dateArchived.split('T')[0] : ''
+    //     };
+    //     reset(formattedRecipe); // Reset the form with properly formatted dates
+    // }, [recipe, reset]);
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetchStaff();
@@ -31,27 +47,41 @@ function RecipeEdit({ recipe }: Props) {
         fetchData();
     }
         , []);
-    const submitForm = async (data: FieldValues) => {
-        if (data.datePublished === "") {
-            data.datePublished = null;
-        }
-        if (data.dateArchived === "") {
-            data.dateArchived = null;
-        }
+    useEffect(() => {
 
-        const r = await PostRecipe(data);
+        reset(recipe);
+    }, [recipe, reset]);
+
+    const submitForm = async (data: FieldValues) => {
+        const transformedData = {
+            ...data,
+            datePublished: data.datePublished === "" ? null : data.datePublished,
+            dateArchived: data.dateArchived === "" ? null : data.dateArchived
+        };
+        const r = await PostRecipe(transformedData);
         setErrorMsg(r.errorMessage)
         console.log(data.dateDraft, 'pub', data.datePublished, 'arc', data.dateArchived);
         reset(r);
         console.log("data", data, 'errormsg', errorMsg);
     };
     const handleDelete = async () => {
-        const r = await DeleteRecipe(recipe.recipeId);
-        setErrorMsg(r.errorMessage);
-        console.log(r.errorMessage);
-        if (r.errorMessage == "") {
-            reset(blankRecipe);
+        try {
+            const r = await DeleteRecipe(recipe.recipeId);
+            setErrorMsg(r.errorMessage);
+            console.log(r.errorMessage);
+            if (r.errorMessage == "") {
+                reset(blankRecipe);
+            }
         }
+        catch (error: unknown) {
+            if (error instanceof Error) {
+                setErrorMsg(error.message);
+            }
+            else {
+                setErrorMsg("error happened");
+            }
+        }
+
 
     };
 
@@ -85,15 +115,18 @@ function RecipeEdit({ recipe }: Props) {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataDraft" className="form-label">Date Draft:</label>
-                                <input type="date" {...register("dateDraft")} className="form-control" required defaultValue={recipe.dateDraft ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} />
+                                <input type="date" {...register("dateDraft")} className="form-control" required />
+                                {/* defaultValue={recipe.dateDraft ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} */}
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataPublished" className="form-label">Date Published:</label>
-                                <input type="date" {...register("datePublished")} className="form-control" defaultValue={recipe.datePublished ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} />
+                                <input type="date" {...register("datePublished")} className="form-control" />
+                                {/* defaultValue={recipe.datePublished ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} */}
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dataArchived" className="form-label">Date Archived:</label>
-                                <input type="date" {...register("dateArchived")} className="form-control" defaultValue={recipe.dateArchived ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} />
+                                <input type="date" {...register("dateArchived")} className="form-control" />
+                                {/* defaultValue={recipe.dateArchived ? new Date(recipe.datePublished).toISOString().split('T')[0] : undefined} */}
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="recipeStatus" className="form-label">Recipe Status:</label>
@@ -128,7 +161,10 @@ function RecipeEdit({ recipe }: Props) {
                                 <input type="number" {...register("numIngredients")} className="form-control" />
                             </div> */}
                             <button type="submit" className="btn btn-primary">Submit</button>
-                            <button onClick={handleDelete} type="button" id="btndelete" className="btn btn-danger">Delete</button>
+                            {roleRank >= 3 ?
+                                < button onClick={handleDelete} type="button" id="btndelete" className="btn btn-danger">Delete</button>
+                                : null}
+                            {/* <button onClick={handleDelete} type="button" id="btndelete" className="btn btn-danger">Delete</button> */}
                         </form>
                     </div>
                 </div>

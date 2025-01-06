@@ -1,4 +1,6 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
+import UserPanel from './UserPanel';
 
 function Navbar() {
     return (
@@ -12,6 +14,9 @@ function Navbar() {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
+                                <NavLink className="nav-link active" aria-current="page" to="/Welcome">Welcome</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink className="nav-link active" aria-current="page" to="/recipes">Recipes</NavLink>
                             </li>
                             <li className="nav-item">
@@ -21,6 +26,9 @@ function Navbar() {
                                 <NavLink className="nav-link" to="/meals">Meals</NavLink>
                             </li>
                         </ul>
+                    </div>
+                    <div>
+                        < UserPanel />
                     </div>
                 </div>
             </nav>

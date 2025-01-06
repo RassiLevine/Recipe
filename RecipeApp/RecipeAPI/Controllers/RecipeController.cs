@@ -48,6 +48,7 @@ namespace RecipeAPI.Controllers
             return r.ListRecipeBaseOnCuisine(cuisineid);
         }
         [HttpPost]
+        [AuthPermission(1)]
         public IActionResult Post( bizRecipe recipe)
         {
             try
@@ -63,6 +64,7 @@ namespace RecipeAPI.Controllers
         }
 
         [HttpDelete]
+        [AuthPermission(3)]
         public IActionResult Delete(int id)
         {
             bizRecipe r = new();

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { IRecipe } from "./DataInterfaces"
 import { fetchRecipeByCuisine } from "./DataUtil"
+import React from "react";
 
 interface Props {
     cuisineId: number,
@@ -17,6 +18,7 @@ function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForE
         const fetchRecipeByCuisineId = async () => {
             if (cuisineId > 0) {
                 const data = await fetchRecipeByCuisine(cuisineId);
+                console.log(data[0].dateDraft);
                 setRecipeList(data);
                 if (data.length > 0) {
                     handleSelecteRecipe(data[0].recipeId)
@@ -27,9 +29,11 @@ function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForE
     }, [cuisineId]);
 
     function handleSelecteRecipe(recipeId: number) {
-        // setSelectedRecipeId(recipeId);
+        //setSelectedRecipeId(recipeId);
         onRecipeSelected(recipeId);
     }
+
+
     return (
         <>
             <table className="table">
@@ -57,6 +61,7 @@ function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForE
                             <td scope="row" style={{ verticalAlign: 'middle' }} >{r.numIngredients}</td>
                             <td scope="row" style={{ verticalAlign: 'middle' }}><button onClick={() => onRecipeSelectedForEdit(r)} className="btn btn-secondary">Edit</button></td>
                             {/* <td><button onClick={() => onDeleteRecipe(r.recipeId)} className="btn btn-danger">X</button></td> */}
+
                         </tr>)
                 }
                 </tbody>

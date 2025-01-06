@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ICuisine } from "./DataInterfaces";
 import { fetchCuisine } from "./DataUtil";
 import CuisineCard from "./CuisineCard";
+import React from "react";
 interface Props { onCuisineSelected: (cuisineId: number) => void }
 
 

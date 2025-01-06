@@ -10,9 +10,9 @@ export interface IRecipe {
     user: string,
     recipeName: string,
     calories: number,
-    dateDraft: Date,
-    datePublished: Date
-    dateArchived: Date,
+    dateDraft: Date | string,
+    datePublished: Date | null | string,
+    dateArchived: Date | null | string,
     recipeStatus: string,
     recipePic: string,
     isVegan: string,

@@ -8,5 +8,6 @@ or @all = 1
 or (@StaffUserName <> '' and s.UserName like '%' + @StaffUserName + '%')
 union select 0, '', '', ''
 where @IncludeBlank = 1
+order by staffid
 end
 go

@@ -8,13 +8,14 @@ or @all = 1
 or (@CuisineType <> '' and c.CuisineType like '%' + @CuisineType + '%')
 union select 0, ''
 where @IncludeBlank = 1
+order by CuisineId
 end
 go
 
 /*
 exec CuisineGet
-
-exec CuisineGet @all = 1
+exec cuisineget 
+exec CuisineGet @all = 1, @includeblank = 1
 
 exec CuisineGet @cuisinetype = 'a'
 

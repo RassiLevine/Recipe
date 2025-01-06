@@ -48,7 +48,6 @@ function RecipeEdit({ recipe }: Props) {
     }
         , []);
     useEffect(() => {
-
         reset(recipe);
     }, [recipe, reset]);
 

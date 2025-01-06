@@ -17,22 +17,18 @@ function App() {
   const [isRecipeEdit, setIsRecipeEdit] = useState(false);
   const [recipeForEdit, setRecipeForEdit] = useState(blankRecipe);
 
-
   const handleSelectedCuisineId = (cuisineId: number) => {
     setIsRecipeEdit(false);
     setSelectedCuisineId(cuisineId);
+
   }
   const handleRecipeSelected = (recipeId: number) => {
     setIsRecipeEdit(false);
     setSelectedRecipeId(recipeId);
-    console.log(selectedRecipeId);
   };
   const handleRecipeSelectedForEdit = (recipe: IRecipe) => {
-    console.log('recipeselected fore edut', recipe);
-    setRecipeForEdit(recipe);
-    console.log('rec for edit', recipeForEdit);
+    setRecipeForEdit(recipe);;
     setIsRecipeEdit(true);
-    console.log('isreicipe eidt', isRecipeEdit);
   };
 
   return (

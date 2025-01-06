@@ -10,15 +10,16 @@ interface Props {
 };
 
 function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForEdit }: Props) {
-    console.log('onrec selected for edit in recipelist comp', onRecipeSelectedForEdit);
+    console.log('hit recipelist bycuisine')
+    console.log('cuisineid before fetch', cuisineId);
     const [recipeList, setRecipeList] = useState<IRecipe[]>([]);
-    // const [selectedRecipeId, setSelectedRecipeId] = useState(0);
     useEffect(() => {
         if (cuisineId > 0) { }
         const fetchRecipeByCuisineId = async () => {
+            console.log('cuisineid', cuisineId);
             if (cuisineId > 0) {
+
                 const data = await fetchRecipeByCuisine(cuisineId);
-                console.log(data[0].dateDraft);
                 setRecipeList(data);
                 if (data.length > 0) {
                     handleSelecteRecipe(data[0].recipeId)
@@ -29,7 +30,6 @@ function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForE
     }, [cuisineId]);
 
     function handleSelecteRecipe(recipeId: number) {
-        //setSelectedRecipeId(recipeId);
         onRecipeSelected(recipeId);
     }
 

@@ -1,4 +1,5 @@
 
+import React from "react";
 import { ICuisine } from "./DataInterfaces";
 
 interface Props {

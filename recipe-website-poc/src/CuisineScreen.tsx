@@ -14,8 +14,9 @@ function CuisineScreen({ onCuisineSelected }: Props) {
         const fetchData = async () => {
             const data = await fetchCuisine();
             setCuisineList(data);
-            if (data.length > 0) {
-                handleSelectedCuisine(data[0].cuisineId);
+            console.log('cusisinelist', data);
+            if (data.length > 0 && selectedCuisine == 0) {
+                handleSelectedCuisine(data[1].cuisineId);
             }
         }
         fetchData();
@@ -25,6 +26,7 @@ function CuisineScreen({ onCuisineSelected }: Props) {
     function handleSelectedCuisine(cuisineId: number) {
         setSelectedCuisine(cuisineId);
         onCuisineSelected(cuisineId);
+        console.log('cuisineid in cuisine screen', cuisineId);
     }
     return (
         <>

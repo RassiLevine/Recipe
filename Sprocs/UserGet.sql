@@ -5,7 +5,7 @@ create or alter proc dbo.UserGet(
 )
 as
 begin
-declare @return int = 0, @maxseconds int = 10
+declare @return int = 0, @maxseconds int = 6000
 if isnull(@sessionkey, '') != ''
 begin
     if(select top 1 DATEDIFF(SECOND, u.sessionKeydate, GETDATE()) from Users u where u.sessionKey = @sessionKey) > @maxseconds

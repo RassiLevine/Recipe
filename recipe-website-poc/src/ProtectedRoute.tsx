@@ -1,7 +1,6 @@
 import React from "react";
 import Login from "./Login";
 import { getUserStore } from "@rassilevine/reactutils";
-// import { useUserStore } from "./UserStore/User";
 
 interface Props { element: React.ReactNode, requiredrole: number }
 

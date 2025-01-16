@@ -1,4 +1,4 @@
-user recipewebsiteDB
+use recipewebsiteDB
 go
 drop table if exists usesr
 drop table if exists Roles

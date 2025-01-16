@@ -12,8 +12,8 @@ const router = createBrowserRouter(
     [
         {
             path: "/", element: <App />, children: [
-                { index: true, element: <Recipes /> }, //remove / from path
-                { path: "welcome", element: <Welcome /> },
+                { index: true, element: <Welcome /> },
+                { path: "recipes", element: <Recipes /> },
                 { path: "login", element: <Login frompath={location.pathname} /> },
                 { path: "recipes", element: <ProtectedRoute requiredrole={0} element={<Recipes />} /> },
                 { path: "cookbooks", element: <ProtectedRoute requiredrole={0} element={<Cookbooks />} /> },

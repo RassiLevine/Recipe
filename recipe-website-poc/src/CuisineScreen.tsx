@@ -14,7 +14,6 @@ function CuisineScreen({ onCuisineSelected }: Props) {
         const fetchData = async () => {
             const data = await fetchCuisine();
             setCuisineList(data);
-            console.log('cusisinelist', data);
             if (data.length > 0 && selectedCuisine == 0) {
                 handleSelectedCuisine(data[1].cuisineId);
             }
@@ -26,7 +25,6 @@ function CuisineScreen({ onCuisineSelected }: Props) {
     function handleSelectedCuisine(cuisineId: number) {
         setSelectedCuisine(cuisineId);
         onCuisineSelected(cuisineId);
-        console.log('cuisineid in cuisine screen', cuisineId);
     }
     return (
         <>
@@ -43,6 +41,4 @@ function CuisineScreen({ onCuisineSelected }: Props) {
         </>
     )
 }
-//FrenchCuisine.jpg
-//FrenchCuisine.png
 export default CuisineScreen

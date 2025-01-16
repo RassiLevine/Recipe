@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { blankRecipe, DeleteRecipe, fetchCuisine, fetchStaff, PostRecipe } from "./DataUtil";
 import React from "react";
 import { getUserStore } from "@rassilevine/reactutils";
-// import { useUserStore } from "./UserStore/User";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 interface Props {
     recipe: IRecipe;
@@ -16,19 +18,8 @@ function RecipeEdit({ recipe }: Props) {
     const [staff, setStaff] = useState<IStaff[]>([]);
     const [cuisine, setCuisine] = useState<ICuisine[]>([]);
     const [errorMsg, setErrorMsg] = useState("");
-
     const roleRank = useUserStore(state => state.roleRank);
 
-    // useEffect(() => {
-    //     // Ensure dates are formatted correctly before resetting form
-    //     const formattedRecipe = {
-    //         ...recipe,
-    //         dateDraft: recipe.dateDraft ? recipe.dateDraft.split('T')[0] : '',
-    //         datePublished: recipe.datePublished ? recipe.datePublished.split('T')[0] : '',
-    //         dateArchived: recipe.dateArchived ? recipe.dateArchived.split('T')[0] : ''
-    //     };
-    //     reset(formattedRecipe); // Reset the form with properly formatted dates
-    // }, [recipe, reset]);
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetchStaff();
@@ -57,12 +48,24 @@ function RecipeEdit({ recipe }: Props) {
             datePublished: data.datePublished === "" ? null : data.datePublished,
             dateArchived: data.dateArchived === "" ? null : data.dateArchived
         };
-        const r = await PostRecipe(transformedData);
-        setErrorMsg(r.errorMessage)
-        console.log(data.dateDraft, 'pub', data.datePublished, 'arc', data.dateArchived);
-        reset(r);
-        console.log("data", data, 'errormsg', errorMsg);
+        try {
+            setErrorMsg("");
+            const r = await PostRecipe(transformedData);
+            setErrorMsg(r.errorMessage)
+            if (!r.errorMessage) {
+                toast.success('Recipe Saved!');
+                reset(r);
+            }
+        }
+        catch (error: unknown) {
+            if (error instanceof Error) {
+                setErrorMsg(error.message);
+            } else {
+                setErrorMsg("An error occurred");
+            }
+        }
     };
+
     const handleDelete = async () => {
         try {
             const r = await DeleteRecipe(recipe.recipeId);
@@ -70,6 +73,7 @@ function RecipeEdit({ recipe }: Props) {
             console.log(r.errorMessage);
             if (r.errorMessage == "") {
                 reset(blankRecipe);
+                toast.success("Recipe Deleted!")
             }
         }
         catch (error: unknown) {
@@ -87,12 +91,10 @@ function RecipeEdit({ recipe }: Props) {
     return (
         <>
             <div className="bg-light mt-4 p-4">
+                <ToastContainer />
                 <div className="row">
                     <div className="col-12">
-                        {/* <h2 id="msg">{errorMsg}</h2>
-                         */}
-                        <h2 id="msg">{errorMsg ? errorMsg : null}</h2>
-
+                        <h2 className="text-danger" id="msg">{errorMsg ? errorMsg : null}</h2>
                     </div>
                 </div>
                 <div className="row">
@@ -131,10 +133,6 @@ function RecipeEdit({ recipe }: Props) {
                                 <label htmlFor="recipeStatus" className="form-label">Recipe Status:</label>
                                 <input type="text" {...register("recipeStatus")} className="form-control" />
                             </div>
-                            {/* <div className="mb-3">
-                                <label htmlFor="recipePic" className="form-label">recipe:</label>
-                                <input type="text" {...register("recipePic")} className="form-control" required />
-                            </div> */}
                             <div className="mb-3">
                                 <label htmlFor="isVegan" className="form-label">Is Vegan?:</label>
                                 <input type="text" {...register("isVegan")} className="form-control" />
@@ -155,15 +153,10 @@ function RecipeEdit({ recipe }: Props) {
                                 <label htmlFor="recipePic" className="form-label">Recipe Pic:</label>
                                 <input type="text" {...register("recipePic")} className="form-control" />
                             </div>
-                            {/* <div className="mb-3">
-                                <label htmlFor="numIngredients" className="form-label">Num Ing:</label>
-                                <input type="number" {...register("numIngredients")} className="form-control" />
-                            </div> */}
                             <button type="submit" className="btn btn-primary">Submit</button>
                             {roleRank >= 3 ?
                                 < button onClick={handleDelete} type="button" id="btndelete" className="btn btn-danger">Delete</button>
                                 : null}
-                            {/* <button onClick={handleDelete} type="button" id="btndelete" className="btn btn-danger">Delete</button> */}
                         </form>
                     </div>
                 </div>

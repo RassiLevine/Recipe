@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { IRecipe } from "./DataInterfaces"
 import { fetchRecipeByCuisine } from "./DataUtil"
 import React from "react";
+import { getUserStore } from "@rassilevine/reactutils";
 
 interface Props {
     cuisineId: number,
@@ -10,13 +11,13 @@ interface Props {
 };
 
 function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForEdit }: Props) {
-    console.log('hit recipelist bycuisine')
-    console.log('cuisineid before fetch', cuisineId);
+    const apiurl = import.meta.env.VITE_API_URL;
+    const useUserStore = getUserStore(apiurl);
+    const isLoggedIn = useUserStore(state => state.isLoggedIn);
     const [recipeList, setRecipeList] = useState<IRecipe[]>([]);
     useEffect(() => {
         if (cuisineId > 0) { }
         const fetchRecipeByCuisineId = async () => {
-            console.log('cuisineid', cuisineId);
             if (cuisineId > 0) {
 
                 const data = await fetchRecipeByCuisine(cuisineId);
@@ -46,7 +47,10 @@ function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForE
                         <th scope="col">Status</th>
                         <th scope="col">Vegan</th>
                         <th scope="col">Ingredients</th>
-                        <th scope="col">Edit Recipe</th>
+                        {isLoggedIn ?
+                            <th scope="col">Edit Recipe</th>
+                            : null}
+
                     </tr>
                 </thead>
                 <tbody>{
@@ -59,9 +63,9 @@ function RecipeListByCuisine({ cuisineId, onRecipeSelected, onRecipeSelectedForE
                             <td scope="row" style={{ verticalAlign: 'middle' }} >{r.recipeStatus}</td>
                             <td scope="row" style={{ verticalAlign: 'middle' }} >{r.isVegan}</td>
                             <td scope="row" style={{ verticalAlign: 'middle' }} >{r.numIngredients}</td>
-                            <td scope="row" style={{ verticalAlign: 'middle' }}><button onClick={() => onRecipeSelectedForEdit(r)} className="btn btn-secondary">Edit</button></td>
-                            {/* <td><button onClick={() => onDeleteRecipe(r.recipeId)} className="btn btn-danger">X</button></td> */}
-
+                            {isLoggedIn ?
+                                <td scope="row" style={{ verticalAlign: 'middle' }}><button onClick={() => onRecipeSelectedForEdit(r)} className="btn btn-secondary">Edit</button></td>
+                                : null}
                         </tr>)
                 }
                 </tbody>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUserStore } from "@rassilevine/reactutils"
 
 export default function UserPanel() {
@@ -8,6 +8,12 @@ export default function UserPanel() {
     const rolename = useUserStore((state => state.roleName));
     const isLoggedIn = useUserStore((state => state.isLoggedIn));
     const logout = useUserStore((state => state.logout));
+    const nav = useNavigate();
+    const handleLogout = () => {
+        -
+        logout(username);
+        nav('/');
+    }
 
 
     return (
@@ -15,7 +21,8 @@ export default function UserPanel() {
             {isLoggedIn ? (
                 <div>
                     <p>Welcome {username}! {rolename}</p>
-                    <button onClick={() => logout(username)}>Logout</button>
+                    <button onClick={() => handleLogout()}>Logout</button>
+                    {/* <button onClick={() => logout(username)}>Logout</button> */}
                 </div>
             ) : (
                 <>

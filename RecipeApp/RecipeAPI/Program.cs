@@ -16,44 +16,74 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(
-    //  c =>
-    //  {
-    //      c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+//  c =>
+//  {
+//      c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
-    //      // Define the BearerAuth scheme
-    //      c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    //      {
-    //          Description = "Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-    //          Name = "Authorization",
-    //          In = ParameterLocation.Header,
-    //          Type = SecuritySchemeType.Http,
-    //          Scheme = "Bearer" // The name of the HTTP Authorization scheme to be used in the Authorization header. In this case "Bearer".
-    //      });
+//      // Define the BearerAuth scheme
+//      c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+//      {
+//          Description = "Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+//          Name = "Authorization",
+//          In = ParameterLocation.Header,
+//          Type = SecuritySchemeType.Http,
+//          Scheme = "Bearer" // The name of the HTTP Authorization scheme to be used in the Authorization header. In this case "Bearer".
+//      });
 
-    //      c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    //    {
-    //    {
-    //        new OpenApiSecurityScheme
-    //        {
-    //            Reference = new OpenApiReference
-    //            {
-    //                Type = ReferenceType.SecurityScheme,
-    //                Id = "Bearer"
-    //            }
-    //        },
-    //        new string[] {}
-    //    }
-    //}
-    //)};
-      );
+//      c.AddSecurityRequirement(new OpenApiSecurityRequirement
+//    {
+//    {
+//        new OpenApiSecurityScheme
+//        {
+//            Reference = new OpenApiReference
+//            {
+//                Type = ReferenceType.SecurityScheme,
+//                Id = "Bearer"
+//            }
+//        },
+//        new string[] {}
+//    }
+//}
+//)};
+);
+//c =>
+//    {
+//        c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+//        // Define the BearerAuth scheme
+//        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+//        {
+//            Description = "Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+//            Name = "Authorization",
+//            In = ParameterLocation.Header,
+//            Type = SecuritySchemeType.Http,
+//            Scheme = "Bearer" // The name of the HTTP Authorization scheme to be used in the Authorization header. In this case "Bearer".
+//        });
+
+//        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+//    {
+//    {
+//        new OpenApiSecurityScheme
+//        {
+//            Reference = new OpenApiReference
+//            {
+//                Type = ReferenceType.SecurityScheme,
+//                Id = "Bearer"
+//            }
+//        },
+//        new string[] {}
+//    }
+//});
+//    }
+//);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    //app.UseSwagger();
-    //app.UseSwaggerUI();
+//app.UseSwagger();
+//app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();

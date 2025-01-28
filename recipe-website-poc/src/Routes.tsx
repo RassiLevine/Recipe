@@ -7,6 +7,7 @@ import React from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import Welcome from "./Welcome";
 import Login from "./Login";
+import UserPanel from "./UserPanel";
 
 const router = createBrowserRouter(
     [

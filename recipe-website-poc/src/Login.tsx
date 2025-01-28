@@ -32,13 +32,12 @@ export default function Login({ frompath }: Props) {
         catch (error: unknown) {
             if (error instanceof Error) {
                 setCrashmsg(error.message);
-                console.log(error.message);
+                console.log("login error", error.message);
             }
             else {
                 setCrashmsg("error");
             }
         }
-
 
     }
     return (
@@ -48,13 +47,18 @@ export default function Login({ frompath }: Props) {
                 <div className="col-6">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label>Username</label>
-                        <input type="text" {...register('username', { required: 'Username is required' })} />
-                        {errors.username && <span>{errors.username.message}</span>}
+                        {/* <input type="text" {...register('username', { required: 'Username is required' })} />
+                        {errors.username && <span>{errors.username.message}</span>} */}
+                        <input type="text" className={`form-control ${errors.username ? 'is-invalid' : ''}`} {...register('username', { required: 'Username is required' })} />
+                        {errors.username && <div className="invalid-feedback">{errors.username.message}</div>}
                         <br />
                         <label>Password</label>
-                        <input type="password"
+                        {/* <input type="password"
                             {...register('password', { required: 'Password is required' })} />
-                        {errors.password && <span>{errors.password.message}</span>}
+                        {errors.password && <span>{errors.password.message}</span>} */}
+                        <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                            {...register('password', { required: 'Password is required' })} />
+                        {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
                         <br />
                         <button type="submit">Login</button>
                     </form>
